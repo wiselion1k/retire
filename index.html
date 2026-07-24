@@ -23,26 +23,28 @@ body{font-family:'Pretendard',system-ui,sans-serif;background:var(--bg);color:va
 .disp{font-family:'Space Grotesk',sans-serif}
 .wrap{max-width:900px;margin:0 auto;padding:0 20px 120px}
 
-/* ── 리조트 히어로 헤더 ───────────────────────────── */
+/* ── 리조트 히어로 헤더 (밝은 트로피컬) ─────────────── */
 header{position:relative;overflow:hidden;isolation:isolate;
-  padding:64px 20px 52px;margin-bottom:30px;
-  background:linear-gradient(168deg,#0A2740 0%,#0F4E86 40%,#1E86A8 66%,#3DB2A6 100%)}
+  padding:66px 20px 56px;margin-bottom:30px;
+  background:linear-gradient(163deg,#67D6F2 0%,#2FC1DE 34%,#16B5B0 66%,#39D9AE 100%)}
 .resort-bg{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;display:block}
-.resort-fade{position:absolute;left:0;right:0;bottom:0;height:120px;z-index:-1;
-  background:linear-gradient(180deg,rgba(61,178,166,0) 0%,rgba(244,247,252,.16) 70%,rgba(244,247,252,.55) 100%)}
+.head-scrim{position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(104deg,rgba(6,40,66,.52) 0%,rgba(6,40,66,.28) 40%,rgba(6,40,66,.05) 62%,rgba(6,40,66,0) 78%)}
+.resort-fade{position:absolute;left:0;right:0;bottom:0;height:110px;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(57,217,174,0) 0%,rgba(244,247,252,.14) 72%,rgba(244,247,252,.5) 100%)}
 .head-inner{position:relative;z-index:2;max-width:900px;margin:0 auto}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;color:#8FF0E6;
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;color:#FFF3D6;
   text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:15px;
-  text-shadow:0 1px 8px rgba(4,22,40,.45)}
-.eyebrow::before{content:"";width:24px;height:2px;background:#FFB86B}
-h1.title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:31px;line-height:1.18;
-  letter-spacing:-.02em;color:#FFFFFF;text-shadow:0 2px 18px rgba(4,22,40,.5)}
-h1.title b{color:#FFCF8E}
-.sub{color:#DCEAF3;font-size:14px;margin-top:11px;max-width:610px;text-shadow:0 1px 10px rgba(4,22,40,.4)}
-.head-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+  text-shadow:0 1px 10px rgba(5,32,54,.55)}
+.eyebrow::before{content:"";width:24px;height:2px;background:#FFC978}
+h1.title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:32px;line-height:1.16;
+  letter-spacing:-.02em;color:#FFFFFF;text-shadow:0 2px 22px rgba(5,32,54,.6),0 1px 3px rgba(5,32,54,.5)}
+h1.title b{color:#FFDD8E}
+.sub{color:#EAFBFF;font-size:14px;margin-top:11px;max-width:610px;text-shadow:0 1px 12px rgba(5,32,54,.55)}
+.head-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:19px}
 .head-tags span{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.4px;
-  color:#EAF6FB;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);
-  border-radius:20px;padding:5px 12px;backdrop-filter:blur(6px)}
+  color:#FFFFFF;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.34);
+  border-radius:20px;padding:5px 12px;backdrop-filter:blur(7px);box-shadow:0 2px 10px rgba(5,32,54,.14)}
 
 .sec{margin-bottom:22px;background:var(--paper);border:1px solid var(--line);border-radius:16px;
   box-shadow:0 1px 2px rgba(16,39,66,.03),0 6px 20px rgba(16,39,66,.04);overflow:hidden}
@@ -222,78 +224,118 @@ footer{text-align:center;color:var(--faint);font-size:11px;margin-top:30px}
   <svg class="resort-bg" viewBox="0 0 900 300" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <defs>
       <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#0A2740"/>
-        <stop offset="0.42" stop-color="#12558F"/>
-        <stop offset="0.72" stop-color="#1E86A8"/>
-        <stop offset="1" stop-color="#41B4A4"/>
+        <stop offset="0" stop-color="#7FE0F5"/>
+        <stop offset="0.4" stop-color="#3EC6E4"/>
+        <stop offset="0.72" stop-color="#1CB6BE"/>
+        <stop offset="1" stop-color="#37D3AE"/>
       </linearGradient>
       <radialGradient id="sunGlow" cx="0.5" cy="0.5" r="0.5">
-        <stop offset="0" stop-color="#FFE9C2"/>
-        <stop offset="0.35" stop-color="#FFC978" stop-opacity="0.9"/>
-        <stop offset="1" stop-color="#FF9E52" stop-opacity="0"/>
+        <stop offset="0" stop-color="#FFFAEC"/>
+        <stop offset="0.28" stop-color="#FFEBB0" stop-opacity="0.95"/>
+        <stop offset="0.6" stop-color="#FFD27A" stop-opacity="0.45"/>
+        <stop offset="1" stop-color="#FFC26B" stop-opacity="0"/>
       </radialGradient>
       <linearGradient id="ocean" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#2FA19C"/>
-        <stop offset="1" stop-color="#4FC3AE"/>
+        <stop offset="0" stop-color="#12A9C9"/>
+        <stop offset="0.5" stop-color="#12BEBE"/>
+        <stop offset="1" stop-color="#46D8C0"/>
+      </linearGradient>
+      <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#FCEFC9"/>
+        <stop offset="1" stop-color="#F6E0AE"/>
       </linearGradient>
     </defs>
     <!-- 하늘 -->
     <rect width="900" height="300" fill="url(#sky)"/>
-    <!-- 태양 후광 + 원반 -->
-    <circle cx="648" cy="150" r="150" fill="url(#sunGlow)"/>
-    <circle cx="648" cy="150" r="50" fill="#FFE1A6" opacity="0.92"/>
-    <!-- 태양이 물에 비치는 반사 -->
-    <g opacity="0.5" fill="#FFE1A6">
-      <rect x="612" y="214" width="72" height="4" rx="2"/>
-      <rect x="600" y="226" width="96" height="4" rx="2"/>
-      <rect x="586" y="240" width="124" height="4" rx="2"/>
-      <rect x="600" y="254" width="96" height="3" rx="1.5"/>
+    <!-- 밝은 태양 -->
+    <circle cx="690" cy="118" r="150" fill="url(#sunGlow)"/>
+    <circle cx="690" cy="118" r="44" fill="#FFF6DC" opacity="0.96"/>
+    <circle cx="690" cy="118" r="44" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.5"/>
+    <!-- 부드러운 구름 -->
+    <g fill="#FFFFFF" opacity="0.85">
+      <ellipse cx="250" cy="58" rx="46" ry="15"/>
+      <ellipse cx="292" cy="52" rx="34" ry="13"/>
+      <ellipse cx="214" cy="52" rx="30" ry="11"/>
+    </g>
+    <g fill="#FFFFFF" opacity="0.7">
+      <ellipse cx="540" cy="40" rx="34" ry="11"/>
+      <ellipse cx="568" cy="36" rx="24" ry="9"/>
     </g>
     <!-- 바다 -->
-    <path d="M0,208 Q225,196 450,206 T900,204 L900,300 L0,300 Z" fill="url(#ocean)"/>
-    <path d="M0,208 Q225,196 450,206 T900,204" fill="none" stroke="#BFF0E0" stroke-width="1.4" opacity="0.5"/>
-    <!-- 잔물결 -->
-    <g stroke="#DFF7EE" stroke-width="1.4" opacity="0.35" fill="none">
-      <path d="M120,232 q22,-6 44,0 t44,0"/>
-      <path d="M330,246 q22,-6 44,0 t44,0"/>
-      <path d="M40,262 q22,-6 44,0 t44,0"/>
-      <path d="M760,240 q22,-6 44,0 t44,0"/>
+    <path d="M0,196 Q225,184 450,193 T900,190 L900,258 L0,258 Z" fill="url(#ocean)"/>
+    <path d="M0,196 Q225,184 450,193 T900,190" fill="none" stroke="#EBFFFA" stroke-width="1.4" opacity="0.55"/>
+    <!-- 태양 반사 + 잔물결 -->
+    <g opacity="0.5" fill="#FFF3D0">
+      <rect x="656" y="204" width="68" height="4" rx="2"/>
+      <rect x="644" y="216" width="92" height="4" rx="2"/>
+      <rect x="632" y="228" width="116" height="3" rx="1.5"/>
     </g>
-    <!-- 왼쪽 야자수 (실루엣) -->
-    <g fill="#08243A">
-      <path d="M150,300 C150,220 150,150 138,96 C136,88 146,86 149,94 C160,148 162,220 166,300 Z"/>
-      <g>
-        <path d="M143,96 C104,70 66,58 26,60 C64,52 108,58 148,86 Z"/>
-        <path d="M143,94 C112,52 78,26 40,10 C86,30 124,60 150,88 Z"/>
-        <path d="M147,92 C150,46 166,8 196,-14 C176,26 162,62 154,90 Z"/>
-        <path d="M150,94 C196,58 244,44 292,52 C244,42 196,52 152,84 Z"/>
-        <path d="M150,100 C198,96 250,104 292,132 C244,110 196,96 150,92 Z"/>
-        <path d="M144,100 C104,104 64,120 30,150 C70,116 108,98 150,94 Z"/>
-      </g>
-      <circle cx="147" cy="92" r="7"/>
-      <!-- 코코넛 -->
-      <circle cx="139" cy="100" r="5"/>
-      <circle cx="156" cy="101" r="5"/>
+    <g stroke="#EBFFF8" stroke-width="1.4" opacity="0.4" fill="none">
+      <path d="M120,224 q22,-6 44,0 t44,0"/>
+      <path d="M330,236 q22,-6 44,0 t44,0"/>
+      <path d="M40,244 q22,-6 44,0 t44,0"/>
     </g>
-    <!-- 오른쪽 야자수 (작고 멀리) -->
-    <g fill="#0A2A44" opacity="0.92">
-      <path d="M812,300 C812,240 814,190 806,150 C805,144 813,143 815,150 C822,190 824,240 826,300 Z"/>
-      <g>
-        <path d="M809,150 C781,132 752,124 724,127 C752,120 784,124 813,143 Z"/>
-        <path d="M809,149 C788,118 766,96 740,84 C772,98 798,122 815,146 Z"/>
-        <path d="M812,148 C815,114 826,86 847,70 C833,98 823,124 818,147 Z"/>
-        <path d="M814,150 C846,124 880,114 900,120 L900,132 C868,120 842,128 816,145 Z"/>
-        <path d="M808,154 C780,158 752,172 730,196 C758,168 784,152 814,149 Z"/>
-      </g>
-      <circle cx="812" cy="148" r="5.5"/>
+    <!-- 백사장 -->
+    <path d="M0,248 Q220,234 460,244 T900,242 L900,300 L0,300 Z" fill="url(#sand)"/>
+    <path d="M0,248 Q220,234 460,244 T900,242" fill="none" stroke="#FFFFFF" stroke-width="1.2" opacity="0.5"/>
+    <!-- 작은 돛단배 (멀리) -->
+    <g opacity="0.9">
+      <path d="M300,206 l2,8 l13,0 l2,-8 Z" fill="#FFFFFF"/>
+      <path d="M309,206 l0,-16 l11,16 Z" fill="#FFFFFF"/>
+      <path d="M309,206 l0,-16 l-9,16 Z" fill="#EAFBFF"/>
     </g>
-    <!-- 작은 새 두 마리 -->
-    <g stroke="#CFE9F2" stroke-width="1.6" fill="none" opacity="0.55" stroke-linecap="round">
-      <path d="M430,70 q8,-7 16,0 q8,-7 16,0"/>
-      <path d="M486,92 q6,-5 12,0 q6,-5 12,0"/>
+    <!-- 오른쪽 야자수 (스크립트로 잎 생성) -->
+    <path d="M840,300 C832,240 832,178 826,120 C825,112 841,111 842,120 C848,178 850,240 856,300 Z" fill="#8A5A34"/>
+    <path d="M840,300 C832,240 832,178 828,122 L836,122 C842,178 846,240 850,300 Z" fill="#A06E43" opacity="0.7"/>
+    <g id="palmR" stroke-linejoin="round"></g>
+    <g fill="#7A4A28"><circle cx="827" cy="122" r="6"/><circle cx="841" cy="123" r="6"/><circle cx="834" cy="130" r="6"/></g>
+    <!-- 왼쪽 상단 코너 프레이밍 잎 (반투명) -->
+    <g id="palmL" opacity="0.96" stroke-linejoin="round"></g>
+    <!-- 새 두 마리 -->
+    <g stroke="#F2FBFF" stroke-width="1.8" fill="none" opacity="0.7" stroke-linecap="round">
+      <path d="M418,70 q8,-7 16,0 q8,-7 16,0"/>
+      <path d="M470,88 q6,-5 12,0 q6,-5 12,0"/>
     </g>
   </svg>
+  <div class="head-scrim"></div>
   <div class="resort-fade"></div>
+  <script>
+  (function(){
+    function bez(a,c,b,t){var u=1-t;return [u*u*a[0]+2*u*t*c[0]+t*t*b[0],u*u*a[1]+2*u*t*c[1]+t*t*b[1]];}
+    function tanv(a,c,b,t){var u=1-t;return [2*u*(c[0]-a[0])+2*t*(b[0]-c[0]),2*u*(c[1]-a[1])+2*t*(b[1]-c[1])];}
+    function frond(cx,cy,ang,len,droop,col){
+      var a=ang*Math.PI/180,dir=[Math.cos(a),Math.sin(a)];
+      var P0=[cx,cy],P1=[cx+dir[0]*len,cy+dir[1]*len];
+      var C=[(P0[0]+P1[0])/2,(P0[1]+P1[1])/2+droop];
+      var rib='M'+P0[0].toFixed(1)+','+P0[1].toFixed(1)+' Q'+C[0].toFixed(1)+','+C[1].toFixed(1)+' '+P1[0].toFixed(1)+','+P1[1].toFixed(1);
+      var s='',N=13;
+      for(var i=1;i<=N;i++){
+        var t=i/(N+1),p=bez(P0,C,P1,t),tg=tanv(P0,C,P1,t);
+        var tl=Math.hypot(tg[0],tg[1])||1;tg=[tg[0]/tl,tg[1]/tl];
+        var nrm=[-tg[1],tg[0]],ll=len*0.22*(1-0.62*t)+3;
+        for(var k=0;k<2;k++){var sgn=k?1:-1;
+          var dx=nrm[0]*sgn*0.9-tg[0]*0.45,dy=nrm[1]*sgn*0.9-tg[1]*0.45;
+          var dl=Math.hypot(dx,dy)||1,d=[dx/dl,dy/dl];
+          var tip=[p[0]+d[0]*ll,p[1]+d[1]*ll];
+          var c1=[p[0]+d[0]*ll*0.5+tg[0]*ll*0.18,p[1]+d[1]*ll*0.5+tg[1]*ll*0.18];
+          s+='<path d="M'+p[0].toFixed(1)+','+p[1].toFixed(1)+' Q'+c1[0].toFixed(1)+','+c1[1].toFixed(1)+' '+tip[0].toFixed(1)+','+tip[1].toFixed(1)+'" fill="none" stroke="'+col+'" stroke-width="'+(ll*0.5).toFixed(1)+'" stroke-linecap="round"/>';
+        }
+      }
+      return '<path d="'+rib+'" fill="none" stroke="'+col+'" stroke-width="3.2" stroke-linecap="round"/>'+s;
+    }
+    var G1='#0F8A5F',G2='#17B07C',G3='#2FCB92';
+    function build(id,cx,cy,fronds){var el=document.getElementById(id);if(!el)return;var o='';fronds.forEach(function(f){o+=frond(cx,cy,f[0],f[1],f[2],f[3]);});el.innerHTML=o;}
+    // 오른쪽 야자수 (풍성한 왕관 — 코너 프레이밍)
+    build('palmR',834,118,[
+      [208,116,42,G1],[230,138,52,G2],[252,150,58,G3],[274,132,58,G2],
+      [298,140,58,G1],[322,150,54,G3],[348,150,46,G2],[14,138,40,G1]
+    ]);
+    // 왼쪽 상단 코너 프레이밍 잎 (반투명)
+    build('palmL',-24,-20,[
+      [18,205,66,G1],[40,200,74,G2],[62,190,74,G3],[84,175,70,G2],[104,150,62,G1]
+    ]);
+  })();
+  </script>
   <div class="head-inner">
     <div class="eyebrow">EXPAT CARD · RETIREMENT RELOCATION</div>
     <h1 class="title">은퇴이민 <b>4개국 비교</b> · 카드 · 학비 · 생활비 · 비자</h1>
