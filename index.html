@@ -1,359 +1,1235 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>간단 MBTI 테스트</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CardFit · 은퇴이민 4개국 비교 — 카드 · 학비 · 생활비 · 비자</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <style>
-  :root {
-    --bg: #f4f6fb;
-    --card: #ffffff;
-    --primary: #6c5ce7;
-    --primary-dark: #5541d7;
-    --text: #2d3436;
-    --muted: #8a94a6;
-    --track: #eceff4;
-    --e: #ff7675; --i: #74b9ff;
-    --s: #ffb142; --n: #55efc4;
-    --t: #a29bfe; --f: #fd79a8;
-    --j: #00cec9; --p: #fab1a0;
-    --kakao: #fee500;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  .app {
-    width: 100%;
-    max-width: 480px;
-    background: var(--card);
-    border-radius: 24px;
-    box-shadow: 0 20px 50px rgba(60, 66, 100, 0.12);
-    overflow: hidden;
-  }
-  .screen { display: none; padding: 32px 28px 36px; }
-  .screen.active { display: block; animation: fade .35s ease; }
-  @keyframes fade { from { opacity: 0; transform: translateY(8px);} to {opacity:1; transform:none;} }
+:root{
+  --bg:#F4F7FC; --paper:#FFFFFF; --ink:#102742; --muted:#5C729A; --faint:#9AACC6;
+  --blue:#1F5FE0; --blue-deep:#16429E; --blue-soft:#EAF1FD; --blue-line:#D4E1F6; --blue-mid:#5B8AE8; --blue-pale:#B9CFF2;
+  --orange:#F97316; --orange-soft:#FFF0E4; --orange-line:#FBD3B0;
+  --line:#E5EDF8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Pretendard',system-ui,sans-serif;background:var(--bg);color:var(--ink);
+  line-height:1.55;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+.mono{font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums}
+.disp{font-family:'Space Grotesk',sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px 120px}
 
-  /* Intro */
-  .intro { text-align: center; }
-  .emoji { font-size: 64px; margin-bottom: 8px; }
-  h1 { font-size: 26px; margin-bottom: 10px; }
-  .subtitle { color: var(--muted); line-height: 1.6; margin-bottom: 28px; font-size: 15px; }
-  .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    width: 100%; padding: 16px; border: none; border-radius: 14px;
-    background: var(--primary); color: #fff; font-size: 16px; font-weight: 700;
-    cursor: pointer; transition: transform .1s, background .2s;
-  }
-  .btn:hover { background: var(--primary-dark); }
-  .btn:active { transform: scale(.98); }
-  .btn.secondary { background: var(--track); color: var(--text); }
-  .btn.secondary:hover { background: #e2e6ee; }
-  .btn.kakao { background: var(--kakao); color: #3a1d1d; }
-  .btn.kakao:hover { filter: brightness(0.96); }
+/* ── 리조트 히어로 헤더 ───────────────────────────── */
+header{position:relative;overflow:hidden;isolation:isolate;
+  padding:64px 20px 52px;margin-bottom:30px;
+  background:linear-gradient(168deg,#0A2740 0%,#0F4E86 40%,#1E86A8 66%,#3DB2A6 100%)}
+.resort-bg{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;display:block}
+.resort-fade{position:absolute;left:0;right:0;bottom:0;height:120px;z-index:-1;
+  background:linear-gradient(180deg,rgba(61,178,166,0) 0%,rgba(244,247,252,.16) 70%,rgba(244,247,252,.55) 100%)}
+.head-inner{position:relative;z-index:2;max-width:900px;margin:0 auto}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;color:#8FF0E6;
+  text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:15px;
+  text-shadow:0 1px 8px rgba(4,22,40,.45)}
+.eyebrow::before{content:"";width:24px;height:2px;background:#FFB86B}
+h1.title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:31px;line-height:1.18;
+  letter-spacing:-.02em;color:#FFFFFF;text-shadow:0 2px 18px rgba(4,22,40,.5)}
+h1.title b{color:#FFCF8E}
+.sub{color:#DCEAF3;font-size:14px;margin-top:11px;max-width:610px;text-shadow:0 1px 10px rgba(4,22,40,.4)}
+.head-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.head-tags span{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.4px;
+  color:#EAF6FB;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);
+  border-radius:20px;padding:5px 12px;backdrop-filter:blur(6px)}
 
-  /* Progress */
-  .progress-wrap { margin-bottom: 24px; }
-  .progress-meta { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
-  .progress-bar { height: 8px; background: var(--track); border-radius: 99px; overflow: hidden; }
-  .progress-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--primary), #a29bfe); border-radius: 99px; transition: width .3s ease; }
+.sec{margin-bottom:22px;background:var(--paper);border:1px solid var(--line);border-radius:16px;
+  box-shadow:0 1px 2px rgba(16,39,66,.03),0 6px 20px rgba(16,39,66,.04);overflow:hidden}
+.sec-head{display:flex;align-items:center;gap:11px;padding:18px 22px 0}
+.sec-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:#fff;background:var(--blue);
+  width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;flex:none}
+.sec-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16.5px}
+.sec-desc{color:var(--muted);font-size:12.5px;padding:5px 22px 0 55px}
+.sec-body{padding:16px 22px 22px}
 
-  .question { font-size: 20px; font-weight: 700; line-height: 1.5; margin-bottom: 28px; min-height: 90px; display: flex; align-items: center; }
-  .options { display: flex; flex-direction: column; gap: 12px; }
-  .option {
-    padding: 16px 18px; border: 2px solid var(--track); border-radius: 14px;
-    background: #fff; text-align: left; font-size: 15px; font-weight: 600; cursor: pointer;
-    transition: border-color .15s, background .15s, transform .1s; color: var(--text);
-  }
-  .option:hover { border-color: var(--primary); background: #f7f5ff; }
-  .option:active { transform: scale(.99); }
-  .back { margin-top: 20px; background: none; border: none; color: var(--muted); font-size: 14px; cursor: pointer; }
-  .back:hover { color: var(--text); }
+.countries{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.cbtn{cursor:pointer;border:1.5px solid var(--line);background:#FBFDFF;border-radius:13px;padding:14px 8px;
+  text-align:center;transition:.15s;font-family:inherit}
+.cbtn .flag{font-size:24px;display:block;margin-bottom:5px;line-height:1}
+.cbtn .cn{font-size:13.5px;font-weight:700;color:var(--ink)}
+.cbtn .cc{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--faint);margin-top:2px}
+.cbtn:hover{border-color:var(--blue-pale);transform:translateY(-1px)}
+.cbtn.active{border-color:var(--blue);background:var(--blue-soft)}
+.cbtn.active .cc{color:var(--blue)}
 
-  /* Result */
-  .result { text-align: center; }
-  .result-type { font-size: 52px; font-weight: 800; letter-spacing: 2px; color: var(--primary); margin-bottom: 4px; }
-  .result-nick { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
-  .result-desc { color: var(--muted); line-height: 1.6; font-size: 15px; margin-bottom: 28px; }
+.spend-top{margin-bottom:12px}
+.spend-label{font-size:12.5px;color:var(--muted)}
+.spend-val{font-family:'JetBrains Mono',monospace;font-size:25px;font-weight:600;color:var(--blue)}
+.spend-krw{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--faint);margin-top:1px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:5px;border-radius:6px;
+  background:var(--blue-line);outline:none;margin:6px 0}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:19px;height:19px;border-radius:50%;
+  background:var(--orange);cursor:pointer;border:3px solid #fff;box-shadow:0 1px 4px rgba(249,115,22,.5)}
+input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;background:var(--orange);cursor:pointer;border:3px solid #fff}
+.range-ends{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--faint);margin-top:1px}
 
-  .info { text-align: left; margin-bottom: 28px; }
-  .info-row { margin-bottom: 18px; }
-  .info-labels { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
-  .info-labels .win { font-size: 15px; }
-  .info-track { position: relative; height: 26px; background: var(--track); border-radius: 99px; overflow: hidden; display: flex; }
-  .info-left, .info-right { height: 100%; display: flex; align-items: center; font-size: 12px; font-weight: 800; color: #fff; }
-  .info-left { justify-content: flex-start; padding-left: 10px; }
-  .info-right { justify-content: flex-end; padding-right: 10px; }
-  .muted-pct { color: rgba(255,255,255,.85); }
+.alloc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 22px}
+.alloc-row .ar-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
+.alloc-row .ar-name{font-size:12.5px;color:var(--ink);display:flex;align-items:center;gap:6px}
+.alloc-row .ar-val{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
 
-  .actions { display: flex; flex-direction: column; gap: 12px; }
+.cards-list{display:flex;flex-direction:column;gap:9px}
+.card-item{display:flex;align-items:center;gap:13px;padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:#FBFDFF}
+.card-item.top{border-color:var(--orange);background:var(--orange-soft)}
+.card-rank{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:var(--faint);width:24px;text-align:center;flex:none}
+.card-item.top .card-rank{color:var(--orange)}
+.card-main{flex:1;min-width:0}
+.card-name{font-size:13.5px;font-weight:600}
+.card-meta{font-size:11px;color:var(--muted);margin-top:2px}
+.card-ben{text-align:right;white-space:nowrap}
+.card-ben .b1{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;color:var(--blue)}
+.card-item.top .card-ben .b1{color:var(--orange)}
+.card-ben .b2{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--faint)}
+.warn{font-size:10.5px;color:var(--orange);margin-top:3px}
+
+.edu-inputs{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;margin-bottom:16px}
+.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px;font-family:'JetBrains Mono',monospace;letter-spacing:.4px}
+.field input[type=number]{width:100%;background:#FBFDFF;border:1.5px solid var(--line);border-radius:9px;color:var(--ink);
+  font-family:'JetBrains Mono',monospace;font-size:15px;padding:10px 12px;outline:none}
+.field input[type=number]:focus{border-color:var(--blue)}
+.infl-row{display:flex;align-items:center;gap:11px}
+.infl-row input[type=range]{flex:1}
+.infl-val{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--orange);width:42px;text-align:right;font-weight:600}
+.eduname{font-size:11px;color:var(--blue);font-family:'JetBrains Mono',monospace;margin-top:4px}
+
+.myschool{display:flex;gap:6px;margin-bottom:9px}
+.mysch-btn{flex:1;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:8px 4px;border-radius:8px;
+  border:1.5px solid var(--line);background:#FBFDFF;color:var(--muted);transition:.15s}
+.mysch-btn:hover{border-color:var(--blue-pale)}
+.mysch-btn.on{border-color:var(--blue);background:var(--blue-soft);color:var(--blue);font-weight:600}
+.rebtn{width:100%;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:12px;padding:11px;border-radius:9px;
+  border:1.5px solid var(--blue-line);background:var(--blue-soft);color:var(--blue);font-weight:600;transition:.15s}
+.rebtn:hover{border-color:var(--blue);transform:translateY(-1px)}
+
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.chip{background:#FBFDFF;border:1px solid var(--line);border-radius:10px;padding:9px 13px;flex:1;min-width:110px}
+.chip .ck{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--faint);letter-spacing:.4px;text-transform:uppercase}
+.chip .cv{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:600;color:var(--ink);margin-top:2px}
+.chip.hero{background:var(--orange-soft);border-color:var(--orange-line)}
+.chip.hero .cv{color:var(--orange);font-size:20px}
+
+.runway{margin:4px 0 6px}
+.bars{display:flex;align-items:flex-end;gap:5px;height:140px;padding-top:18px;border-bottom:1.5px solid var(--blue-line)}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.bar{width:100%;max-width:30px;border-radius:4px 4px 0 0;position:relative;min-height:3px;transition:.3s}
+.bar.elem{background:var(--blue-pale)}
+.bar.mid{background:var(--blue-mid)}
+.bar.high{background:var(--blue-deep)}
+.bar-amt{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);white-space:nowrap}
+.bar-yr{font-family:'JetBrains Mono',monospace;font-size:8.5px;color:var(--faint);margin-top:4px}
+.bar-grade{font-family:'JetBrains Mono',monospace;font-size:7.5px;color:var(--orange);font-weight:600}
+.legend{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap}
+.legend span{display:flex;align-items:center;gap:5px;font-size:10.5px;color:var(--muted)}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+
+.edu-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:12px}
+.edu-table th{text-align:right;font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--faint);font-weight:500;
+  letter-spacing:.4px;padding:6px 9px;border-bottom:1.5px solid var(--blue-line);text-transform:uppercase}
+.edu-table th:first-child,.edu-table td:first-child{text-align:left}
+.edu-table td{padding:7px 9px;border-bottom:1px solid var(--line);font-family:'JetBrains Mono',monospace}
+.lvtag{font-size:8.5px;padding:1px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-weight:600}
+.lvtag.elem{background:var(--blue-soft);color:var(--blue-mid)}
+.lvtag.mid{background:var(--blue-soft);color:var(--blue)}
+.lvtag.high{background:#E5EDFB;color:var(--blue-deep)}
+.edu-table tfoot td{border-top:2px solid var(--blue-line);border-bottom:none;font-weight:600;font-size:12.5px;padding-top:10px}
+.edu-table tfoot .tot{color:var(--orange)}
+
+.col-bars{display:flex;flex-direction:column;gap:13px;margin-top:6px}
+.col-rh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
+.col-name{font-size:13px;font-weight:600;display:flex;align-items:center;gap:7px}
+.col-name .fl{font-size:15px}
+.col-row.sel .col-name{color:var(--blue)}
+.col-total{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--ink)}
+.col-row.sel .col-total{color:var(--orange)}
+.col-track{display:flex;height:22px;border-radius:6px;overflow:hidden;background:#F0F4FA;border:1px solid var(--line)}
+.col-seg{height:100%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;
+  font-size:9px;color:#fff;white-space:nowrap;overflow:hidden}
+.col-seg.living{background:var(--blue-pale)}
+.col-seg.housing{background:var(--blue-mid)}
+.col-seg.edu{background:var(--orange)}
+.col-legend{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap}
+.col-legend span{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
+.col-legend i{width:11px;height:11px;border-radius:3px}
+.bench{margin-top:14px;font-size:11.5px;color:var(--muted);line-height:1.7;background:#FBFDFF;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.bench b{color:var(--ink)}
+.bench .bh{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px}
+
+.visa-list{display:flex;flex-direction:column;gap:9px}
+.visa-item{display:flex;gap:13px;padding:12px 14px;border:1px solid var(--line);border-radius:11px;background:#FBFDFF}
+.visa-item.star{border-color:var(--orange);background:var(--orange-soft)}
+.visa-tier{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;width:120px;flex:none;color:var(--blue)}
+.visa-item.star .visa-tier{color:var(--orange)}
+.visa-detail{font-size:12px;color:var(--ink);line-height:1.5}
+.visa-note{margin-top:12px;font-size:11.5px;color:var(--muted);background:var(--blue-soft);border-left:3px solid var(--blue);
+  border-radius:0 8px 8px 0;padding:10px 13px;line-height:1.6}
+
+.disclaim{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--faint);border:1px solid var(--line);
+  border-radius:12px;padding:14px 16px;margin-top:22px;line-height:1.7;background:#FBFDFF}
+.disclaim b{color:var(--muted)}
+footer{text-align:center;color:var(--faint);font-size:11px;margin-top:30px}
+
+.rate-list{display:flex;flex-direction:column;gap:12px}
+.rate-rh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.rate-name{font-size:13px;font-weight:600;display:flex;gap:7px;align-items:center}
+.rate-name .fl{font-size:15px}
+.rate-val{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;color:var(--blue)}
+.rate-row.sel .rate-val{color:var(--orange)}
+.rate-track{height:8px;border-radius:5px;background:#EEF3FB;overflow:hidden}
+.rate-fill{height:100%;background:var(--blue-mid);border-radius:5px;transition:.3s}
+.rate-row.sel .rate-fill{background:var(--orange)}
+.rate-sub{font-size:10.5px;color:var(--faint);font-family:'JetBrains Mono',monospace;margin-top:3px}
+
+.sim-inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 18px;margin-bottom:18px}
+.sim-inputs .infl-row .simval{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--orange);font-weight:600;min-width:58px;text-align:right}
+.scn-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:4px 0}
+.scn{border:1.5px solid var(--line);border-radius:13px;padding:14px 15px;background:#FBFDFF}
+.scn.my{border-color:var(--orange);background:var(--orange-soft)}
+.scn .sh{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;display:flex;align-items:center;gap:6px;margin-bottom:9px}
+.scn .srow{display:flex;justify-content:space-between;font-size:11.5px;padding:3px 0;color:var(--muted)}
+.scn .srow b{font-family:'JetBrains Mono',monospace;color:var(--ink);font-weight:500}
+.scn .snet{margin-top:9px;padding-top:9px;border-top:1px dashed var(--blue-line);display:flex;justify-content:space-between;align-items:baseline}
+.scn .snet .lab{font-size:11px;color:var(--muted)}
+.scn .snet .val{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;color:var(--blue)}
+.scn.my .snet .val{color:var(--orange)}
+.sim-hero{background:var(--orange-soft);border:1px solid var(--orange-line);border-radius:12px;padding:13px 16px;margin:14px 0 4px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.sim-hero .lab{font-size:12px;color:var(--ink)}
+.sim-hero .val{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:var(--orange)}
+
+@media (max-width:640px){
+  .countries{grid-template-columns:repeat(2,1fr)}
+  .alloc-grid,.edu-inputs{grid-template-columns:1fr}
+  .sim-inputs,.scn-grid{grid-template-columns:1fr}
+  h1.title{font-size:24px}
+  .bar-amt{display:none}
+  .visa-tier{width:92px;font-size:12px}
+  header{padding:48px 20px 44px}
+}
 </style>
 </head>
 <body>
-<div class="app">
+<header>
+  <svg class="resort-bg" viewBox="0 0 900 300" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#0A2740"/>
+        <stop offset="0.42" stop-color="#12558F"/>
+        <stop offset="0.72" stop-color="#1E86A8"/>
+        <stop offset="1" stop-color="#41B4A4"/>
+      </linearGradient>
+      <radialGradient id="sunGlow" cx="0.5" cy="0.5" r="0.5">
+        <stop offset="0" stop-color="#FFE9C2"/>
+        <stop offset="0.35" stop-color="#FFC978" stop-opacity="0.9"/>
+        <stop offset="1" stop-color="#FF9E52" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="ocean" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#2FA19C"/>
+        <stop offset="1" stop-color="#4FC3AE"/>
+      </linearGradient>
+    </defs>
+    <!-- 하늘 -->
+    <rect width="900" height="300" fill="url(#sky)"/>
+    <!-- 태양 후광 + 원반 -->
+    <circle cx="648" cy="150" r="150" fill="url(#sunGlow)"/>
+    <circle cx="648" cy="150" r="50" fill="#FFE1A6" opacity="0.92"/>
+    <!-- 태양이 물에 비치는 반사 -->
+    <g opacity="0.5" fill="#FFE1A6">
+      <rect x="612" y="214" width="72" height="4" rx="2"/>
+      <rect x="600" y="226" width="96" height="4" rx="2"/>
+      <rect x="586" y="240" width="124" height="4" rx="2"/>
+      <rect x="600" y="254" width="96" height="3" rx="1.5"/>
+    </g>
+    <!-- 바다 -->
+    <path d="M0,208 Q225,196 450,206 T900,204 L900,300 L0,300 Z" fill="url(#ocean)"/>
+    <path d="M0,208 Q225,196 450,206 T900,204" fill="none" stroke="#BFF0E0" stroke-width="1.4" opacity="0.5"/>
+    <!-- 잔물결 -->
+    <g stroke="#DFF7EE" stroke-width="1.4" opacity="0.35" fill="none">
+      <path d="M120,232 q22,-6 44,0 t44,0"/>
+      <path d="M330,246 q22,-6 44,0 t44,0"/>
+      <path d="M40,262 q22,-6 44,0 t44,0"/>
+      <path d="M760,240 q22,-6 44,0 t44,0"/>
+    </g>
+    <!-- 왼쪽 야자수 (실루엣) -->
+    <g fill="#08243A">
+      <path d="M150,300 C150,220 150,150 138,96 C136,88 146,86 149,94 C160,148 162,220 166,300 Z"/>
+      <g>
+        <path d="M143,96 C104,70 66,58 26,60 C64,52 108,58 148,86 Z"/>
+        <path d="M143,94 C112,52 78,26 40,10 C86,30 124,60 150,88 Z"/>
+        <path d="M147,92 C150,46 166,8 196,-14 C176,26 162,62 154,90 Z"/>
+        <path d="M150,94 C196,58 244,44 292,52 C244,42 196,52 152,84 Z"/>
+        <path d="M150,100 C198,96 250,104 292,132 C244,110 196,96 150,92 Z"/>
+        <path d="M144,100 C104,104 64,120 30,150 C70,116 108,98 150,94 Z"/>
+      </g>
+      <circle cx="147" cy="92" r="7"/>
+      <!-- 코코넛 -->
+      <circle cx="139" cy="100" r="5"/>
+      <circle cx="156" cy="101" r="5"/>
+    </g>
+    <!-- 오른쪽 야자수 (작고 멀리) -->
+    <g fill="#0A2A44" opacity="0.92">
+      <path d="M812,300 C812,240 814,190 806,150 C805,144 813,143 815,150 C822,190 824,240 826,300 Z"/>
+      <g>
+        <path d="M809,150 C781,132 752,124 724,127 C752,120 784,124 813,143 Z"/>
+        <path d="M809,149 C788,118 766,96 740,84 C772,98 798,122 815,146 Z"/>
+        <path d="M812,148 C815,114 826,86 847,70 C833,98 823,124 818,147 Z"/>
+        <path d="M814,150 C846,124 880,114 900,120 L900,132 C868,120 842,128 816,145 Z"/>
+        <path d="M808,154 C780,158 752,172 730,196 C758,168 784,152 814,149 Z"/>
+      </g>
+      <circle cx="812" cy="148" r="5.5"/>
+    </g>
+    <!-- 작은 새 두 마리 -->
+    <g stroke="#CFE9F2" stroke-width="1.6" fill="none" opacity="0.55" stroke-linecap="round">
+      <path d="M430,70 q8,-7 16,0 q8,-7 16,0"/>
+      <path d="M486,92 q6,-5 12,0 q6,-5 12,0"/>
+    </g>
+  </svg>
+  <div class="resort-fade"></div>
+  <div class="head-inner">
+    <div class="eyebrow">EXPAT CARD · RETIREMENT RELOCATION</div>
+    <h1 class="title">은퇴이민 <b>4개국 비교</b> · 카드 · 학비 · 생활비 · 비자</h1>
+    <p class="sub">3인 가족 기준. 나라를 고르면 현지 통화로 모든 값이 전환됩니다. 자녀 출생연도로 졸업까지 학비를, Numbeo로 월 생활비를 환산합니다.</p>
+    <div class="head-tags"><span>🌴 한국</span><span>🏝️ 말레이시아</span><span>🌊 싱가포르</span><span>☀️ 호주 · 브리즈번</span></div>
+  </div>
+</header>
 
-  <!-- 인트로 -->
-  <section id="intro" class="screen active intro">
-    <div class="emoji">🧭</div>
-    <h1>간단 MBTI 테스트</h1>
-    <p class="subtitle">12개의 질문으로 알아보는 나의 성격 유형!<br>직관적으로 편하게 골라주세요.</p>
-    <button class="btn" onclick="startTest()">테스트 시작하기 →</button>
+<div class="wrap">
+
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">1</span><span class="sec-title">국가</span></div>
+    <div class="sec-desc">통화·슬라이더 상한·학비·생활비·비자가 자동 전환됩니다.</div>
+    <div class="sec-body"><div class="countries" id="countries"></div></div>
   </section>
 
-  <!-- 질문 -->
-  <section id="quiz" class="screen">
-    <div class="progress-wrap">
-      <div class="progress-meta">
-        <span id="q-count">1 / 12</span>
-        <span id="q-percent">0%</span>
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">2</span><span class="sec-title">월 카드 사용금액</span></div>
+    <div class="sec-desc">상한은 나라별 현지 통화 기준으로 일반화.</div>
+    <div class="sec-body">
+      <div class="spend-top">
+        <div class="spend-label">월 카드 사용 총액</div>
+        <div class="spend-val" id="spendVal">—</div>
+        <div class="spend-krw" id="spendKrw"></div>
       </div>
-      <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
-    </div>
-    <div id="question" class="question"></div>
-    <div id="options" class="options"></div>
-    <button id="back-btn" class="back" onclick="prevQuestion()" style="display:none">← 이전 질문</button>
-  </section>
-
-  <!-- 결과 -->
-  <section id="result" class="screen result">
-    <div class="emoji" id="r-emoji">🎉</div>
-    <div class="result-type" id="r-type">ENFP</div>
-    <div class="result-nick" id="r-nick"></div>
-    <p class="result-desc" id="r-desc"></p>
-
-    <div class="info" id="info"></div>
-
-    <div class="actions">
-      <button class="btn kakao" onclick="shareKakao()">💬 카카오톡으로 공유하기</button>
-      <button class="btn secondary" onclick="shareFallback()">🔗 링크 복사 / 다른 방법으로 공유</button>
-      <button class="btn secondary" onclick="restart()">🔄 다시 테스트하기</button>
+      <input type="range" id="spendRange" min="0" max="100" value="40">
+      <div class="range-ends"><span id="spendMin">—</span><span id="spendMax">—</span></div>
     </div>
   </section>
 
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">3</span><span class="sec-title">카테고리 배분</span></div>
+    <div class="sec-desc">기본 비중 배분. 조정하면 카드 추천이 갱신됩니다.</div>
+    <div class="sec-body"><div class="alloc-grid" id="allocGrid"></div></div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">4</span><span class="sec-title">추천 카드 — 최적 조합 (최대 4장)</span></div>
+    <div class="sec-desc">여러 장을 조합해 카테고리별 최적 카드로 결제했을 때의 최종 할인액·피킹률. 카드를 탭해 직접 조합할 수 있습니다.</div>
+    <div class="sec-body">
+      <div class="sim-hero" id="comboHero"></div>
+      <button class="rebtn" id="optBtn" onclick="autoOptimizeCards()" style="margin:4px 0 12px">🔄 최적 조합 자동 선택</button>
+      <div class="cards-list" id="cardsList"></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">5</span><span class="sec-title">교육비 — 졸업까지</span></div>
+    <div class="sec-desc" id="eduDesc"></div>
+    <div class="sec-body">
+      <div class="edu-inputs">
+        <div class="field">
+          <label>자녀 출생연도</label>
+          <input type="number" id="birthYear" value="2015" min="2008" max="2025" step="1">
+          <div class="eduname" id="eduNameLine"></div>
+        </div>
+        <div class="field" id="eduCostField"></div>
+      </div>
+      <div class="chips" id="eduChips"></div>
+      <div class="runway">
+        <div class="bars" id="eduBars"></div>
+        <div class="legend">
+          <span><i style="background:var(--blue-pale)"></i>초등 (1–6)</span>
+          <span><i style="background:var(--blue-mid)"></i>중등 (7–9)</span>
+          <span><i style="background:var(--blue-deep)"></i>고등 (10–12)</span>
+        </div>
+      </div>
+      <table class="edu-table" id="eduTable"></table>
+      <div class="bench" id="eduNote"></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">6</span><span class="sec-title">대학 등록금 (학부 4년)</span></div>
+    <div class="sec-desc">고3 이후 진학 경로 비교 — 한국 반도체 계약학과 vs 모나쉬 말레이시아 vs 호주 대학.</div>
+    <div class="sec-body">
+      <div class="col-bars" id="univBars"></div>
+      <div class="bench" id="univNote"></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">7</span><span class="sec-title">월 생활비 비교 (Numbeo · 3인)</span></div>
+    <div class="sec-desc">생활비 + 주거(3BR) + 교육 = 월 총액(원화 환산). 4개국 동시 비교.</div>
+    <div class="sec-body">
+      <div class="field" style="margin-bottom:16px"><label>한국 실제 월 생활비 — 순수 생활비 기준 (주거·교육 제외)</label>
+        <div class="infl-row"><input type="range" id="krLiv" min="3000000" max="9000000" step="100000" value="5000000">
+        <span class="simval" id="krLivV" style="color:var(--blue)"></span></div>
+        <div class="eduname" id="krLivNote"></div></div>
+      <div class="col-bars" id="colBars"></div>
+      <div class="col-legend">
+        <span><i style="background:var(--blue-pale)"></i>생활비(rent 제외)</span>
+        <span><i style="background:var(--blue-mid)"></i>주거 3BR</span>
+        <span><i style="background:var(--orange)"></i>교육</span>
+      </div>
+      <div class="bench" id="benchNote"></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">8</span><span class="sec-title">비자 조건</span></div>
+    <div class="sec-desc">3인 가족 장기체류·은퇴이민 기준.</div>
+    <div class="sec-body">
+      <div class="visa-list" id="visaList"></div>
+      <div class="visa-note" id="visaNote"></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">9</span><span class="sec-title">예금 금리 (1년 정기예금)</span></div>
+    <div class="sec-desc">MM2H 정기예치금(FD)도 이 금리로 이자가 붙습니다 — 말레이시아는 MM2H FD 이자가 면세.</div>
+    <div class="sec-body">
+      <div class="rate-list" id="rateList"></div>
+      <div class="bench" id="rateNote"></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">10</span><span class="sec-title">아일랜드 S&amp;P500 (IBKR) 세후수익 시뮬레이터</span></div>
+    <div class="sec-desc">아일랜드 상장 누적형 UCITS(예: CSPX)로 S&amp;P500 투자 시, 거주국에 따라 달라지는 세후 수익.</div>
+    <div class="sec-body">
+      <div class="sim-inputs">
+        <div class="field"><label>투자원금</label>
+          <div class="infl-row"><input type="range" id="simP" min="500000000" max="3000000000" step="50000000" value="1000000000">
+          <span class="simval" id="simPV"></span></div></div>
+        <div class="field"><label>연 기대수익률</label>
+          <div class="infl-row"><input type="range" id="simR" min="4" max="15" step="0.5" value="8">
+          <span class="simval" id="simRV"></span></div></div>
+        <div class="field"><label>보유기간</label>
+          <div class="infl-row"><input type="range" id="simN" min="1" max="30" step="1" value="10">
+          <span class="simval" id="simNV"></span></div></div>
+      </div>
+      <div class="chips" id="simTop"></div>
+      <div class="scn-grid" id="simScn"></div>
+      <div class="sim-hero" id="simHero"></div>
+      <div class="bench" id="simNote"></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">11</span><span class="sec-title">국가별 최종 총 자산 — 35년 시뮬레이션 (만50→85세)</span></div>
+    <div class="sec-desc">시작 유동자산에서 매년 [생활비+주거+교육−연금]을 빼고 세후수익률로 복리. 거주국 투자세(한국 22%·말련/싱가 0%·호주 15%)가 35년 누적되어 격차를 만듭니다.</div>
+    <div class="sec-body">
+      <div class="sim-inputs" style="grid-template-columns:1fr 1fr">
+        <div class="field"><label>시작 유동자산</label>
+          <div class="infl-row"><input type="range" id="wAssets" min="1000000000" max="6000000000" step="50000000" value="3040000000">
+          <span class="simval" id="wAssetsV"></span></div></div>
+        <div class="field"><label>연 투자수익률 (총)</label>
+          <div class="infl-row"><input type="range" id="wRet" min="3" max="12" step="0.5" value="6">
+          <span class="simval" id="wRetV"></span></div></div>
+      </div>
+      <div class="sim-hero" id="wHero"></div>
+      <div class="col-bars" id="wealthBars"></div>
+      <div class="col-legend">
+        <span><i style="background:var(--blue-deep)"></i>85세 잔존 총자산</span>
+        <span><i style="background:var(--orange)"></i>자산 고갈</span>
+      </div>
+      <div class="bench" id="wealthNote"></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">12</span><span class="sec-title">배당주·단기국채 시뮬레이션 (월배당 ETF · 美국채)</span></div>
+    <div class="sec-desc">투자금·기간을 조정하면 한국·미국 월배당 ETF TOP10과 미국 단기국채의 세전/세후 수익을 최대 40년까지 자동 계산합니다.</div>
+    <div class="sec-body">
+      <div class="sim-inputs" style="grid-template-columns:1fr 1fr">
+        <div class="field"><label>투자금</label>
+          <div class="infl-row"><input type="range" id="divAmt" min="10000000" max="3000000000" step="10000000" value="100000000">
+          <span class="simval" id="divAmtV"></span></div></div>
+        <div class="field"><label>투자 기간 (최대 40년)</label>
+          <div class="infl-row"><input type="range" id="divYears" min="1" max="40" step="1" value="20">
+          <span class="simval" id="divYearsV"></span></div></div>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:6px">
+        <div style="flex:1;min-width:170px"><label style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.4px">배당 처리</label><div class="myschool" id="dripTog"></div></div>
+        <div style="flex:1;min-width:170px"><label style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.4px">거주지 (세금)</label><div class="myschool" id="resTog"></div></div>
+      </div>
+      <div class="sim-hero" id="divHero"></div>
+
+      <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;margin:20px 0 6px">🇰🇷 한국 월배당 ETF TOP 10 <span style="font-size:11px;color:var(--faint);font-family:'JetBrains Mono',monospace">· 1년 배당률순 · 2026 스냅샷</span></div>
+      <table class="edu-table" id="divKRTable"></table>
+
+      <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;margin:22px 0 6px">🇺🇸 미국 월배당 ETF TOP 10 <span style="font-size:11px;color:var(--faint);font-family:'JetBrains Mono',monospace">· 1년 배당률순 · 2026 스냅샷</span></div>
+      <table class="edu-table" id="divUSTable"></table>
+
+      <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;margin:22px 0 6px">🇺🇸 미국 단기국채 (T-Bill) <span style="font-size:11px;color:var(--faint);font-family:'JetBrains Mono',monospace">· 세후 실수령</span></div>
+      <div class="myschool" id="bondTog" style="max-width:330px"></div>
+      <div class="chips" id="bondChips"></div>
+
+      <div class="bench" id="divNote"></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><span class="sec-num">13</span><span class="sec-title">은퇴 자산 고갈 시뮬레이션 (만50→90세 · 실질)</span></div>
+    <div class="sec-desc">생활비를 빼 쓰는 현실을 반영. 지난 100년 폭락(대공황·오일쇼크·IMF·닷컴·서브프라임·코로나)의 빈도·낙폭을 주입해 600회 시뮬레이션하고, 모든 금액을 오늘 가치(실질)로 표시합니다.</div>
+    <div class="sec-body">
+      <div class="sim-inputs" style="grid-template-columns:1fr 1fr">
+        <div class="field"><label>연 생활비 (오늘 가치)</label>
+          <div class="infl-row"><input type="range" id="cSpend" min="30000000" max="300000000" step="6000000" value="96000000">
+          <span class="simval" id="cSpendV"></span></div></div>
+        <div class="field"><label>연 변동성 (위험도)</label>
+          <div class="infl-row"><input type="range" id="cVol" min="10" max="20" step="1" value="14">
+          <span class="simval" id="cVolV"></span></div></div>
+      </div>
+      <button class="rebtn" id="reseedBtn" onclick="reseedCrisis()" style="margin-bottom:14px">🎲 다른 시나리오로 다시 굴리기</button>
+      <div class="chips" id="crisisChips"></div>
+      <div id="crisisChart"></div>
+      <div class="col-legend">
+        <span><i style="background:var(--blue-deep)"></i>중앙값(P50)</span>
+        <span><i style="background:var(--blue-pale)"></i>P10~P90 범위</span>
+        <span><i style="background:var(--orange)"></i>한 시나리오(폭락 포함)</span>
+        <span><i style="background:var(--faint)"></i>순수 복리 가정</span>
+      </div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;margin:20px 0 6px">📉 지난 100년 주요 폭락 이벤트</div>
+      <table class="edu-table" id="crisisTable"></table>
+      <div class="bench" id="crisisNote"></div>
+    </div>
+  </section>
+
+  <div class="disclaim" id="disclaim"></div>
+  <footer>CardFit · expatcard standalone v2 · 한국·말레이시아·싱가포르·호주(브리즈번)</footer>
 </div>
 
 <script>
-/* ---------------- 데이터 ---------------- */
-// 각 질문은 하나의 축(dichotomy)을 측정. a/b 선택지가 각 극단에 해당.
-const questions = [
-  { axis: "EI", q: "주말에 에너지를 얻는 방법은?", a: {t:"E", label:"사람들과 만나 왁자지껄 놀기"}, b: {t:"I", label:"집에서 혼자 조용히 쉬기"} },
-  { axis: "EI", q: "처음 보는 모임에 가면?", a: {t:"E", label:"먼저 다가가 말을 건다"}, b: {t:"I", label:"누군가 말 걸어주길 기다린다"} },
-  { axis: "EI", q: "고민이 생기면?", a: {t:"E", label:"말하면서 정리한다"}, b: {t:"I", label:"혼자 생각하며 정리한다"} },
+const FX={KRW:1,MYR:381,SGD:1150,AUD:970};
+const LIVING_FACTOR=0.87;
 
-  { axis: "SN", q: "새로운 일을 배울 때 더 끌리는 건?", a: {t:"S", label:"구체적인 사실과 경험"}, b: {t:"N", label:"의미와 가능성, 아이디어"} },
-  { axis: "SN", q: "여행 계획을 세울 때?", a: {t:"S", label:"검증된 맛집·동선을 확인"}, b: {t:"N", label:"어떤 새로운 경험일지 상상"} },
-  { axis: "SN", q: "대화할 때 나는?", a: {t:"S", label:"현실적이고 사실 위주"}, b: {t:"N", label:"비유와 상상이 많은 편"} },
+/* 1년 정기예금 금리 (2026.6 조사, 대표치) */
+const FD={
+  KR:{rate:3.2, sub:'기준금리 2.5% · 시중 3.0~3.5%', tax:'이자소득세 15.4%'},
+  MY:{rate:3.5, sub:'최고 ~3.85%(디지털은행)', tax:'거주자 비과세 · MM2H FD 이자 면세'},
+  SG:{rate:1.5, sub:'최고 ~1.6%(GXS)', tax:'개인 이자소득 비과세'},
+  AU:{rate:4.7, sub:'RBA 4.35% · 최고 ~5.25%(빅4)', tax:'이자 과세(소득세 합산)'},
+};
+/* 아일랜드 UCITS S&P500 세후 시뮬레이터 상수 */
+const DIVY=0.013, FUNDWHT=0.15, KRDED=2500000, KRCGT=0.22;
 
-  { axis: "TF", q: "결정을 내릴 때 더 중요한 건?", a: {t:"T", label:"논리와 객관적 사실"}, b: {t:"F", label:"사람의 감정과 관계"} },
-  { axis: "TF", q: "친구가 고민을 털어놓으면?", a: {t:"T", label:"해결책을 먼저 제시한다"}, b: {t:"F", label:"우선 공감하고 위로한다"} },
-  { axis: "TF", q: "피드백을 줄 때 나는?", a: {t:"T", label:"솔직하고 직설적으로"}, b: {t:"F", label:"상대 기분을 배려하며"} },
+/* 대학 학부 등록금 (2026 조사, 4년 기준) */
+const UNIV={
+  KR:{name:'한국 반도체 계약학과', flag:'🇰🇷', years:4, annual:0, cur:'KRW',
+    sub:'등록금 전액 장학금 · 생활비 보조 · 졸업 후 삼성/SK하이닉스 입사 보장',
+    note:'성균관대·연세대·KAIST·포항공대·고려대·한양대·서강대 등. 일반 공대 등록금은 ~₩900만/년이나 전액 장학금이라 실부담 ≈ ₩0 (오히려 생활비 보조금 수령).'},
+  MY:{name:'Monash Malaysia (공학)', flag:'🇲🇾', years:4, annual:60000, cur:'MYR',
+    sub:'호주 본교와 동일 학위 · 국제학생 RM48k~69k/년',
+    note:'학부 대부분 RM48,000~69,000/년(공학·IT 상단). 의대 ~RM135k/년. 호주 Monash 본교 편입·교환 가능.'},
+  AU:{name:'호주 대학 (국제학생·공학)', flag:'🇦🇺', years:4, annual:50000, cur:'AUD',
+    sub:'Go8 공학 ~A$45k~55k/년 · PR이면 국내 CSP ~A$12k/년',
+    note:'국제학생 학부 A$20k~50k(공학·Go8 상단 A$45~55k). 시민·PR이면 CSP 학생기여금 ~A$11~16k/년 + HECS 대출 가능.'},
+};
 
-  { axis: "JP", q: "일을 할 때 나는?", a: {t:"J", label:"미리 계획하고 순서대로"}, b: {t:"P", label:"상황 봐가며 유연하게"} },
-  { axis: "JP", q: "여행 스타일은?", a: {t:"J", label:"시간표까지 짜두는 계획형"}, b: {t:"P", label:"발길 닿는 대로 즉흥형"} },
-  { axis: "JP", q: "마감이 있는 일은?", a: {t:"J", label:"여유 있게 미리 끝낸다"}, b: {t:"P", label:"마감 직전 집중해서 몰아친다"} },
+/* 말레이시아 국제학교 프리셋 — ISP/ISKL 실제 검증 학비(2026) + 일반 mid-tier */
+const MY_SCHOOLS={
+  ISP:{elem:55000,mid:72000,high:79000,label:'ISP · DPC',
+    note:'ISP(Desa ParkCity·영국식 IGCSE→A-Level) 실제 학비: 초 RM38~60k, 중(Y7–9) RM72k, 고(Y10–13) RM78~82k. DPC 거주자 등록비 25% 감면(1회). 학비+버스·급식·시험료 등 풀코스트 8년 ≈ RM825k(약 3.08억원).'},
+  ISKL:{elem:114500,mid:129300,high:142000,label:'ISKL · Ampang',
+    note:'ISKL(Ampang·미국식+IBDP) 실제 학비: 초(~G5) RM114.5k, 중(G6–8) RM129.3k, 고(G9–12) RM142k. IB 시험료·필수 GAP 여행 별도. 풀코스트 8년 ≈ RM1.33M(약 4.94억원).'},
+  MID:{elem:45000,mid:60000,high:80000,label:'일반 mid-tier',
+    note:'KL 일반 mid-tier(median ~RM45k). Tier1(Alice Smith·BISKL) RM80~130k+.'},
+};
+function applyMySchool(){
+  const s=MY_SCHOOLS[state.mySchool];
+  COUNTRIES.MY.school={elem:s.elem,mid:s.mid,high:s.high};
+  COUNTRIES.MY.schoolNote=s.note;
+}
+function selectMySchool(k){state.mySchool=k;applyMySchool();renderEduControls();renderEdu();renderCOL();renderWealth();}
+
+/* 섹션11 — 국가별 자산 시뮬 상수 */
+const W_TAX={KR:0.22,MY:0,SG:0,AU:0.15};
+const W_PENSION_AGE=65, W_PENSION=18000000, W_LIVINFL=0.025, W_YEARS=36, W_AGE0=50;
+
+/* 배당주·국채 — 2026 1~6월 스냅샷. [이름, 연배당률, NAV성장 가정] */
+const DIV_KR=[
+  ['SOL 팔란티어커버드콜OTM채권혼합',0.259,-0.04],
+  ['SOL 팔란티어미국채커버드콜혼합',0.208,-0.03],
+  ['RISE 미국테크100데일리고정커버드콜',0.207,-0.02],
+  ['KODEX 미국나스닥100데일리커버드콜OTM',0.193,-0.01],
+  ['RISE 미국배당100데일리고정커버드콜',0.140,0.01],
+  ['PLUS 고배당주위클리커버드콜',0.137,0.00],
+  ['KODEX 미국배당다우존스타겟커버드콜',0.133,0.015],
+  ['TIGER 미국배당다우존스타겟커버드콜2호',0.116,0.02],
+  ['PLUS 미국배당증가성장주데일리커버드콜',0.104,0.025],
+  ['KODEX 미국배당커버드콜액티브',0.094,0.03],
+];
+const DIV_US=[
+  ['QQQI · NEOS 나스닥100',0.141,0.01],
+  ['RYLD · Russell2000 CC',0.130,-0.02],
+  ['SPYI · NEOS S&P500',0.120,0.02],
+  ['QYLD · 나스닥100 CC',0.116,-0.02],
+  ['PBP · S&P500 BuyWrite',0.107,0.02],
+  ['JEPQ · JPM 나스닥 EPI',0.105,0.04],
+  ['XYLD · S&P500 CC',0.100,0.00],
+  ['JEPI · JPM Equity PI',0.084,0.03],
+  ['DIVO · Amplify CWP',0.048,0.06],
+  ['SPHD · Invesco 고배당저변동',0.039,0.03],
+];
+const BONDS={'3M':{y:0.0375,frac:0.25,label:'3개월'},'6M':{y:0.0385,frac:0.5,label:'6개월'},'1Y':{y:0.0393,frac:1,label:'1년'}};
+
+/* 지난 100년 주요 폭락 (S&P500 기준, 1997은 KOSPI). [이벤트, 기간, 낙폭, 회복] */
+const CRISES=[
+  ['1929 대공황','1929–1932','−86%','약 25년'],
+  ['1937 2차 침체','1937–1938','−50%','WWII 거쳐 회복'],
+  ['1973 오일쇼크','1973–1974','−48%','수년(고인플레)'],
+  ['1987 블랙먼데이','1987','−34%','약 20개월'],
+  ['1997 아시아·IMF','1997–1998','KOSPI −65~75%','수년'],
+  ['2000 닷컴버블','2000–2002','−49%','약 7년'],
+  ['2008 서브프라임','2007–2009','−57%','약 4년'],
+  ['2020 코로나','2020','−34%(33일)','약 5개월'],
+  ['2022 인플레·금리','2022','−25%','약 1년'],
+];
+/* 위기 시 적용할 낙폭 분포(역사적, 1929 -86%는 희소) */
+const CRISIS_DEPTHS=[0.30,0.34,0.37,0.43,0.48,0.49,0.57,0.30,0.34,0.43,0.86];
+const CRISIS_P=0.06; /* 연 위기확률 ≈ 7년에 1회 약세장 빈도 반영 */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296;};}
+
+const CATS=[
+  {k:'groceries',label:'마트',ic:'🛒',w:.18},{k:'dining',label:'외식',ic:'🍽️',w:.20},
+  {k:'online',label:'온라인',ic:'📦',w:.15},{k:'shopping',label:'쇼핑',ic:'🛍️',w:.12},
+  {k:'telecom',label:'통신',ic:'📱',w:.07},{k:'transport',label:'교통/EV',ic:'🚉',w:.08},
+  {k:'cafe',label:'카페',ic:'☕',w:.07},{k:'travel',label:'여행',ic:'✈️',w:.13},
 ];
 
-const typeInfo = {
-  ISTJ:["🗂️","청렴결백한 논리주의자","사실에 근거해 책임감 있게 일을 완수하는 신뢰의 아이콘."],
-  ISFJ:["🛡️","용감한 수호자","조용하지만 헌신적으로 주변을 챙기는 따뜻한 사람."],
-  INFJ:["🔮","선의의 옹호자","깊은 통찰과 이상으로 사람을 이끄는 신비로운 조언가."],
-  INTJ:["♟️","용의주도한 전략가","큰 그림을 그리고 계획으로 실현하는 마스터마인드."],
-  ISTP:["🛠️","만능 재주꾼","직접 손대며 문제를 해결하는 쿨한 실용주의자."],
-  ISFP:["🎨","호기심 많은 예술가","감각적이고 자유로운 마음의 온화한 예술가."],
-  INFP:["🌈","열정적인 중재자","이상과 가치를 품고 사는 따뜻한 몽상가."],
-  INTP:["🔬","논리적인 사색가","호기심으로 세상을 분석하는 아이디어 뱅크."],
-  ESTP:["🏄","모험을 즐기는 사업가","순간의 판단이 빠른 에너지 넘치는 행동파."],
-  ESFP:["🎉","자유로운 영혼의 연예인","어디서나 분위기를 띄우는 흥부자."],
-  ENFP:["✨","재기발랄한 활동가","가능성과 사람을 사랑하는 열정 가득한 자유인."],
-  ENTP:["💡","뜨거운 논쟁을 즐기는 변론가","아이디어와 토론을 즐기는 똑똑한 반항아."],
-  ESTJ:["📋","엄격한 관리자","체계와 규칙으로 목표를 달성하는 리더."],
-  ESFJ:["🤝","사교적인 외교관","사람들을 챙기고 조화를 만드는 인싸형 조력자."],
-  ENFJ:["🌟","정의로운 사회운동가","사람의 마음을 움직여 이끄는 카리스마 리더."],
-  ENTJ:["👑","대담한 통솔자","목표를 향해 조직을 이끄는 타고난 지휘관."],
+const COUNTRIES={
+  KR:{name:'한국',city:'서울',flag:'🇰🇷',cur:'KRW',sym:'₩',
+    monthlyMax:10000000,monthlyStep:100000,monthlyDefault:4000000,
+    eduMode:'private',eduPrivate:1000000,
+    living4:5517610,housing:3100000,
+    housingBench:'개포 디에이치퍼스티어아이파크 59㎡(25평형·방3): 매매 ₩28.8억 · 전세 ₩11.8억 · 월세환산 ~₩310만',
+    cards:[
+      {name:'현대카드 ZERO Edition3 (할인형)',issuer:'현대',fee:10000,min:0,base:.012,rewards:[]},
+      {name:'삼성카드 taptap O',issuer:'삼성',fee:10000,min:300000,base:.007,rewards:[{cats:['online','transport'],rate:.01,cap:10000}]},
+      {name:'신한카드 Mr.Life',issuer:'신한',fee:18000,min:300000,base:.003,rewards:[{cats:['groceries'],rate:.05,cap:10000},{cats:['telecom'],rate:.10,cap:5000}]},
+    ],
+    visa:[{tier:'내국인',detail:'한국 국민 — 비자 불필요. 자녀 일반(공립) 학교 무상 + 사교육비 부담.'}],
+    visaNote:'본인이 한국인이므로 국내 거주 시 비자·국제학교 이슈 없음. 교육비는 사교육비로 계산.'},
+  MY:{name:'말레이시아',city:'쿠알라룸푸르',flag:'🇲🇾',cur:'MYR',sym:'RM',
+    monthlyMax:30000,monthlyStep:250,monthlyDefault:8000,
+    eduMode:'intl',school:{elem:45000,mid:60000,high:80000},
+    schoolNote:'KL mid-tier(median ~RM45k). Tier1(Alice Smith·BISKL) RM80~130k+.',
+    living4:9048,housing:6000,
+    housingBench:'Desa ParkCity·몽키아라 3BR 임대 ~RM6,000/월 (DPC South Brooks·OCP ~RM6.5k · 몽키아라 신축 가족형 3BR ~RM5.5k, 중위 RM4.2k).',
+    cards:[
+      {name:'UOB ONE Platinum',issuer:'UOB',fee:0,min:2000,base:.003,rewards:[{cats:['groceries'],rate:.10,cap:15},{cats:['dining'],rate:.10,cap:15},{cats:['transport'],rate:.10,cap:15},{cats:['cafe'],rate:.10,cap:15}]},
+      {name:'CIMB Cash Rebate',issuer:'CIMB',fee:0,min:0,base:.002,rewards:[{cats:['telecom'],rate:.05,cap:30},{cats:['dining','cafe'],rate:.12,cap:30}]},
+      {name:'Maybank 2 Premier',issuer:'Maybank',fee:0,min:0,base:.015,rewards:[{cats:['dining'],rate:.05,cap:50}]},
+    ],
+    visa:[
+      {tier:'MM2H Silver',detail:'5년 · 정기예금 USD150k · 부동산 RM600k · 연 90일 체류'},
+      {tier:'MM2H Gold',detail:'15년 · FD USD500k · 부동산 RM1M · SC Priority(PRB) 자동'},
+      {tier:'MM2H Platinum',detail:'20년 · FD USD1M · 부동산 RM2M · 취업·사업 허용'},
+      {tier:'PVIP ★대안',detail:'20년(갱신) · 연령무관 · 체류조건 없음 · FD RM1M(1년 후 절반 인출) · 해외소득 RM40k/월 · 수수료 RM200k+가족 RM100k/인 · 취업·사업·학업 전면 허용',star:true},
+    ],
+    visaNote:'해외 송금소득 면세 ~2026.12.31(이후 정책 변동 가능). 취업·유연성 우선이면 PVIP가 MM2H보다 우위, 비용 최소화면 MM2H Gold.'},
+  SG:{name:'싱가포르',city:'싱가포르',flag:'🇸🇬',cur:'SGD',sym:'S$',
+    monthlyMax:15000,monthlyStep:100,monthlyDefault:5000,
+    eduMode:'intl',school:{elem:32000,mid:38000,high:44000},
+    schoolNote:'mid-tier(Chatsworth·Dover Court·CIS·AIS) S$30~45k. Top(SAS·UWC) S$55~85k.',
+    living4:5461,housing:6500,
+    housingBench:'프리미엄 3BR 임대 ~S$6,500/월 (전체 3BR S$4.5k~10k). 외국인은 콘도만 매입 가능.',
+    cards:[
+      {name:'UOB One Card',issuer:'UOB',fee:0,min:500,base:.005,rewards:[{cats:['groceries','dining','transport','online','cafe'],rate:.0333,cap:100}]},
+      {name:'Citi Cash Back',issuer:'Citi',fee:0,min:800,base:.0025,rewards:[{cats:['dining','cafe'],rate:.08,cap:80},{cats:['groceries'],rate:.08,cap:80}]},
+      {name:'DBS Live Fresh',issuer:'DBS',fee:0,min:600,base:.003,rewards:[{cats:['online'],rate:.05,cap:75},{cats:['transport'],rate:.05,cap:75}]},
+    ],
+    visa:[
+      {tier:'전용 은퇴비자 없음',detail:'싱가포르는 retirement visa 자체가 부재'},
+      {tier:'Employment Pass',detail:'취업(고용주 스폰서) · 월 S$5,600+ · 1년 후 PR 신청 가능'},
+      {tier:'EntrePass',detail:'창업 비자(자본금 S$50k+)'},
+      {tier:'GIP (투자 PR)',detail:'사업 S$10M / EDB펀드 S$25M / 패밀리오피스 S$50M'},
+    ],
+    visaNote:'수동적 은퇴 정착은 사실상 불가. 취업(EP→PR) 또는 대규모 투자(GIP)만 현실적 경로.'},
+  AU:{name:'호주',city:'브리즈번',flag:'🇦🇺',cur:'AUD',sym:'A$',
+    monthlyMax:15000,monthlyStep:100,monthlyDefault:5000,
+    eduMode:'intl',school:{elem:15000,mid:22000,high:28000},
+    schoolNote:'브리즈번 사립 independent school 기준(QLD: 초 ~A$14k, 중·고 ~A$25k, GPS A$28~38k).',
+    living4:5270,housing:3200,
+    housingBench:'inner suburb 3BR 임대 ~A$3,200/월 (CBD A$3,800 · 외곽 A$2,600).',
+    cards:[
+      {name:'Amex Explorer',issuer:'Amex',fee:395,min:0,base:.015,rewards:[{cats:['travel'],rate:.03,cap:9999}]},
+      {name:'ANZ Rewards Black',issuer:'ANZ',fee:375,min:0,base:.01,rewards:[{cats:['groceries','dining'],rate:.015,cap:9999}]},
+      {name:'Bankwest More World',issuer:'Bankwest',fee:160,min:0,base:.008,rewards:[]},
+    ],
+    visa:[
+      {tier:'전용 은퇴비자 없음',detail:'405·410 retirement visa 신규 폐쇄'},
+      {tier:'투자비자 188/888',detail:'BIIP 2024년 신규 접수 중단'},
+      {tier:'기술이민',detail:'점수제 · 만 50세 연령 크게 불리'},
+      {tier:'고용주 스폰서 / 부모비자',detail:'취업 스폰서 또는 기여부모(143) 경로'},
+    ],
+    visaNote:'4개국 중 자비 은퇴정착이 가장 어려움 — 전용 은퇴·투자비자가 사실상 닫혀 취업/가족 경로 외 대안이 적음.'},
 };
 
-const axisMeta = {
-  EI: { left:{k:"E",c:"var(--e)"}, right:{k:"I",c:"var(--i)"}, name:{E:"외향",I:"내향"} },
-  SN: { left:{k:"S",c:"var(--s)"}, right:{k:"N",c:"var(--n)"}, name:{S:"감각",N:"직관"} },
-  TF: { left:{k:"T",c:"var(--t)"}, right:{k:"F",c:"var(--f)"}, name:{T:"사고",F:"감정"} },
-  JP: { left:{k:"J",c:"var(--j)"}, right:{k:"P",c:"var(--p)"}, name:{J:"판단",P:"인식"} },
+/* 국가별 카드 확장 (대표 근사치, 검증 필요) — 다중 조합용 */
+const EXTRA_CARDS={
+  KR:[
+    {name:'국민 my WE:SH',issuer:'국민',fee:15000,min:300000,base:.005,rewards:[{cats:['transport'],rate:.10,cap:5000},{cats:['cafe'],rate:.10,cap:5000},{cats:['online'],rate:.05,cap:10000}]},
+    {name:'우리 카드의정석 EVERY1',issuer:'우리',fee:13000,min:0,base:.010,rewards:[]},
+    {name:'롯데 LOCA LIKIT 1.2',issuer:'롯데',fee:13000,min:0,base:.012,rewards:[{cats:['online','dining'],rate:.012,cap:99999}]},
+    {name:'하나 원큐데일리+',issuer:'하나',fee:8000,min:300000,base:.008,rewards:[{cats:['groceries','cafe'],rate:.03,cap:10000}]},
+    {name:'현대 the Green',issuer:'현대',fee:30000,min:0,base:.010,rewards:[{cats:['cafe','dining'],rate:.05,cap:10000},{cats:['travel'],rate:.03,cap:99999}]},
+  ],
+  MY:[
+    {name:'HSBC Live+',issuer:'HSBC',fee:0,min:0,base:.008,rewards:[{cats:['dining','cafe','groceries'],rate:.08,cap:25}]},
+    {name:'Public Bank Quantum',issuer:'Public',fee:0,min:0,base:.003,rewards:[{cats:['online','cafe','dining'],rate:.05,cap:30}]},
+    {name:'SC JustOne Platinum',issuer:'SCB',fee:0,min:1500,base:.002,rewards:[{cats:['groceries','dining'],rate:.08,cap:38}]},
+    {name:'Alliance Visa Infinite',issuer:'Alliance',fee:0,min:0,base:.012,rewards:[{cats:['travel'],rate:.05,cap:99999}]},
+    {name:'AmBank BonusLink',issuer:'AmBank',fee:0,min:0,base:.005,rewards:[{cats:['groceries','telecom'],rate:.02,cap:30}]},
+  ],
+  SG:[
+    {name:'OCBC 365',issuer:'OCBC',fee:0,min:800,base:.003,rewards:[{cats:['dining','cafe','groceries'],rate:.06,cap:80},{cats:['transport'],rate:.05,cap:80}]},
+    {name:'Citi SMRT',issuer:'Citi',fee:0,min:0,base:.003,rewards:[{cats:['transport','online'],rate:.05,cap:50}]},
+    {name:'HSBC Revolution',issuer:'HSBC',fee:0,min:0,base:.004,rewards:[{cats:['online','dining','cafe'],rate:.04,cap:60}]},
+    {name:'Maybank FC Barcelona',issuer:'Maybank',fee:0,min:0,base:.0034,rewards:[{cats:['dining','groceries','online','transport','cafe'],rate:.0345,cap:120}]},
+    {name:'Amex True Cashback',issuer:'Amex',fee:0,min:0,base:.015,rewards:[]},
+  ],
+  AU:[
+    {name:'Coles Rewards MC',issuer:'Coles',fee:99,min:0,base:.010,rewards:[{cats:['groceries'],rate:.02,cap:99999}]},
+    {name:'NAB Rewards Signature',issuer:'NAB',fee:295,min:0,base:.012,rewards:[{cats:['dining','travel'],rate:.02,cap:99999}]},
+    {name:'CommBank Ultimate',issuer:'CBA',fee:0,min:0,base:.011,rewards:[{cats:['groceries','dining'],rate:.015,cap:99999}]},
+    {name:'Westpac Altitude Black',issuer:'Westpac',fee:295,min:0,base:.010,rewards:[{cats:['travel'],rate:.025,cap:99999}]},
+  ],
 };
+Object.keys(EXTRA_CARDS).forEach(k=>{COUNTRIES[k].cards=COUNTRIES[k].cards.concat(EXTRA_CARDS[k]);});
 
-/* ---------------- 상태 ---------------- */
-let current = 0;
-let answers = []; // 각 문항에서 선택한 극단 문자 저장
+let state={country:'KR',monthly:0,alloc:{},birthYear:2015,infl:0.05,eduPrivate:1000000,
+  simP:1000000000,simR:0.08,simN:10,krLiving:5000000,
+  mySchool:'ISP',startAssets:3040000000,wealthR:0.06,
+  divAmt:100000000,divYears:20,divDRIP:true,divRes:'KR',bondTerm:'3M',
+  crisisVol:0.14,crisisSeed:20260629,crisisSpend:96000000,selectedCards:[]};
+const co=()=>COUNTRIES[state.country];
+const NOW=2026,START=2027;
 
-function show(id){
-  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-}
+function fmt(v,cur){const sym={KRW:'₩',MYR:'RM ',SGD:'S$',AUD:'A$'}[cur]||'';return sym+Math.round(v).toLocaleString('en-US');}
+function toKRW(v,cur){return Math.round(v*FX[cur]);}
+function krwStr(v,cur){return '≈ ₩'+toKRW(v,cur).toLocaleString('en-US');}
 
-function startTest(){
-  current = 0; answers = [];
-  show("quiz");
-  renderQuestion();
-}
-
-function renderQuestion(){
-  const q = questions[current];
-  document.getElementById("q-count").textContent = (current+1) + " / " + questions.length;
-  const pct = Math.round((current)/questions.length*100);
-  document.getElementById("q-percent").textContent = pct + "%";
-  document.getElementById("progress-fill").style.width = pct + "%";
-
-  document.getElementById("question").textContent = q.q;
-  const opts = document.getElementById("options");
-  opts.innerHTML = "";
-  [q.a, q.b].forEach(opt=>{
-    const b = document.createElement("button");
-    b.className = "option";
-    b.textContent = opt.label;
-    b.onclick = ()=>choose(opt.t);
-    opts.appendChild(b);
+function renderCountries(){
+  const el=document.getElementById('countries');el.innerHTML='';
+  Object.entries(COUNTRIES).forEach(([code,c])=>{
+    const b=document.createElement('button');
+    b.className='cbtn'+(state.country===code?' active':'');
+    b.innerHTML=`<span class="flag">${c.flag}</span><span class="cn">${c.name}</span><span class="cc">${c.cur} · ${c.city}</span>`;
+    b.onclick=()=>{state.country=code;setupCountry();renderAll();};
+    el.appendChild(b);
   });
-  document.getElementById("back-btn").style.display = current>0 ? "block" : "none";
+}
+function setupCountry(){
+  const c=co();const r=document.getElementById('spendRange');
+  r.min=0;r.max=c.monthlyMax;r.step=c.monthlyStep;
+  state.monthly=c.monthlyDefault;r.value=state.monthly;
+  if(c.eduMode==='private')state.eduPrivate=c.eduPrivate;
+  applyMySchool();
+  redistribute();
+  state.selectedCards=findOptimalCombo(c.cards,4);
+}
+function redistribute(){const a={};CATS.forEach(cat=>a[cat.k]=Math.round(state.monthly*cat.w/co().monthlyStep)*co().monthlyStep);state.alloc=a;}
+
+function renderSpend(){
+  const c=co();
+  document.getElementById('spendVal').textContent=fmt(state.monthly,c.cur);
+  document.getElementById('spendKrw').textContent=c.cur==='KRW'?'':krwStr(state.monthly,c.cur);
+  document.getElementById('spendMin').textContent=fmt(0,c.cur);
+  document.getElementById('spendMax').textContent=fmt(c.monthlyMax,c.cur);
 }
 
-function choose(letter){
-  answers[current] = letter;
-  if(current < questions.length-1){
-    current++;
-    renderQuestion();
-  } else {
-    document.getElementById("progress-fill").style.width = "100%";
-    document.getElementById("q-percent").textContent = "100%";
-    showResult();
-  }
+function renderAlloc(){
+  const grid=document.getElementById('allocGrid');grid.innerHTML='';const c=co();
+  CATS.forEach(cat=>{
+    const v=state.alloc[cat.k]||0;
+    const row=document.createElement('div');row.className='alloc-row';
+    row.innerHTML=`<div class="ar-top"><span class="ar-name">${cat.ic} ${cat.label}</span><span class="ar-val">${fmt(v,c.cur)}</span></div>
+      <input type="range" min="0" max="${c.monthlyMax}" step="${c.monthlyStep}" value="${v}" data-k="${cat.k}">`;
+    const inp=row.querySelector('input');
+    inp.oninput=e=>{state.alloc[cat.k]=+e.target.value;
+      state.monthly=Object.values(state.alloc).reduce((s,x)=>s+x,0);
+      document.getElementById('spendRange').value=Math.min(state.monthly,c.monthlyMax);
+      renderSpend();row.querySelector('.ar-val').textContent=fmt(state.alloc[cat.k],c.cur);renderCards();renderCOL();};
+    grid.appendChild(row);
+  });
 }
 
-function prevQuestion(){
-  if(current>0){ current--; renderQuestion(); }
+function cardCatRate(card,k,allowBonus){ let rate=card.base,cap=Infinity,ri=-1;
+  if(allowBonus) card.rewards.forEach((r,i)=>{ if(r.cats.includes(k)&&r.rate>rate){rate=r.rate;cap=r.cap;ri=i;} });
+  return {rate,cap,ri};
 }
-
-/* ---------------- 결과 계산 ---------------- */
-function computeResult(){
-  const count = {E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};
-  answers.forEach(a=>count[a]++);
-  const perAxis = {EI:3, SN:3, TF:3, JP:3};
-  const type =
-    (count.E>=count.I?"E":"I") +
-    (count.S>=count.N?"S":"N") +
-    (count.T>=count.F?"T":"F") +
-    (count.J>=count.P?"J":"P");
-
-  // 각 축 퍼센트
-  const pct = {};
-  for(const axis in axisMeta){
-    const L = axisMeta[axis].left.k, R = axisMeta[axis].right.k;
-    const total = count[L]+count[R];
-    pct[axis] = { left: Math.round(count[L]/total*100), right: Math.round(count[R]/total*100) };
-  }
-  return { type, count, pct };
-}
-
-let lastResult = null;
-
-function showResult(){
-  const res = computeResult();
-  lastResult = res;
-  const info = typeInfo[res.type];
-  document.getElementById("r-emoji").textContent = info[0];
-  document.getElementById("r-type").textContent = res.type;
-  document.getElementById("r-nick").textContent = info[1];
-  document.getElementById("r-desc").textContent = info[2];
-
-  // 인포그래픽
-  const box = document.getElementById("info");
-  box.innerHTML = "";
-  for(const axis in axisMeta){
-    const m = axisMeta[axis];
-    const p = res.pct[axis];
-    const leftWins = p.left >= p.right;
-    const row = document.createElement("div");
-    row.className = "info-row";
-    row.innerHTML = `
-      <div class="info-labels">
-        <span class="${leftWins?'win':''}" style="color:${m.left.c}">${m.left.k} · ${m.name[m.left.k]}</span>
-        <span class="${!leftWins?'win':''}" style="color:${m.right.c}">${m.name[m.right.k]} · ${m.right.k}</span>
-      </div>
-      <div class="info-track">
-        <div class="info-left" style="width:${p.left}%;background:${m.left.c}">${p.left>15?p.left+'%':''}</div>
-        <div class="info-right" style="width:${p.right}%;background:${m.right.c}">${p.right>15?p.right+'%':''}</div>
-      </div>`;
-    box.appendChild(row);
-  }
-  show("result");
-}
-
-function restart(){ show("intro"); }
-
-/* ---------------- 공유 ---------------- */
-function shareText(){
-  const info = typeInfo[lastResult.type];
-  return `내 MBTI는 ${lastResult.type} ${info[0]} "${info[1]}"! 너도 테스트 해봐 👉`;
-}
-
-function shareKakao(){
-  const text = shareText();
-  const url = location.href;
-  // Kakao SDK가 로드되고 초기화되어 있으면 실제 공유
-  if (window.Kakao && Kakao.isInitialized && Kakao.isInitialized() && Kakao.Share) {
-    Kakao.Share.sendDefault({
-      objectType: 'feed',
-      content: {
-        title: `내 MBTI: ${lastResult.type}`,
-        description: text,
-        imageUrl: 'https://via.placeholder.com/600x400.png?text=MBTI',
-        link: { mobileWebUrl: url, webUrl: url },
-      },
-      buttons: [{ title: '나도 테스트 하기', link: { mobileWebUrl: url, webUrl: url } }],
+function routeBenefit(cards){
+  function compute(active){
+    const capUsed=cards.map(()=>({})), pcSpend=cards.map(()=>0), pcBen=cards.map(()=>0), assign={};
+    const cats=CATS.map(c=>({k:c.k,s:state.alloc[c.k]||0})).sort((a,b)=>b.s-a.s);
+    cats.forEach(({k,s})=>{ if(s<=0)return;
+      let best={ci:-1,ben:-1,info:null};
+      cards.forEach((c,ci)=>{
+        const {rate,cap,ri}=cardCatRate(c,k,active.has(c.name));
+        let ben;
+        if(ri>=0){ const used=capUsed[ci][ri]||0; const bonus=Math.min(s*rate,Math.max(cap-used,0)); const covSpend=rate>0?bonus/rate:0; ben=bonus+Math.max(s-covSpend,0)*c.base; }
+        else ben=s*c.base;
+        if(ben>best.ben) best={ci,ben,info:{rate,cap,ri}};
+      });
+      if(best.ci>=0){ const ci=best.ci; pcBen[ci]+=best.ben; pcSpend[ci]+=s; assign[k]=cards[ci].name;
+        const ri=best.info.ri; if(ri>=0){ const used=capUsed[ci][ri]||0; capUsed[ci][ri]=used+Math.min(s*best.info.rate,Math.max(best.info.cap-used,0)); } }
     });
-  } else {
-    alert(
-      "카카오톡 공유를 사용하려면 카카오 JavaScript 키가 필요해요.\n\n" +
-      "① https://developers.kakao.com 에서 앱 등록\n" +
-      "② 내 앱 > 앱 키 > JavaScript 키 복사\n" +
-      "③ index.html 하단의 KAKAO_JS_KEY 값에 붙여넣기\n\n" +
-      "지금은 대신 링크 복사 방식으로 공유할게요."
-    );
-    shareFallback();
+    return {pcSpend,pcBen,assign};
   }
+  let active=new Set(cards.map(c=>c.name)), res;
+  for(let it=0; it<3; it++){ res=compute(active); let ch=false;
+    cards.forEach((c,ci)=>{ if(active.has(c.name)&&res.pcSpend[ci]<c.min){active.delete(c.name);ch=true;} });
+    if(!ch)break; }
+  const gross=res.pcBen.reduce((a,b)=>a+b,0), fee=cards.reduce((a,c)=>a+c.fee/12,0);
+  return {res,gross,fee,net:gross-fee,active};
+}
+function findOptimalCombo(cards,maxN){
+  let best=null; const n=cards.length; const idx=[...Array(n).keys()];
+  function* combos(arr,k){ if(k===0){yield[];return;} for(let i=0;i<=arr.length-k;i++){ for(const rest of combos(arr.slice(i+1),k-1)) yield [arr[i],...rest]; } }
+  for(let k=1;k<=Math.min(maxN,n);k++) for(const sub of combos(idx,k)){ const sel=sub.map(i=>cards[i]); const r=routeBenefit(sel); if(!best||r.net>best.net) best={names:sel.map(c=>c.name),net:r.net}; }
+  return best?best.names:[];
+}
+function toggleCard(name){ const i=state.selectedCards.indexOf(name);
+  if(i>=0) state.selectedCards.splice(i,1);
+  else { if(state.selectedCards.length>=4) return; state.selectedCards.push(name); }
+  renderCards();
+}
+function autoOptimizeCards(){ state.selectedCards=findOptimalCombo(co().cards,4); renderCards(); }
+function renderCards(){
+  const c=co(), list=document.getElementById('cardsList'); list.innerHTML='';
+  const selObjs=state.selectedCards.map(n=>c.cards.find(x=>x.name===n)).filter(Boolean);
+  const rb=selObjs.length?routeBenefit(selObjs):{res:{pcSpend:[],pcBen:[]},gross:0,fee:0,net:0,active:new Set()};
+  const spend=state.monthly||0;
+  const pick=spend>0?rb.gross/spend*100:0, netPick=spend>0?rb.net/spend*100:0;
+  document.getElementById('comboHero').innerHTML=`<span class="lab">선택 ${selObjs.length}장 조합 · 연 할인 ${fmt(rb.gross*12,c.cur)} · 연회비 ${fmt(rb.fee*12,c.cur)} · 순 피킹률 ${netPick.toFixed(2)}%${c.cur==='KRW'?'':'<br>'+krwStr(rb.gross,c.cur)+'/월'}</span><span class="val">${fmt(rb.gross,c.cur)}/월 · ${pick.toFixed(2)}%</span>`;
+  c.cards.forEach(card=>{
+    const ci=selObjs.indexOf(card); const sel=ci>=0;
+    const ben=sel?rb.res.pcBen[ci]:0, sp=sel?rb.res.pcSpend[ci]:0;
+    const covSet=[...new Set(card.rewards.flatMap(r=>r.cats))];
+    const catLabel=covSet.length?covSet.map(k=>(CATS.find(x=>x.k===k)||{}).ic||'').join(''):'기본적립';
+    const infeasible=sel&&!rb.active.has(card.name);
+    const it=document.createElement('div'); it.className='card-item'+(sel?' top':''); it.style.cursor='pointer';
+    it.onclick=()=>toggleCard(card.name);
+    it.innerHTML=`<div class="card-rank">${sel?'✓':'+'}</div>
+      <div class="card-main"><div class="card-name">${card.name}</div>
+        <div class="card-meta">${card.issuer} · 연회비 ${fmt(card.fee,c.cur)} · 최소실적 ${card.min?fmt(card.min,c.cur):'없음'} · ${catLabel}</div>
+        ${infeasible?'<div class="warn">⚠ 라우팅 결제액이 최소실적 미달 — 혜택 제외됨</div>':''}</div>
+      <div class="card-ben">${sel?`<div class="b1">${fmt(ben,c.cur)}/월</div><div class="b2">결제 ${fmt(sp,c.cur)}</div>`:'<div class="b2" style="color:var(--faint)">탭하여 추가</div>'}</div>`;
+    list.appendChild(it);
+  });
 }
 
-async function shareFallback(){
-  const text = shareText() + " " + location.href;
-  // 모바일 등에서 기본 공유창
-  if (navigator.share) {
-    try { await navigator.share({ title: "MBTI 테스트", text: shareText(), url: location.href }); return; }
-    catch(e){ /* 취소 시 아래로 */ }
-  }
-  // 클립보드 복사
-  try {
-    await navigator.clipboard.writeText(text);
-    alert("결과가 클립보드에 복사됐어요!\n\n" + text);
-  } catch(e){
-    prompt("아래 내용을 복사해서 공유하세요:", text);
+function gradeIn(by,y){return co().eduMode==='private'?(y-by)-6:(y-by)-5;}
+function levelOf(g){if(g<1)return 'pre';if(g<=6)return 'elem';if(g<=9)return 'mid';if(g<=12)return 'high';return 'grad';}
+function gradeLabel(g){if(g<1)return '미취학';if(g>12)return '졸업';
+  if(co().eduMode==='private'){if(g<=6)return '초'+g;if(g<=9)return '중'+(g-6);return '고'+(g-9);}
+  return g===0?'K':'G'+g;}
+function annualEdu(g,y){
+  const lv=levelOf(g);if(lv==='pre'||lv==='grad')return 0;
+  const base=co().eduMode==='private'?state.eduPrivate*12:co().school[lv];
+  return base*Math.pow(1+state.infl,y-NOW);
+}
+function renderEduControls(){
+  const c=co();
+  const intlDesc=c.city+' 국제학교 · '+(state.country==='MY'?MY_SCHOOLS[state.mySchool].label:'mid-tier')+'. 출생연도→학년 자동 계산, 졸업(12학년)까지.';
+  document.getElementById('eduDesc').textContent = c.eduMode==='private'
+    ? '한국 거주: 자녀는 일반(공립) 학교 → 학비 무상, 사교육비만 반영.'
+    : intlDesc;
+  document.getElementById('eduNameLine').textContent =
+    c.eduMode==='private'?'한국식 학년 (3월/만나이 기준)':'국제학교 학년 (9월 입학 기준)';
+  const f=document.getElementById('eduCostField');
+  if(c.eduMode==='private'){
+    f.innerHTML=`<label>월 사교육비 (₩)</label><input type="number" id="privInput" value="${state.eduPrivate}" min="0" step="100000">
+      <div class="eduname">현재 ₩${(state.eduPrivate/10000).toFixed(0)}만/월 · 연 ₩${(state.eduPrivate*12/10000).toFixed(0)}만 (중·고 진학 시 통상 상승)</div>`;
+    f.querySelector('#privInput').oninput=e=>{state.eduPrivate=+e.target.value||0;renderEdu();renderCOL();renderWealth();};
+  }else{
+    const schoolSel = state.country==='MY'
+      ? `<div class="myschool">${Object.entries(MY_SCHOOLS).map(([k,v])=>`<button class="mysch-btn${state.mySchool===k?' on':''}" onclick="selectMySchool('${k}')">${v.label}</button>`).join('')}</div>`
+      : '';
+    f.innerHTML=schoolSel+`<label>연 학비 인상률 (가정)</label>
+      <div class="infl-row"><input type="range" id="inflR" min="0" max="7" value="${state.infl*100}" step="0.5">
+      <span class="infl-val" id="inflV">${(state.infl*100).toFixed(1)}%</span></div>`;
+    f.querySelector('#inflR').oninput=e=>{state.infl=+e.target.value/100;document.getElementById('inflV').textContent=(+e.target.value).toFixed(1)+'%';renderEdu();renderCOL();renderWealth();};
   }
 }
+function renderEdu(){
+  const c=co(),by=state.birthYear;
+  const gNow=gradeIn(by,NOW);
+  const gradStart=c.eduMode==='private'?by+18:by+17;
+  let rows=[],total=0,totalKRW=0;
+  for(let y=START;y<=gradStart;y++){const g=gradeIn(by,y),lv=levelOf(g);if(lv==='pre'||lv==='grad')continue;
+    const fee=annualEdu(g,y);total+=fee;totalKRW+=fee*FX[c.cur];rows.push({y,g,lv,fee});}
+  document.getElementById('eduChips').innerHTML=`
+    <div class="chip"><div class="ck">현재 (2026)</div><div class="cv">${gradeLabel(gNow)}</div></div>
+    <div class="chip"><div class="ck">졸업</div><div class="cv">${gradStart+1}년</div></div>
+    <div class="chip"><div class="ck">남은 학년</div><div class="cv">${rows.length}년</div></div>
+    <div class="chip hero"><div class="ck">잔여 총 교육비 (2027~)</div><div class="cv">${fmt(total,c.cur)}</div></div>`;
 
-/* ---------------- 카카오 SDK ---------------- */
-// 아래 KAKAO_JS_KEY 에 발급받은 JavaScript 키를 넣으면 실제 카톡 공유가 활성화됩니다.
-const KAKAO_JS_KEY = ""; // 예: "abcd1234..."
-(function loadKakao(){
-  if(!KAKAO_JS_KEY) return;
-  const s = document.createElement("script");
-  s.src = "https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js";
-  s.onload = ()=>{ try{ Kakao.init(KAKAO_JS_KEY); }catch(e){ console.warn(e); } };
-  document.head.appendChild(s);
-})();
+  const bars=document.getElementById('eduBars');bars.innerHTML='';
+  if(!rows.length){bars.innerHTML='<div style="margin:auto;color:var(--faint);font-size:12px">이미 졸업했거나 미취학 출생연도입니다.</div>';}
+  const mx=Math.max(...rows.map(r=>r.fee),1);
+  rows.forEach(r=>{const col=document.createElement('div');col.className='bar-col';
+    col.innerHTML=`<span class="bar-amt">${shortFee(r.fee,c.cur)}</span><div class="bar ${r.lv}" style="height:${Math.max(r.fee/mx*100,3)}%"></div>
+      <span class="bar-yr">${String(r.y).slice(2)}</span><span class="bar-grade">${gradeLabel(r.g)}</span>`;bars.appendChild(col);});
+
+  const body=rows.map(r=>`<tr><td>${r.y}년</td>
+    <td><span class="lvtag ${r.lv}">${gradeLabel(r.g)}</span></td>
+    <td>${fmt(r.fee,c.cur)}</td><td>${c.cur==='KRW'?'—':'₩'+Math.round(r.fee*FX[c.cur]).toLocaleString('en-US')}</td></tr>`).join('');
+  document.getElementById('eduTable').innerHTML=`
+    <thead><tr><th>연도</th><th>학년</th><th>연 ${c.cur==='KRW'?'사교육비':'학비'}</th><th>원화</th></tr></thead>
+    <tbody>${body}</tbody>
+    <tfoot><tr><td>합계</td><td>2027→${gradStart}</td><td class="tot">${fmt(total,c.cur)}</td>
+      <td class="tot">${c.cur==='KRW'?'—':'₩'+Math.round(totalKRW).toLocaleString('en-US')}</td></tr></tfoot>`;
+
+  document.getElementById('eduNote').innerHTML = c.eduMode==='private'
+    ? `<span class="bh">한국 · 사교육비</span>현재 입력값 ₩${(state.eduPrivate/10000).toFixed(0)}만/월 기준, 인상률 ${(state.infl*100).toFixed(1)}%/년 적용. 공립학교 학비는 무상. <b>실제 사교육비는 중·고 진학 시 크게 상승</b>하므로 보수적으로 보정 권장.`
+    : `<span class="bh">${c.city} · 국제학교(${state.country==='MY'?MY_SCHOOLS[state.mySchool].label:'mid-tier'})</span>초 ${fmt(c.school.elem,c.cur)} / 중 ${fmt(c.school.mid,c.cur)} / 고 ${fmt(c.school.high,c.cur)} (연). 인상률 ${(state.infl*100).toFixed(1)}%/년 복리. ${c.schoolNote} 입학금·통학·식비 등 부대비용(헤드라인의 +15~30%) 제외.`;
+}
+function shortFee(v,cur){if(cur==='KRW')return '₩'+(v/10000).toFixed(0)+'만';return {MYR:'RM',SGD:'S$',AUD:'A$'}[cur]+(v/1000).toFixed(0)+'k';}
+
+function monthlyEduNowKRW(code){
+  const c=COUNTRIES[code],by=state.birthYear;
+  const g=(c.eduMode==='private'?(NOW-by)-6:(NOW-by)-5);
+  const lv=(g<1?'pre':g<=6?'elem':g<=9?'mid':g<=12?'high':'grad');
+  if(lv==='pre'||lv==='grad')return 0;
+  if(c.eduMode==='private')return state.eduPrivate;
+  return Math.round(c.school[lv]/12*FX[c.cur]);
+}
+function renderCOL(){
+  const krBase=COUNTRIES.KR.living4*LIVING_FACTOR;     /* Numbeo 3인 추정 기준선(KRW) */
+  const m=state.krLiving/krBase;                        /* 실제 한국 생활비로 보정한 가중치 */
+  const rows=Object.entries(COUNTRIES).map(([code,c])=>{
+    const livKRW=Math.round(c.living4*LIVING_FACTOR*FX[c.cur]*m);
+    const houKRW=Math.round(c.housing*FX[c.cur]);
+    const eduKRW=monthlyEduNowKRW(code);
+    return {code,c,livKRW,houKRW,eduKRW,total:livKRW+houKRW+eduKRW};
+  });
+  const max=Math.max(...rows.map(r=>r.total));
+  const el=document.getElementById('colBars');el.innerHTML='';
+  rows.sort((a,b)=>a.total-b.total).forEach(r=>{
+    const sel=r.code===state.country;
+    const div=document.createElement('div');div.className='col-row'+(sel?' sel':'');
+    div.innerHTML=`<div class="col-rh"><span class="col-name"><span class="fl">${r.c.flag}</span>${r.c.name} · ${r.c.city}</span>
+        <span class="col-total">₩${(r.total/10000).toLocaleString('en-US',{maximumFractionDigits:0})}만/월</span></div>
+      <div class="col-track" style="width:${(r.total/max*100).toFixed(1)}%">
+        <div class="col-seg living" style="flex:${r.livKRW}">${r.livKRW/r.total>.18?'생활':''}</div>
+        <div class="col-seg housing" style="flex:${r.houKRW}">${r.houKRW/r.total>.18?'주거':''}</div>
+        <div class="col-seg edu" style="flex:${r.eduKRW}">${r.eduKRW/r.total>.12?'교육':''}</div>
+      </div>
+      <div class="rate-sub">생활 ₩${Math.round(r.livKRW/1e4).toLocaleString('en-US')}만 · 주거 ₩${Math.round(r.houKRW/1e4).toLocaleString('en-US')}만 · 교육 ₩${Math.round(r.eduKRW/1e4).toLocaleString('en-US')}만</div>`;
+    el.appendChild(div);
+  });
+  document.getElementById('krLivV').textContent='₩'+(state.krLiving/10000).toLocaleString('en-US')+'만';
+  const ratioStr=Object.entries(COUNTRIES).map(([code,c])=>`${c.flag}${Math.round(c.living4*LIVING_FACTOR*FX[c.cur]/krBase*100)}%`).join(' · ');
+  document.getElementById('krLivNote').innerHTML=`입력값은 <b>주거·교육을 뺀 순수 생활비</b>. 한국 ₩${(state.krLiving/10000).toLocaleString('en-US')}만 = 기준 100%, 각국은 Numbeo 물가비율로 환산 → ${ratioStr}. 여기에 각국 주거(3BR)·교육을 더한 값이 위의 <b>월 총액</b>입니다.`;
+  const c=co();
+  document.getElementById('benchNote').innerHTML=`<span class="bh">주거 benchmark · ${c.city}</span>${c.housingBench}<br>
+    <span style="color:var(--faint)">순수 생활비 = 한국 실제치 ₩${(state.krLiving/10000).toLocaleString('en-US')}만 기준, 각국 Numbeo 물가비율로 환산(참고: 싱가포르 순수생활비는 서울보다 높음). 주거·교육은 각국 실제값을 별도 합산. 환율 MYR ${FX.MYR}·SGD ${FX.SGD}·AUD ${FX.AUD}. 모두 추정.</span>`;
+}
+
+function renderVisa(){
+  const c=co();const el=document.getElementById('visaList');el.innerHTML='';
+  c.visa.forEach(v=>{const d=document.createElement('div');d.className='visa-item'+(v.star?' star':'');
+    d.innerHTML=`<div class="visa-tier">${v.tier}</div><div class="visa-detail">${v.detail}</div>`;el.appendChild(d);});
+  document.getElementById('visaNote').textContent=c.visaNote;
+}
+
+function eok(v){ if(Math.abs(v)>=1e8) return (v/1e8).toFixed(2)+'억'; return Math.round(v/1e4).toLocaleString('en-US')+'만'; }
+
+function renderRates(){
+  const el=document.getElementById('rateList');el.innerHTML='';
+  const max=Math.max(...Object.values(FD).map(f=>f.rate));
+  Object.entries(COUNTRIES).forEach(([code,c])=>{
+    const f=FD[code];const sel=code===state.country;
+    const div=document.createElement('div');div.className='rate-row'+(sel?' sel':'');
+    div.innerHTML=`<div class="rate-rh"><span class="rate-name"><span class="fl">${c.flag}</span>${c.name}</span>
+        <span class="rate-val">${f.rate.toFixed(1)}%</span></div>
+      <div class="rate-track"><div class="rate-fill" style="width:${(f.rate/max*100).toFixed(0)}%"></div></div>
+      <div class="rate-sub">${f.sub} · ${f.tax}</div>`;
+    el.appendChild(div);
+  });
+  document.getElementById('rateNote').innerHTML=`<span class="bh">참고</span>MM2H Gold 기준 정기예치금 USD500,000을 연 ${FD.MY.rate.toFixed(1)}%로 예치 시 연 이자 ≈ USD ${Math.round(500000*FD.MY.rate/100).toLocaleString('en-US')} (MM2H는 이 FD 이자 면세). 금리는 2026.6 대표치이며 우대조건·예치기간에 따라 변동.`;
+}
+
+function renderSim(){
+  const P=state.simP,r=state.simR,n=state.simN;
+  const rNet=r-DIVY*FUNDWHT;
+  const fv=P*Math.pow(1+rNet,n);
+  const gain=fv-P;
+  const krTax=Math.max(0,gain-KRDED)*KRCGT;
+  const krProfit=gain-krTax, myProfit=gain;
+  const krVal=P+krProfit, myVal=fv, saved=krTax;
+  const krEff=gain>0?krTax/gain*100:0;
+  document.getElementById('simPV').textContent='₩'+eok(P);
+  document.getElementById('simRV').textContent=(r*100).toFixed(1)+'%';
+  document.getElementById('simNV').textContent=n+'년';
+  document.getElementById('simTop').innerHTML=`
+    <div class="chip"><div class="ck">세전 만기 평가액</div><div class="cv">₩${eok(fv)}</div></div>
+    <div class="chip"><div class="ck">총 수익(세전)</div><div class="cv">₩${eok(gain)}</div></div>
+    <div class="chip"><div class="ck">실효 수익률(WHT반영)</div><div class="cv">${(rNet*100).toFixed(2)}%</div></div>`;
+  document.getElementById('simScn').innerHTML=`
+    <div class="scn my"><div class="sh">🇲🇾 말레이시아 거주 (MM2H)</div>
+      <div class="srow"><span>해외주식 양도세</span><b>0%</b></div>
+      <div class="srow"><span>납부 세금</span><b>₩0</b></div>
+      <div class="snet"><span class="lab">세후 수익</span><span class="val">₩${eok(myProfit)}</span></div>
+      <div class="srow" style="margin-top:6px"><span>세후 평가액</span><b>₩${eok(myVal)}</b></div></div>
+    <div class="scn"><div class="sh">🇰🇷 한국 거주</div>
+      <div class="srow"><span>양도세율(공제 ₩250만)</span><b>22%</b></div>
+      <div class="srow"><span>납부 세금</span><b>₩${eok(krTax)}</b></div>
+      <div class="snet"><span class="lab">세후 수익</span><span class="val">₩${eok(krProfit)}</span></div>
+      <div class="srow" style="margin-top:6px"><span>세후 평가액 · 실효세율</span><b>₩${eok(krVal)} · ${krEff.toFixed(1)}%</b></div></div>`;
+  document.getElementById('simHero').innerHTML=`<span class="lab">말레이시아 비거주 전환으로 절감되는 양도세</span><span class="val">₩${eok(saved)}</span>`;
+  document.getElementById('simNote').innerHTML=`<span class="bh">구조 · 가정</span>아일랜드 누적형 UCITS는 <b>펀드단에서만 미국 배당 15% 원천징수</b>(미국 직접보유 30% 대비 절반), 누적형이라 <b>보유 중 배당소득세 0</b>, 비(非)미국 자산이라 <b>미국 상속세(40%) 회피</b>. 투자자단 세금은 거주국이 결정 — 한국 거주는 해외주식 양도세 22%, 말레이시아(MM2H)·싱가포르는 0%, 호주는 세계소득 과세(12개월+ 보유분 50% 할인).<br>
+    <span style="color:var(--faint)">가정: 배당수익률 1.3% · 만기 일괄 매도 · 연 250만 공제는 1회만 반영 · 손익통산·환율변동 미반영. 실제 수치는 시점·환율·상품에 따라 달라지며 세무 자문이 아닙니다.</span>`;
+}
+
+function renderUniv(){
+  const rows=Object.values(UNIV).map(u=>{
+    const totalLocal=u.annual*u.years;
+    const totalKRW=Math.round(totalLocal*FX[u.cur]);
+    return {u,totalLocal,totalKRW};
+  });
+  const max=Math.max(...rows.map(r=>r.totalKRW),1);
+  const el=document.getElementById('univBars');el.innerHTML='';
+  rows.sort((a,b)=>a.totalKRW-b.totalKRW).forEach(r=>{
+    const u=r.u, free=(u.annual===0);
+    const div=document.createElement('div');div.className='col-row'+(free?' sel':'');
+    div.innerHTML=`<div class="col-rh"><span class="col-name"><span class="fl">${u.flag}</span>${u.name}</span>
+        <span class="col-total">${free?'실부담 ₩0':'₩'+(r.totalKRW/10000).toLocaleString('en-US')+'만'}</span></div>
+      <div class="col-track" style="width:${free?7:Math.max(r.totalKRW/max*100,7).toFixed(1)}%">
+        <div class="col-seg ${free?'edu':'housing'}" style="flex:1">${free?'전액 장학금':'4년 총액'}</div></div>
+      <div class="rate-sub">연 ${free?'₩0 (전액 장학금)':fmt(u.annual,u.cur)} × ${u.years}년 · ${u.sub}</div>`;
+    el.appendChild(div);
+  });
+  document.getElementById('univNote').innerHTML=`<span class="bh">대학 4년 등록금 (학부)</span>
+    🇰🇷 ${UNIV.KR.note}<br>🇲🇾 ${UNIV.MY.note}<br>🇦🇺 ${UNIV.AU.note}<br>
+    <span style="color:var(--faint)">입학금·기숙사·생활비 별도. 환율·학과·연도에 따라 변동. 2026 조사값.</span>`;
+}
+
+function projectWealth(code){
+  const c=COUNTRIES[code];
+  const krBase=COUNTRIES.KR.living4*LIVING_FACTOR;
+  const m=state.krLiving/krBase;
+  const monthLH=(c.living4*LIVING_FACTOR*m + c.housing)*FX[c.cur];
+  const annLH0=monthLH*12;
+  const by=state.birthYear;
+  const taxR=W_TAX[code];
+  const netRate=(state.wealthR - DIVY*FUNDWHT)*(1-taxR);
+  let assets=state.startAssets, depletedYear=null;
+  const traj=[assets];
+  for(let i=0;i<W_YEARS;i++){
+    const year=NOW+i, age=W_AGE0+i;
+    const lh=annLH0*Math.pow(1+W_LIVINFL,i);
+    const g=(c.eduMode==='private'?(year-by)-6:(year-by)-5);
+    const lv=(g<1?'pre':g<=6?'elem':g<=9?'mid':g<=12?'high':'grad');
+    let edu=0;
+    if(lv!=='pre'&&lv!=='grad'){
+      edu=(c.eduMode==='private'?state.eduPrivate*12:c.school[lv]*FX[c.cur])*Math.pow(1+state.infl,year-NOW);
+    }
+    const pension=age>=W_PENSION_AGE?W_PENSION:0;
+    assets=assets*(1+netRate)-lh-edu+pension;
+    if(assets<0&&depletedYear===null)depletedYear=year;
+    traj.push(assets);
+  }
+  return {code,c,final:assets,traj,depletedYear,netRate,annLH0};
+}
+function renderWealth(){
+  document.getElementById('wAssetsV').textContent='₩'+eok(state.startAssets);
+  document.getElementById('wRetV').textContent=(state.wealthR*100).toFixed(1)+'%';
+  const rows=Object.keys(COUNTRIES).map(projectWealth);
+  const maxFinal=Math.max(...rows.map(r=>Math.max(r.final,0)),1);
+  const sorted=[...rows].sort((a,b)=>b.final-a.final);
+  const best=sorted[0];
+  const kr=rows.find(r=>r.code==='KR');
+  document.getElementById('wHero').innerHTML=`<span class="lab">85세 최종 총자산 1위 — ${best.c.flag} ${best.c.name}</span><span class="val">₩${eok(best.final)}</span>`;
+  const el=document.getElementById('wealthBars');el.innerHTML='';
+  sorted.forEach(r=>{
+    const sel=r.code===state.country;
+    const neg=r.final<0;
+    const w=neg?6:Math.max(r.final/maxFinal*100,4);
+    const vsKr=r.final-kr.final;
+    const div=document.createElement('div');div.className='col-row'+(sel?' sel':'');
+    div.innerHTML=`<div class="col-rh"><span class="col-name"><span class="fl">${r.c.flag}</span>${r.c.name} · ${r.c.city}</span>
+        <span class="col-total" style="${neg?'color:var(--orange)':''}">₩${eok(r.final)}</span></div>
+      <div class="col-track" style="width:${w.toFixed(1)}%;background:${neg?'var(--orange-soft)':'#F0F4FA'}">
+        <div class="col-seg" style="flex:1;background:${neg?'var(--orange)':'var(--blue-deep)'}">${neg?'고갈 '+(r.depletedYear||''):''}</div></div>
+      <div class="rate-sub">투자세율 ${(W_TAX[r.code]*100).toFixed(0)}% · 세후실효 ${(r.netRate*100).toFixed(2)}%${r.code!=='KR'?' · 한국 대비 '+(vsKr>=0?'+':'')+'₩'+eok(vsKr):''}</div>`;
+    el.appendChild(div);
+  });
+  document.getElementById('wealthNote').innerHTML=`<span class="bh">가정 · 35년(2026→2061 · 만50→85세)</span>
+    시작자산 ₩${eok(state.startAssets)} · 총수익률 ${(state.wealthR*100).toFixed(1)}%에서 아일랜드 UCITS 펀드단 미국배당 WHT(−0.20%p) 차감 후 거주국 투자세 적용 · 생활비 인상 2.5%/년 · 학비 인상 ${(state.infl*100).toFixed(1)}%/년 · 국민연금 65세부터 연 ₩1,800만(가정) · 말레이시아 교육비는 선택 학교(${MY_SCHOOLS[state.mySchool].label}) 기준.<br>
+    <span style="color:var(--faint)">투자세는 한국 22% 양도세를 매년 발생분에 단순 적용(장기보유 시 다소 과대), 말련·싱가 0%(FSI/비과세), 호주 15%(50% 할인 가정). 생활비·주거·환율·연금은 추정 — 본인 실제치로 교체 권장. 투자·세무 자문 아님.</span>`;
+}
+
+function divTaxRate(market){ if(state.divRes==='KR')return 0.154; return market==='US'?0.30:0.154; }
+function bondTaxRate(){ return state.divRes==='KR'?0.154:0.0; }
+function divCalc(p,y,g,n,t,drip){
+  if(drip){ return {gross:p*Math.pow(1+g+y,n), net:p*Math.pow(1+g+y*(1-t),n)}; }
+  let sg=0; for(let k=0;k<n;k++) sg+=Math.pow(1+g,k);
+  return {gross:p*y*sg, net:p*y*(1-t)*sg};
+}
+function setDrip(k){state.divDRIP=(k==='drip');renderDiv();}
+function setRes(k){state.divRes=k;renderDiv();}
+function setBond(k){state.bondTerm=k;renderDiv();}
+function divTableHTML(list,market){
+  const p=state.divAmt,n=state.divYears,drip=state.divDRIP,t=divTaxRate(market);
+  const colLabel=drip?'평가액':'누적배당';
+  const rows=list.map((d,i)=>{
+    const r=divCalc(p,d[1],d[2],n,t,drip);
+    return `<tr><td>${i+1}. ${d[0]}</td><td>${(d[1]*100).toFixed(1)}%</td>
+      <td style="color:${d[2]<0?'var(--orange)':'var(--muted)'}">${d[2]>=0?'+':''}${(d[2]*100).toFixed(1)}%</td>
+      <td>₩${eok(r.gross)}</td><td class="tot">₩${eok(r.net)}</td></tr>`;
+  }).join('');
+  return `<thead><tr><th>상품 (배당률순)</th><th>연배당률</th><th>NAV가정</th><th>세전 ${colLabel}</th><th>세후 ${colLabel}</th></tr></thead><tbody>${rows}</tbody>`;
+}
+function renderDiv(){
+  const dt=document.getElementById('dripTog');
+  dt.innerHTML=[['drip','재투자(DRIP)'],['cash','현금수령']].map(([k,l])=>`<button class="mysch-btn${(state.divDRIP?'drip':'cash')===k?' on':''}" onclick="setDrip('${k}')">${l}</button>`).join('');
+  document.getElementById('resTog').innerHTML=[['KR','🇰🇷 한국'],['MY','🇲🇾 MM2H']].map(([k,l])=>`<button class="mysch-btn${state.divRes===k?' on':''}" onclick="setRes('${k}')">${l}</button>`).join('');
+  document.getElementById('bondTog').innerHTML=Object.entries(BONDS).map(([k,v])=>`<button class="mysch-btn${state.bondTerm===k?' on':''}" onclick="setBond('${k}')">${v.label}</button>`).join('');
+  document.getElementById('divAmtV').textContent='₩'+eok(state.divAmt);
+  document.getElementById('divYearsV').textContent=state.divYears+'년';
+  document.getElementById('divKRTable').innerHTML=divTableHTML(DIV_KR,'KR');
+  document.getElementById('divUSTable').innerHTML=divTableHTML(DIV_US,'US');
+  const p=state.divAmt,n=state.divYears,drip=state.divDRIP;
+  let best=null;
+  DIV_KR.forEach(d=>{const r=divCalc(p,d[1],d[2],n,divTaxRate('KR'),drip); if(!best||r.net>best.net)best={name:d[0],net:r.net};});
+  DIV_US.forEach(d=>{const r=divCalc(p,d[1],d[2],n,divTaxRate('US'),drip); if(!best||r.net>best.net)best={name:d[0],net:r.net};});
+  document.getElementById('divHero').innerHTML=`<span class="lab">투자금 ₩${eok(p)} · ${n}년 · ${drip?'재투자':'현금수령'} · ${state.divRes==='KR'?'한국 거주':'MM2H'} — 세후 최고 ${drip?'평가액':'누적배당'}<br><b>${best.name}</b></span><span class="val">₩${eok(best.net)}</span>`;
+  const b=BONDS[state.bondTerm],bt=bondTaxRate();
+  const annPre=p*b.y, annNet=p*b.y*(1-bt), termNet=p*b.y*b.frac*(1-bt);
+  document.getElementById('bondChips').innerHTML=`
+    <div class="chip"><div class="ck">만기 수익률(연)</div><div class="cv">${(b.y*100).toFixed(2)}%</div></div>
+    <div class="chip"><div class="ck">연 이자 세전</div><div class="cv">₩${eok(annPre)}</div></div>
+    <div class="chip hero"><div class="ck">연 이자 세후(실수령)</div><div class="cv">₩${eok(annNet)}</div></div>
+    <div class="chip"><div class="ck">${b.label} 1회 이자(세후)</div><div class="cv">₩${eok(termNet)}</div></div>`;
+  document.getElementById('divNote').innerHTML=`<span class="bh">데이터 · 가정</span>
+    배당률 = 2026년 1~6월 스냅샷(과거 12개월 분배금 기준 · 한국거래소·운용사·이슈어 공시). <b>커버드콜·고배당 ETF는 분배금에 원금반환(ROC)이 섞여 NAV가 침식</b>될 수 있어 'NAV가정'(연 가격증감 추정)을 별도 반영 — 음수(주황)는 원금 침식 가정. 실제 분배율은 VIX·옵션시장에 따라 매월 변동.<br>
+    <b>세금</b>: 한국 거주 배당 15.4% · MM2H는 한국ETF 15.4%(한국 원천징수)·<b>미국ETF 30%</b>(미-말레이시아 조세조약 부재 → 배당 원천징수 30%)·미국국채 이자 <b>0%</b>(외국인 portfolio interest 면제 + FSI). 미국 단기국채(2026.6): 3M ${(BONDS['3M'].y*100).toFixed(2)}% · 6M ${(BONDS['6M'].y*100).toFixed(2)}% · 1Y ${(BONDS['1Y'].y*100).toFixed(2)}%.<br>
+    <span style="color:var(--faint)">투자금은 원화 기준(미국상품 환율변동 미반영). DRIP=세후 배당 재투자 복리, 가격차익은 매도 전까지 과세이연 가정. ※ 25%대 배당률을 40년 복리로 돌리면 비현실적으로 커지므로 NAV가정·기간을 함께 보정해야 함. YieldMax 단일종목 CC(MSTY·NVDY 등)는 표면배당 40~90%+이나 NAV 급락 위험으로 현실 순위에서 제외. 모두 추정이며 투자·세무 자문이 아닙니다.</span>`;
+}
+
+function simulateCrises(){
+  const rng=mulberry32(state.crisisSeed>>>0);
+  const norm=()=>{let u=0,v=0;while(u===0)u=rng();while(v===0)v=rng();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);};
+  const infl=0.025;
+  const muReal=(1+state.wealthR)/(1+infl)-1;            // 실질 기대수익률(명목−물가)
+  const sig=state.crisisVol, p=CRISIS_P;
+  const meanSurv=CRISIS_DEPTHS.reduce((s,d)=>s+(1-d),0)/CRISIS_DEPTHS.length;
+  const muN=(1+muReal - p*meanSurv)/(1-p) - 1;          // 정상연 평균(위기 포함 기대수익=muReal로 보정)
+  const NP=600, Y=40, P0=state.startAssets, age0=50;    // 만50→90세, 40년
+  const spend=state.crisisSpend, pension=18000000, penAge=65;
+  const byYear=Array.from({length:Y+1},()=>[]);
+  let sample=[P0], sCrashes=0, sWorst=0, sRuinAge=null, ruinCount=0, ruinAges=[], endVals=[];
+  for(let path=0;path<NP;path++){
+    let v=P0, ruined=false, rAge=null; byYear[0].push(v);
+    for(let t=1;t<=Y;t++){
+      const age=age0+t;
+      let ret;
+      if(rng()<p) ret=-CRISIS_DEPTHS[Math.floor(rng()*CRISIS_DEPTHS.length)];
+      else ret=muN+sig*norm();
+      v=v*(1+ret) - spend + (age>=penAge?pension:0);    // 실질: 수익 후 생활비 인출, 65세부터 연금
+      if(v<=0 && !ruined){ ruined=true; rAge=age; }
+      if(v<0)v=0;
+      byYear[t].push(v);
+      if(path===0){sample.push(v); if(ret<=-0.20)sCrashes++; if(ret<sWorst)sWorst=ret; if(v<=0&&sRuinAge===null)sRuinAge=age;}
+    }
+    if(ruined){ruinCount++;ruinAges.push(rAge);}
+    endVals.push(v);
+  }
+  const pct=(arr,q)=>{const a=[...arr].sort((x,y)=>x-y);return a[Math.floor(q*(a.length-1))];};
+  const p10=[],p50=[],p90=[];
+  for(let t=0;t<=Y;t++){p10.push(pct(byYear[t],0.10));p50.push(pct(byYear[t],0.50));p90.push(pct(byYear[t],0.90));}
+  const naive=[]; let nv=P0;                            // 무위기·매끄러운 실질 경로(비교용)
+  for(let t=0;t<=Y;t++){ if(t>0){const age=age0+t; nv=nv*(1+muReal)-spend+(age>=penAge?pension:0); if(nv<0)nv=0;} naive.push(nv); }
+  const successRate=100*(NP-ruinCount)/NP;
+  const medRuinAge=ruinAges.length?ruinAges.sort((a,b)=>a-b)[Math.floor(ruinAges.length/2)]:null;
+  return {p10,p50,p90,naive,sample,sCrashes,sWorst,sRuinAge,Y,age0,successRate,medRuinAge,
+    endP10:pct(endVals,0.10),endP50:pct(endVals,0.50),endP90:pct(endVals,0.90),muReal};
+}
+function buildCrisisSVG(d){
+  const W=720,H=270,padL=10,padR=10,padT=14,padB=24,Y=d.Y;
+  let mx=0;
+  [d.p90,d.naive,d.p50,d.sample].forEach(s=>s.forEach(v=>{if(v>mx)mx=v;}));
+  const loMin=Math.log(Math.max(1,state.startAssets*0.05)), loMax=Math.log(mx*1.05);
+  const X=t=>padL+(W-padL-padR)*t/Y;
+  const clamp=x=>Math.max(loMin,Math.min(loMax,x));
+  const Yc=v=>padT+(H-padT-padB)*(1-(clamp(Math.log(Math.max(v,1)))-loMin)/(loMax-loMin));
+  const line=arr=>arr.map((v,t)=>`${t===0?'M':'L'}${X(t).toFixed(1)},${Yc(v).toFixed(1)}`).join(' ');
+  const up=d.p90.map((v,t)=>`${t===0?'M':'L'}${X(t).toFixed(1)},${Yc(v).toFixed(1)}`).join(' ');
+  const dn=d.p10.map((v,t)=>`L${X(Y-t).toFixed(1)},${Yc(d.p10[Y-t]).toFixed(1)}`).join(' ');
+  const band=`${up} ${dn} Z`;
+  let xl='';for(let t=0;t<=Y;t+=10)xl+=`<text x="${X(t).toFixed(1)}" y="${H-6}" font-size="10" fill="#9AACC6" text-anchor="middle" font-family="JetBrains Mono">${d.age0+t}세</text>`;
+  let yl='';[0.25,0.5,0.75].forEach(f=>{const val=Math.exp(loMin+(loMax-loMin)*f);const yy=Yc(val);yl+=`<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${W-padR}" y2="${yy.toFixed(1)}" stroke="#E5EDF8"/><text x="${padL+2}" y="${(yy-3).toFixed(1)}" font-size="9" fill="#9AACC6" font-family="JetBrains Mono">₩${(val/1e8).toFixed(0)}억</text>`;});
+  return `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;border:1px solid var(--line);border-radius:12px;background:#FBFDFF">
+    ${yl}
+    <path d="${band}" fill="var(--blue-pale)" opacity="0.35"/>
+    <path d="${line(d.naive)}" fill="none" stroke="var(--faint)" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <path d="${line(d.p50)}" fill="none" stroke="var(--blue-deep)" stroke-width="2.5"/>
+    <path d="${line(d.sample)}" fill="none" stroke="var(--orange)" stroke-width="1.6" opacity="0.92"/>
+    ${xl}
+  </svg>`;
+}
+function renderCrisis(){
+  document.getElementById('cVolV').textContent=(state.crisisVol*100).toFixed(0)+'%';
+  document.getElementById('cSpendV').textContent='₩'+eok(state.crisisSpend)+'/년';
+  const d=simulateCrises();
+  document.getElementById('crisisChart').innerHTML=buildCrisisSVG(d);
+  const f=v=>'₩'+eok(v);
+  const ruinTxt=d.medRuinAge?`중앙 ${d.medRuinAge}세`:'없음';
+  document.getElementById('crisisChips').innerHTML=`
+    <div class="chip hero"><div class="ck">성공 확률 (90세까지 안 마름)</div><div class="cv">${d.successRate.toFixed(0)}%</div></div>
+    <div class="chip"><div class="ck">실질 최종자산 중앙값</div><div class="cv">${f(d.endP50)}</div></div>
+    <div class="chip"><div class="ck">P10 (나쁜 경우)</div><div class="cv" style="color:var(--orange)">${f(d.endP10)}</div></div>
+    <div class="chip"><div class="ck">P90 (좋은 경우)</div><div class="cv">${f(d.endP90)}</div></div>
+    <div class="chip"><div class="ck">고갈 발생 나이</div><div class="cv">${ruinTxt}</div></div>
+    <div class="chip"><div class="ck">이 시나리오 폭락/최대낙폭</div><div class="cv">${d.sCrashes}회 / ${(d.sWorst*100).toFixed(0)}%${d.sRuinAge?' · '+d.sRuinAge+'세 고갈':''}</div></div>`;
+  document.getElementById('crisisTable').innerHTML=`<thead><tr><th>이벤트</th><th>기간</th><th>최대낙폭</th><th>회복</th></tr></thead><tbody>${CRISES.map(c=>`<tr><td>${c[0]}</td><td>${c[1]}</td><td style="color:var(--orange)">${c[2]}</td><td>${c[3]}</td></tr>`).join('')}</tbody>`;
+  document.getElementById('crisisNote').innerHTML=`<span class="bh">방법 · 모든 금액 = 오늘 가치(실질)</span>
+    시작자산 ₩${eok(state.startAssets)}에서 매년 생활비 ₩${eok(state.crisisSpend)}(실질 고정)을 인출하고, 65세부터 국민연금 ₩1,800만(실질)을 더합니다. 수익은 <b>실질 기대 ${(d.muReal*100).toFixed(1)}%</b>(명목 ${(state.wealthR*100).toFixed(1)}%−물가 2.5%)에, 1929년 이후 역사적 빈도인 <b>연 ${(CRISIS_P*100).toFixed(0)}% 위기(−30~−86% 낙폭)</b>를 주입해 600회 시뮬레이션. 만50→90세(40년).<br>
+    <b>주황 실선</b>=무작위 한 경로(폭락 포함) · <b>파란선</b>=중앙값 · <b>음영</b>=P10~P90 · <b>점선</b>=무위기 매끄러운 경로(섹션 11·12 가정). 무위기 가정의 90세 잔액은 ₩${eok(d.naive[d.Y])}이지만, 위기를 넣으면 중앙값 ₩${eok(d.endP50)}·나쁜 경우(P10) ₩${eok(d.endP10)}로 떨어집니다.<br>
+    <span style="color:var(--faint)">이전 버전의 결함을 수정: ①생활비 인출 반영(이전엔 50년 무인출 복리) ②명목→실질(오늘 가치) ③변동성+위기 이중계상 완화(σ 기본 14%, 위기는 별도 주입) ④중앙값 고정 인공물 제거. 핵심은 "최종 금액"이 아니라 <b>성공 확률과 시퀀스 리스크</b> — 은퇴 초반 폭락이 가장 치명적입니다. 낙폭·빈도는 역사적 추정이며 미래를 보장하지 않습니다. 투자 자문 아님.</span>`;
+}
+function reseedCrisis(){state.crisisSeed=(Math.floor(Math.random()*4294967296))>>>0;renderCrisis();}
+
+function renderAll(){renderCountries();renderSpend();renderAlloc();renderCards();renderEduControls();renderEdu();renderUniv();renderCOL();renderVisa();renderRates();renderSim();renderWealth();renderDiv();renderCrisis();
+  document.getElementById('disclaim').innerHTML=`<b>데이터 기준</b> · 학비 = 2026년 각국 수도 mid-tier 국제학교 조사값(KL median ~RM45k 확인 / 말레이시아는 ISP·ISKL 실제 학비 선택 가능 / 호주는 사립 independent). 한국은 사교육비 입력값. · 생활비 = Numbeo 2026.6 (4인 rent 제외 ×${LIVING_FACTOR} 3인 추정). · 주거 = 3BR 시장가(한국 = 디퍼아 59㎡ 방3 가격 기준 · 말레이시아 = DPC·몽키아라 · 기타 3BR benchmark). · 비자 = 2026년 각국 이민당국·자문사 공개 기준. · 예금금리 = 2026.6 대표치. · 환율 = MYR/KRW ${FX.MYR}(2026.6 ~373 변동). · 세율 = 한국 해외주식 양도세 22%(금투세 2024 폐지)·말레이시아 개인 해외양도차익 비과세(FSI 면세 2036)·아일랜드 UCITS 미국배당 WHT 15%. · 카드 = 대표 카드 근사치(검증 필요). · 모두 추정이며 투자·세무·이민 자문이 아닙니다.`;
+}
+
+document.getElementById('spendRange').oninput=e=>{state.monthly=+e.target.value;redistribute();renderSpend();renderAlloc();renderCards();renderCOL();};
+document.getElementById('birthYear').oninput=e=>{state.birthYear=+e.target.value||2015;renderEdu();renderCOL();renderUniv();renderWealth();};
+document.getElementById('krLiv').oninput=e=>{state.krLiving=+e.target.value;renderCOL();renderWealth();};
+document.getElementById('simP').oninput=e=>{state.simP=+e.target.value;renderSim();};
+document.getElementById('simR').oninput=e=>{state.simR=+e.target.value/100;renderSim();};
+document.getElementById('simN').oninput=e=>{state.simN=+e.target.value;renderSim();};
+document.getElementById('wAssets').oninput=e=>{state.startAssets=+e.target.value;renderWealth();};
+document.getElementById('wRet').oninput=e=>{state.wealthR=+e.target.value/100;renderWealth();};
+document.getElementById('divAmt').oninput=e=>{state.divAmt=+e.target.value;renderDiv();};
+document.getElementById('divYears').oninput=e=>{state.divYears=+e.target.value;renderDiv();};
+document.getElementById('cVol').oninput=e=>{state.crisisVol=+e.target.value/100;renderCrisis();};
+document.getElementById('cSpend').oninput=e=>{state.crisisSpend=+e.target.value;renderCrisis();};
+
+setupCountry();renderAll();
 </script>
 </body>
 </html>
