@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>간단 MBTI 테스트</title>
+<style>
+  :root {
+    --bg: #f4f6fb;
+    --card: #ffffff;
+    --primary: #6c5ce7;
+    --primary-dark: #5541d7;
+    --text: #2d3436;
+    --muted: #8a94a6;
+    --track: #eceff4;
+    --e: #ff7675; --i: #74b9ff;
+    --s: #ffb142; --n: #55efc4;
+    --t: #a29bfe; --f: #fd79a8;
+    --j: #00cec9; --p: #fab1a0;
+    --kakao: #fee500;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .app {
+    width: 100%;
+    max-width: 480px;
+    background: var(--card);
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(60, 66, 100, 0.12);
+    overflow: hidden;
+  }
+  .screen { display: none; padding: 32px 28px 36px; }
+  .screen.active { display: block; animation: fade .35s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px);} to {opacity:1; transform:none;} }
+
+  /* Intro */
+  .intro { text-align: center; }
+  .emoji { font-size: 64px; margin-bottom: 8px; }
+  h1 { font-size: 26px; margin-bottom: 10px; }
+  .subtitle { color: var(--muted); line-height: 1.6; margin-bottom: 28px; font-size: 15px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; padding: 16px; border: none; border-radius: 14px;
+    background: var(--primary); color: #fff; font-size: 16px; font-weight: 700;
+    cursor: pointer; transition: transform .1s, background .2s;
+  }
+  .btn:hover { background: var(--primary-dark); }
+  .btn:active { transform: scale(.98); }
+  .btn.secondary { background: var(--track); color: var(--text); }
+  .btn.secondary:hover { background: #e2e6ee; }
+  .btn.kakao { background: var(--kakao); color: #3a1d1d; }
+  .btn.kakao:hover { filter: brightness(0.96); }
+
+  /* Progress */
+  .progress-wrap { margin-bottom: 24px; }
+  .progress-meta { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+  .progress-bar { height: 8px; background: var(--track); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--primary), #a29bfe); border-radius: 99px; transition: width .3s ease; }
+
+  .question { font-size: 20px; font-weight: 700; line-height: 1.5; margin-bottom: 28px; min-height: 90px; display: flex; align-items: center; }
+  .options { display: flex; flex-direction: column; gap: 12px; }
+  .option {
+    padding: 16px 18px; border: 2px solid var(--track); border-radius: 14px;
+    background: #fff; text-align: left; font-size: 15px; font-weight: 600; cursor: pointer;
+    transition: border-color .15s, background .15s, transform .1s; color: var(--text);
+  }
+  .option:hover { border-color: var(--primary); background: #f7f5ff; }
+  .option:active { transform: scale(.99); }
+  .back { margin-top: 20px; background: none; border: none; color: var(--muted); font-size: 14px; cursor: pointer; }
+  .back:hover { color: var(--text); }
+
+  /* Result */
+  .result { text-align: center; }
+  .result-type { font-size: 52px; font-weight: 800; letter-spacing: 2px; color: var(--primary); margin-bottom: 4px; }
+  .result-nick { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+  .result-desc { color: var(--muted); line-height: 1.6; font-size: 15px; margin-bottom: 28px; }
+
+  .info { text-align: left; margin-bottom: 28px; }
+  .info-row { margin-bottom: 18px; }
+  .info-labels { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .info-labels .win { font-size: 15px; }
+  .info-track { position: relative; height: 26px; background: var(--track); border-radius: 99px; overflow: hidden; display: flex; }
+  .info-left, .info-right { height: 100%; display: flex; align-items: center; font-size: 12px; font-weight: 800; color: #fff; }
+  .info-left { justify-content: flex-start; padding-left: 10px; }
+  .info-right { justify-content: flex-end; padding-right: 10px; }
+  .muted-pct { color: rgba(255,255,255,.85); }
+
+  .actions { display: flex; flex-direction: column; gap: 12px; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- 인트로 -->
+  <section id="intro" class="screen active intro">
+    <div class="emoji">🧭</div>
+    <h1>간단 MBTI 테스트</h1>
+    <p class="subtitle">12개의 질문으로 알아보는 나의 성격 유형!<br>직관적으로 편하게 골라주세요.</p>
+    <button class="btn" onclick="startTest()">테스트 시작하기 →</button>
+  </section>
+
+  <!-- 질문 -->
+  <section id="quiz" class="screen">
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span id="q-count">1 / 12</span>
+        <span id="q-percent">0%</span>
+      </div>
+      <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+    </div>
+    <div id="question" class="question"></div>
+    <div id="options" class="options"></div>
+    <button id="back-btn" class="back" onclick="prevQuestion()" style="display:none">← 이전 질문</button>
+  </section>
+
+  <!-- 결과 -->
+  <section id="result" class="screen result">
+    <div class="emoji" id="r-emoji">🎉</div>
+    <div class="result-type" id="r-type">ENFP</div>
+    <div class="result-nick" id="r-nick"></div>
+    <p class="result-desc" id="r-desc"></p>
+
+    <div class="info" id="info"></div>
+
+    <div class="actions">
+      <button class="btn kakao" onclick="shareKakao()">💬 카카오톡으로 공유하기</button>
+      <button class="btn secondary" onclick="shareFallback()">🔗 링크 복사 / 다른 방법으로 공유</button>
+      <button class="btn secondary" onclick="restart()">🔄 다시 테스트하기</button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* ---------------- 데이터 ---------------- */
+// 각 질문은 하나의 축(dichotomy)을 측정. a/b 선택지가 각 극단에 해당.
+const questions = [
+  { axis: "EI", q: "주말에 에너지를 얻는 방법은?", a: {t:"E", label:"사람들과 만나 왁자지껄 놀기"}, b: {t:"I", label:"집에서 혼자 조용히 쉬기"} },
+  { axis: "EI", q: "처음 보는 모임에 가면?", a: {t:"E", label:"먼저 다가가 말을 건다"}, b: {t:"I", label:"누군가 말 걸어주길 기다린다"} },
+  { axis: "EI", q: "고민이 생기면?", a: {t:"E", label:"말하면서 정리한다"}, b: {t:"I", label:"혼자 생각하며 정리한다"} },
+
+  { axis: "SN", q: "새로운 일을 배울 때 더 끌리는 건?", a: {t:"S", label:"구체적인 사실과 경험"}, b: {t:"N", label:"의미와 가능성, 아이디어"} },
+  { axis: "SN", q: "여행 계획을 세울 때?", a: {t:"S", label:"검증된 맛집·동선을 확인"}, b: {t:"N", label:"어떤 새로운 경험일지 상상"} },
+  { axis: "SN", q: "대화할 때 나는?", a: {t:"S", label:"현실적이고 사실 위주"}, b: {t:"N", label:"비유와 상상이 많은 편"} },
+
+  { axis: "TF", q: "결정을 내릴 때 더 중요한 건?", a: {t:"T", label:"논리와 객관적 사실"}, b: {t:"F", label:"사람의 감정과 관계"} },
+  { axis: "TF", q: "친구가 고민을 털어놓으면?", a: {t:"T", label:"해결책을 먼저 제시한다"}, b: {t:"F", label:"우선 공감하고 위로한다"} },
+  { axis: "TF", q: "피드백을 줄 때 나는?", a: {t:"T", label:"솔직하고 직설적으로"}, b: {t:"F", label:"상대 기분을 배려하며"} },
+
+  { axis: "JP", q: "일을 할 때 나는?", a: {t:"J", label:"미리 계획하고 순서대로"}, b: {t:"P", label:"상황 봐가며 유연하게"} },
+  { axis: "JP", q: "여행 스타일은?", a: {t:"J", label:"시간표까지 짜두는 계획형"}, b: {t:"P", label:"발길 닿는 대로 즉흥형"} },
+  { axis: "JP", q: "마감이 있는 일은?", a: {t:"J", label:"여유 있게 미리 끝낸다"}, b: {t:"P", label:"마감 직전 집중해서 몰아친다"} },
+];
+
+const typeInfo = {
+  ISTJ:["🗂️","청렴결백한 논리주의자","사실에 근거해 책임감 있게 일을 완수하는 신뢰의 아이콘."],
+  ISFJ:["🛡️","용감한 수호자","조용하지만 헌신적으로 주변을 챙기는 따뜻한 사람."],
+  INFJ:["🔮","선의의 옹호자","깊은 통찰과 이상으로 사람을 이끄는 신비로운 조언가."],
+  INTJ:["♟️","용의주도한 전략가","큰 그림을 그리고 계획으로 실현하는 마스터마인드."],
+  ISTP:["🛠️","만능 재주꾼","직접 손대며 문제를 해결하는 쿨한 실용주의자."],
+  ISFP:["🎨","호기심 많은 예술가","감각적이고 자유로운 마음의 온화한 예술가."],
+  INFP:["🌈","열정적인 중재자","이상과 가치를 품고 사는 따뜻한 몽상가."],
+  INTP:["🔬","논리적인 사색가","호기심으로 세상을 분석하는 아이디어 뱅크."],
+  ESTP:["🏄","모험을 즐기는 사업가","순간의 판단이 빠른 에너지 넘치는 행동파."],
+  ESFP:["🎉","자유로운 영혼의 연예인","어디서나 분위기를 띄우는 흥부자."],
+  ENFP:["✨","재기발랄한 활동가","가능성과 사람을 사랑하는 열정 가득한 자유인."],
+  ENTP:["💡","뜨거운 논쟁을 즐기는 변론가","아이디어와 토론을 즐기는 똑똑한 반항아."],
+  ESTJ:["📋","엄격한 관리자","체계와 규칙으로 목표를 달성하는 리더."],
+  ESFJ:["🤝","사교적인 외교관","사람들을 챙기고 조화를 만드는 인싸형 조력자."],
+  ENFJ:["🌟","정의로운 사회운동가","사람의 마음을 움직여 이끄는 카리스마 리더."],
+  ENTJ:["👑","대담한 통솔자","목표를 향해 조직을 이끄는 타고난 지휘관."],
+};
+
+const axisMeta = {
+  EI: { left:{k:"E",c:"var(--e)"}, right:{k:"I",c:"var(--i)"}, name:{E:"외향",I:"내향"} },
+  SN: { left:{k:"S",c:"var(--s)"}, right:{k:"N",c:"var(--n)"}, name:{S:"감각",N:"직관"} },
+  TF: { left:{k:"T",c:"var(--t)"}, right:{k:"F",c:"var(--f)"}, name:{T:"사고",F:"감정"} },
+  JP: { left:{k:"J",c:"var(--j)"}, right:{k:"P",c:"var(--p)"}, name:{J:"판단",P:"인식"} },
+};
+
+/* ---------------- 상태 ---------------- */
+let current = 0;
+let answers = []; // 각 문항에서 선택한 극단 문자 저장
+
+function show(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function startTest(){
+  current = 0; answers = [];
+  show("quiz");
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = questions[current];
+  document.getElementById("q-count").textContent = (current+1) + " / " + questions.length;
+  const pct = Math.round((current)/questions.length*100);
+  document.getElementById("q-percent").textContent = pct + "%";
+  document.getElementById("progress-fill").style.width = pct + "%";
+
+  document.getElementById("question").textContent = q.q;
+  const opts = document.getElementById("options");
+  opts.innerHTML = "";
+  [q.a, q.b].forEach(opt=>{
+    const b = document.createElement("button");
+    b.className = "option";
+    b.textContent = opt.label;
+    b.onclick = ()=>choose(opt.t);
+    opts.appendChild(b);
+  });
+  document.getElementById("back-btn").style.display = current>0 ? "block" : "none";
+}
+
+function choose(letter){
+  answers[current] = letter;
+  if(current < questions.length-1){
+    current++;
+    renderQuestion();
+  } else {
+    document.getElementById("progress-fill").style.width = "100%";
+    document.getElementById("q-percent").textContent = "100%";
+    showResult();
+  }
+}
+
+function prevQuestion(){
+  if(current>0){ current--; renderQuestion(); }
+}
+
+/* ---------------- 결과 계산 ---------------- */
+function computeResult(){
+  const count = {E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};
+  answers.forEach(a=>count[a]++);
+  const perAxis = {EI:3, SN:3, TF:3, JP:3};
+  const type =
+    (count.E>=count.I?"E":"I") +
+    (count.S>=count.N?"S":"N") +
+    (count.T>=count.F?"T":"F") +
+    (count.J>=count.P?"J":"P");
+
+  // 각 축 퍼센트
+  const pct = {};
+  for(const axis in axisMeta){
+    const L = axisMeta[axis].left.k, R = axisMeta[axis].right.k;
+    const total = count[L]+count[R];
+    pct[axis] = { left: Math.round(count[L]/total*100), right: Math.round(count[R]/total*100) };
+  }
+  return { type, count, pct };
+}
+
+let lastResult = null;
+
+function showResult(){
+  const res = computeResult();
+  lastResult = res;
+  const info = typeInfo[res.type];
+  document.getElementById("r-emoji").textContent = info[0];
+  document.getElementById("r-type").textContent = res.type;
+  document.getElementById("r-nick").textContent = info[1];
+  document.getElementById("r-desc").textContent = info[2];
+
+  // 인포그래픽
+  const box = document.getElementById("info");
+  box.innerHTML = "";
+  for(const axis in axisMeta){
+    const m = axisMeta[axis];
+    const p = res.pct[axis];
+    const leftWins = p.left >= p.right;
+    const row = document.createElement("div");
+    row.className = "info-row";
+    row.innerHTML = `
+      <div class="info-labels">
+        <span class="${leftWins?'win':''}" style="color:${m.left.c}">${m.left.k} · ${m.name[m.left.k]}</span>
+        <span class="${!leftWins?'win':''}" style="color:${m.right.c}">${m.name[m.right.k]} · ${m.right.k}</span>
+      </div>
+      <div class="info-track">
+        <div class="info-left" style="width:${p.left}%;background:${m.left.c}">${p.left>15?p.left+'%':''}</div>
+        <div class="info-right" style="width:${p.right}%;background:${m.right.c}">${p.right>15?p.right+'%':''}</div>
+      </div>`;
+    box.appendChild(row);
+  }
+  show("result");
+}
+
+function restart(){ show("intro"); }
+
+/* ---------------- 공유 ---------------- */
+function shareText(){
+  const info = typeInfo[lastResult.type];
+  return `내 MBTI는 ${lastResult.type} ${info[0]} "${info[1]}"! 너도 테스트 해봐 👉`;
+}
+
+function shareKakao(){
+  const text = shareText();
+  const url = location.href;
+  // Kakao SDK가 로드되고 초기화되어 있으면 실제 공유
+  if (window.Kakao && Kakao.isInitialized && Kakao.isInitialized() && Kakao.Share) {
+    Kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: `내 MBTI: ${lastResult.type}`,
+        description: text,
+        imageUrl: 'https://via.placeholder.com/600x400.png?text=MBTI',
+        link: { mobileWebUrl: url, webUrl: url },
+      },
+      buttons: [{ title: '나도 테스트 하기', link: { mobileWebUrl: url, webUrl: url } }],
+    });
+  } else {
+    alert(
+      "카카오톡 공유를 사용하려면 카카오 JavaScript 키가 필요해요.\n\n" +
+      "① https://developers.kakao.com 에서 앱 등록\n" +
+      "② 내 앱 > 앱 키 > JavaScript 키 복사\n" +
+      "③ index.html 하단의 KAKAO_JS_KEY 값에 붙여넣기\n\n" +
+      "지금은 대신 링크 복사 방식으로 공유할게요."
+    );
+    shareFallback();
+  }
+}
+
+async function shareFallback(){
+  const text = shareText() + " " + location.href;
+  // 모바일 등에서 기본 공유창
+  if (navigator.share) {
+    try { await navigator.share({ title: "MBTI 테스트", text: shareText(), url: location.href }); return; }
+    catch(e){ /* 취소 시 아래로 */ }
+  }
+  // 클립보드 복사
+  try {
+    await navigator.clipboard.writeText(text);
+    alert("결과가 클립보드에 복사됐어요!\n\n" + text);
+  } catch(e){
+    prompt("아래 내용을 복사해서 공유하세요:", text);
+  }
+}
+
+/* ---------------- 카카오 SDK ---------------- */
+// 아래 KAKAO_JS_KEY 에 발급받은 JavaScript 키를 넣으면 실제 카톡 공유가 활성화됩니다.
+const KAKAO_JS_KEY = ""; // 예: "abcd1234..."
+(function loadKakao(){
+  if(!KAKAO_JS_KEY) return;
+  const s = document.createElement("script");
+  s.src = "https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js";
+  s.onload = ()=>{ try{ Kakao.init(KAKAO_JS_KEY); }catch(e){ console.warn(e); } };
+  document.head.appendChild(s);
+})();
+</script>
+</body>
+</html>
