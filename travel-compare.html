@@ -162,6 +162,19 @@
   .pick{margin-top:20px;padding:18px 20px;border-radius:16px;background:linear-gradient(120deg,#eef3ff,#eafff8);
     border:1px solid var(--line);font-size:14.5px;font-weight:600;text-align:center;line-height:1.7}
   .pick b{font-weight:900}
+  .rvwrap{margin-top:24px}
+  .rvwrap h3{font-size:17px;font-weight:900;text-align:center;margin-bottom:12px;letter-spacing:-.3px}
+  .rv{border-radius:16px;padding:18px;border:1px solid var(--line)}
+  .rv.oki{background:#f2fdff}.rv.nag{background:#f2f6ff}
+  .rv h4{font-size:15px;font-weight:900;margin-bottom:4px}
+  .rv.oki h4{color:#0d9bb0}.rv.nag h4{color:#3f74ff}
+  .rv .lbl{font-size:12.5px;font-weight:900;margin:10px 0 5px}
+  .rv .lbl.p{color:#0a9e73}.rv .lbl.c{color:#e0455e}
+  .rv ul{list-style:none;display:grid;gap:5px}
+  .rv li{font-size:12.8px;font-weight:600;padding-left:16px;position:relative;line-height:1.45}
+  .rv .pros li::before{content:"＋";position:absolute;left:0;color:#0a9e73;font-weight:900}
+  .rv .cons li::before{content:"－";position:absolute;left:0;color:#e0455e;font-weight:900}
+  .rv-note{margin-top:12px;font-size:11.5px;color:var(--sub);text-align:center;font-weight:600}
   footer{text-align:center;padding:24px;color:var(--sub);font-size:12px;border-top:1px solid var(--line);margin-top:30px}
 </style>
 </head>
@@ -426,6 +439,30 @@ const FLIGHTS={
   macau:{c:'에어마카오',ap:'마카오(MFM)',dep:'08:10',arr:'11:00',dur:'3시간 50분',st:'직항'}
 };
 
+// 여행자 실제 후기 기반 장단점 (트립어드바이저·구글 리뷰·여행 블로그 최근 후기 요약)
+const REVIEWS={
+  tokyo:{pros:['치안·청결·대중교통이 최상급','미식·쇼핑·볼거리 압도적','디즈니 등 아이 즐길거리 풍부'],cons:['여름 무덥고 습함','물가·숙소비 비쌈','인파 많고 복잡']},
+  osaka:{pros:['먹거리 천국·가성비 식당 많음','교통·명소 밀집해 동선 짧음','USJ 등 가족 즐길거리'],cons:['한여름 폭염','주요 명소 혼잡','도심 호텔 방이 좁음']},
+  okinawa:{pros:['에메랄드빛 바다·물놀이 최적','해양 액티비티 다양','여유롭고 깨끗함'],cons:['렌터카 사실상 필수','8월 태풍 변수','대중교통 불편']},
+  bangkok:{pros:['물가 저렴·미식 다양','사원·야시장·루프탑 볼거리','마사지·스파 가성비'],cons:['교통체증·매연','더위·습도 높음','일부 관광지 호객·바가지']},
+  phuket:{pros:['해변·섬 투어가 아름다움','리조트 가성비 좋음','활기찬 밤문화'],cons:['8월 우기라 파도·소나기','파통 번잡·호객','택시·툭툭 요금 비쌈']},
+  chiangmai:{pros:['코끼리·자연 체험 특별','저렴·힐링 분위기','감성 카페·사원'],cons:['대중교통 부족(그랩 의존)','명소 간 이동 거리','볼거리 밀도 낮음']},
+  kl:{pros:['다양한 미식·저렴','트윈타워·대형 쇼핑몰','영어 소통 수월'],cons:['오후 스콜·무더위','도보 이동 불편','볼거리 다소 분산']},
+  kk:{pros:['맑은 바다·섬 스노클링','선셋 명소로 유명','리조트 가성비'],cons:['시내 볼거리 적음','인프라 다소 열악','연말 우기 변수']},
+  penang:{pros:['조지타운 벽화·유네스코 정취','호커 미식 천국','물가 저렴'],cons:['무덥고 습함','해변 수질 아쉬움','대중교통 불편']},
+  danang:{pros:['깨끗한 미케비치·가성비','바나힐·호이안 근교 매력','8월 건기라 맑음'],cons:['빠른 관광지화·호객 증가','도심 자체 볼거리 적음','한낮 햇볕 강함']},
+  phuquoc:{pros:['바다 물이 맑음(다낭·나트랑보다)','넓은 신축 리조트 가성비','매일 석양·가족 친화'],cons:['섬이라 물가 다소 높음','쇼핑·도시·밤문화 약함','8월 우기 흐림·소나기']},
+  hanoi:{pros:['저렴·활기찬 구시가','하롱베이·닌빈 근교','에그커피 등 미식'],cons:['교통 혼잡·매연','무덥고 습함','호객·소매치기 유의']},
+  sydney:{pros:['오페라하우스·비치 절경','청결·치안 좋음','블루마운틴 등 근교 자연'],cons:['물가 매우 비쌈','8월은 겨울로 쌀쌀','장거리 비행 부담']},
+  melbourne:{pros:['카페·예술 문화 풍부','그레이트오션로드 등 근교','도시 자체가 감성적'],cons:['하루에도 날씨 변덕','물가 비쌈','8월 겨울 추위']},
+  goldcoast:{pros:['테마파크 4대장(가족 최적)','서핑·해변 좋음','휴양+놀이 균형'],cons:['테마파크 입장료 비쌈','겨울 바다 수영 쌀쌀','밤 유흥가 소란']},
+  brisbane:{pros:['여유로운 강변 도시','론파인 코알라 체험','겨울에도 온화'],cons:['대도시 대비 볼거리 적음','물가 비쌈','장거리 비행 부담']},
+  taipei:{pros:['야시장·미식 저렴','대중교통 편리·동선 짧음','온천·지우펀 등 근교 다양'],cons:['여름 무덥고 습함','태풍 시즌(7~9월)','흐린 날 잦음']},
+  kaohsiung:{pros:['여유롭고 저렴','항구·예술특구 감성','따뜻한 날씨'],cons:['볼거리 상대적으로 적음','한여름 무더위','대중교통 커버 한계']},
+  taichung:{pros:['감성 카페·무지개촌 등 마을','저렴·쾌적','야시장 규모 큼'],cons:['대중교통 불편','명소가 분산','여름 더위']},
+  macau:{pros:['포르투갈+중화 이색 정취','무료 셔틀·볼거리 밀집(도보 관광)','에그타르트 등 미식'],cons:['숙소·식비 다소 비쌈','여름 무덥고 태풍','카지노 위주 분위기']}
+};
+
 // ===== 상태 =====
 const STATE={adults:2,kids:1,nights:4,days:5,month:8,dayType:'평일'};
 
@@ -613,6 +650,10 @@ function verdictHtml(da,db){
       <li>🎯 ${d.city.exps[1][0].replace(/ \(3인\)$/,'')}</li>
       <li>${d.weather.items[0][0]} ${STATE.month}월 ${d.weather.items[0][1]}</li>
     </ul></div>`;
+  const rvCard=(d)=>{const r=REVIEWS[d.id];return `<div class="rv ${d.cls}"><h4>${d.flag} ${d.name}</h4>
+      <div class="lbl p">👍 여행자 장점</div><ul class="pros">${r.pros.map(x=>`<li>${x}</li>`).join('')}</ul>
+      <div class="lbl c">👎 여행자 단점</div><ul class="cons">${r.cons.map(x=>`<li>${x}</li>`).join('')}</ul>
+    </div>`;};
   return `<h2>🏁 최종 비교 & 추천</h2>
     <div style="overflow-x:auto"><table class="cmp">
       <thead><tr><th>항목</th><th>${da.flag} ${da.name}</th><th>${db.flag} ${db.name}</th></tr></thead>
@@ -626,7 +667,11 @@ function verdictHtml(da,db){
     <div class="reco">${rc(da)}${rc(db)}</div>
     <div class="pick">💡 <b>${cheaper}</b>가 약 <b>${KRW(diff)}</b> 더 저렴합니다.
       <b>${da.name}</b>은(는) ${da.tag}, <b>${db.name}</b>은(는) ${db.tag}.<br>
-      성인 ${STATE.adults}·아동 ${STATE.kids}명 · ${STATE.nights}박${STATE.days}일 · ${STATE.month}월 기준으로 대표 액티비티와 날씨·예산을 비교해 골라보세요.</div>`;
+      성인 ${STATE.adults}·아동 ${STATE.kids}명 · ${STATE.nights}박${STATE.days}일 · ${STATE.month}월 기준으로 대표 액티비티와 날씨·예산을 비교해 골라보세요.</div>
+    <div class="rvwrap"><h3>💬 여행자 실제 후기 기반 장단점</h3>
+      <div class="reco">${rvCard(da)}${rvCard(db)}</div>
+      <div class="rv-note">최근 여행자 후기(트립어드바이저·구글 리뷰·여행 블로그) 요약 · 시즌·개인차 있음</div>
+    </div>`;
 }
 
 // ===== 셀렉트 구성 & 초기화 =====
