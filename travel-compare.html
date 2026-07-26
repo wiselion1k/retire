@@ -477,6 +477,19 @@
   .detailgrid .cards{gap:10px}
   .detailgrid .costlist{gap:10px}
   .detailgrid .costtotal{padding:0 0 12px;margin-bottom:12px}
+
+  /* 여행자 후기 — 단일 카드 반반(좌/우) 통합 */
+  .rvduo{display:grid;grid-template-columns:1fr 1fr;background:#f2f6fb;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:2px}
+  .rvside{padding:16px 18px}
+  .rvside + .rvside{border-left:1px solid var(--line)}
+  .rvside h4{font-size:15px;font-weight:900;letter-spacing:-.01em;margin-bottom:6px}
+  .rvside .lbl{font-size:11.5px;font-weight:900;margin:9px 0 4px}
+  .rvside .lbl.p{color:#0a9e73}.rvside .lbl.c{color:#e0455e}
+  .rvside ul{list-style:none;display:grid;gap:4px}
+  .rvside li{font-size:12.3px;font-weight:600;padding-left:15px;position:relative;line-height:1.4}
+  .rvside .pros li::before{content:"＋";position:absolute;left:0;color:var(--ink);font-weight:900}
+  .rvside .cons li::before{content:"－";position:absolute;left:0;color:var(--sub);font-weight:900}
+  @media(max-width:560px){.rvduo{grid-template-columns:1fr}.rvside + .rvside{border-left:none;border-top:1px solid var(--line)}}
 </style>
 </head>
 <body>
@@ -1034,9 +1047,10 @@ function destHtml(d){
     </div></div>`;
 }
 function extrasHtml(da,db){
-  const rvCard=(d)=>{const r=REVIEWS[d.id];return `<div class="rv ${d.cls}"><h4>${d.flag} ${d.name}</h4>
-      <div class="lbl p">👍 여행자 장점</div><ul class="pros">${r.pros.map(x=>`<li>${x}</li>`).join('')}</ul>
-      <div class="lbl c">👎 여행자 단점</div><ul class="cons">${r.cons.map(x=>`<li>${x}</li>`).join('')}</ul>
+  const rvBody=(d)=>{const r=REVIEWS[d.id];return `<div class="rvside">
+      <h4>${d.flag} ${d.name}</h4>
+      <div class="lbl p">👍 장점</div><ul class="pros">${r.pros.map(x=>`<li>${x}</li>`).join('')}</ul>
+      <div class="lbl c">👎 단점</div><ul class="cons">${r.cons.map(x=>`<li>${x}</li>`).join('')}</ul>
     </div>`;};
   const all=Object.keys(CITIES).map(id=>({id,c:CITIES[id],t:calc(CITIES[id]).total})).sort((x,y)=>x.t-y.t);
   const maxT=all[all.length-1].t;
@@ -1046,7 +1060,7 @@ function extrasHtml(da,db){
     return `<div class="ab ${sel}"><span class="abn">${x.c.flag} ${x.c.name}</span><span class="abbar"><span style="width:${(x.t/maxT*100).toFixed(1)}%;background:${col}"></span></span><span class="abv">${KRW(x.t)}</span></div>`;
   }).join('');
   return `<div class="verdict rvwrap"><h3>💬 여행자 실제 후기 기반 장단점</h3>
-      <div class="reco">${rvCard(da)}${rvCard(db)}</div>
+      <div class="rvduo">${rvBody(da)}${rvBody(db)}</div>
       <div class="rv-note">최근 여행자 후기(트립어드바이저·구글 리뷰·여행 블로그) 요약 · 시즌·개인차 있음</div>
     <div class="allwrap"><h3>📊 전체 도시 총비용 순위</h3>
       <div class="allsub">성인 ${STATE.adults}·아동 ${STATE.kids} · ${STATE.nights}박${STATE.days}일 · ${STATE.month}월 · ${STATE.dayType} 기준 · 저렴한 순 (${STATE.adults+STATE.kids}인 합산)</div>
