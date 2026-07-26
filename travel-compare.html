@@ -7,6 +7,8 @@
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Expires" content="0"/>
 <title>여행지 비교 컨설팅 — 도시를 고르면 자동 비교</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css"/>
 <style>
   :root{
     --bg:#f6f9ff;--card:#fff;--ink:#1c2540;--sub:#6b7794;--line:#e7edf9;
@@ -414,6 +416,24 @@
   .itin-card .day::before{top:24px}
   .itin-card .day h4{font-size:15px;font-weight:900;margin-bottom:9px;color:var(--ink)}
   .itin-card .day h4 .dn{color:var(--sub);font-weight:700;font-size:12.5px;margin-left:7px}
+
+  /* 오키나와 해변 배경 — 자체 SVG(하늘·바다·모래) + 화이트 스크림으로 톤다운 */
+  header.hero{
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.95) 0%, rgba(255,255,255,.66) 38%, rgba(255,255,255,.24) 66%, rgba(255,255,255,.06) 100%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='440' viewBox='0 0 1200 440'%3E%3Cdefs%3E%3ClinearGradient id='s' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23eaf4fb'/%3E%3Cstop offset='1' stop-color='%23dcecf7'/%3E%3C/linearGradient%3E%3ClinearGradient id='w' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%238fd2d7'/%3E%3Cstop offset='1' stop-color='%23c4e7df'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='440' fill='url(%23s)'/%3E%3Ccircle cx='985' cy='118' r='150' fill='%23fdf3d8' opacity='0.5'/%3E%3Cpath d='M0 258 C200 243 400 243 600 256 S1000 273 1200 258 L1200 380 L0 380 Z' fill='url(%23w)'/%3E%3Cpath d='M0 308 C250 296 480 308 720 304 S1050 308 1200 300 L1200 380 L0 380 Z' fill='%23eafaf6' opacity='0.7'/%3E%3Cpath d='M0 350 C250 340 520 358 760 352 S1050 350 1200 354 L1200 440 L0 440 Z' fill='%23f4ecd9'/%3E%3C/svg%3E")
+      no-repeat bottom center / cover !important;
+    padding:60px 0 52px;
+  }
+
+  /* 현대카드 타이포그래피 — Pretendard(youandi 대체) · tabular numerals · 타이트 트래킹 */
+  body{font-family:'Pretendard Variable','Pretendard','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif!important}
+  h1,h2,h3,.ftotal,.ct-v,.gval,.fname,.abv,.cr-v,.gauge .glabel,.stickyin .score b,.total .big{
+    font-variant-numeric:tabular-nums;font-feature-settings:'tnum' 1}
+  .hero h1{letter-spacing:-.05em;font-weight:900}
+  .round h3,.rvwrap h3,.allwrap h3,.detailhead,.blk-title{font-weight:900;letter-spacing:-.025em}
+  .ftotal,.ct-v{letter-spacing:-.05em}
+  .badge,.rtag,.ct-k,.champ-badge{font-feature-settings:'case' 1}
 </style>
 </head>
 <body>
