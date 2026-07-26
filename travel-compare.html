@@ -508,6 +508,27 @@
   .acc[open] > summary::after{transform:rotate(180deg)}
   .acc > :not(summary){margin:2px 0 14px}
   .acc-air{margin-bottom:10px!important}
+
+  /* 항공 카드 — 로고형 배지 + 출발/비행시간/도착 */
+  .alogo{display:inline-flex;align-items:center;color:#fff;font-size:11px;font-weight:900;letter-spacing:.02em;padding:5px 9px;border-radius:6px;line-height:1;white-space:nowrap}
+  .flightcard{border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:8px 0 6px;background:#fff}
+  .fc-head{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+  .fc-name{font-size:12.5px;font-weight:800;color:var(--ink)}
+  .fc-st{margin-left:auto;font-size:11px;font-weight:900;padding:3px 9px;border-radius:999px}
+  .fc-st.direct{background:#e9f5ee;color:#0a9e73}
+  .fc-st.stop{background:#eef1f6;color:var(--sub)}
+  .fc-route{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}
+  .fc-pt{display:flex;flex-direction:column;gap:2px}
+  .fc-pt.r{align-items:flex-end;text-align:right}
+  .fc-t{font-size:21px;font-weight:900;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--ink)}
+  .fc-ap{font-size:10.5px;color:var(--sub);font-weight:700}
+  .fc-mid{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:82px}
+  .fc-dur{font-size:11px;font-weight:800;color:#3f6288}
+  .fc-line{display:block;width:78px;border-top:1.5px dashed #c2d0e0;margin-top:8px;position:relative}
+  .fc-line::after{content:'✈';position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:#fff;font-size:12px;padding:0 4px;color:#3f6288}
+  .fc-foot{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;font-weight:700;color:var(--sub)}
+  .fc-foot b{font-size:15.5px;font-weight:900;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.02em;margin-left:4px}
+  .fc-src{font-size:10px;color:var(--sub);font-weight:600}
 </style>
 </head>
 <body>
@@ -640,7 +661,7 @@ const CITIES={
     exps:[['툰쿠압둘라만 3섬 스노클링 (3인)',135000],['마누칸섬 씨워킹',120000],['반딧불 리버크루즈',105000],['마리마리 원주민 문화촌',90000],['키나발루공원·포링온천',90000]],
     spots:['탄중아루 선셋','시티 모스크','필리피노 마켓','사바 주립박물관','시그널힐','가야 스트리트']},
   penang:{country:'my',flag:'🎨',name:'페낭',en:'PENANG',tag:'조지타운 벽화 · 호커 미식 · 해변',
-    flight:620000,night:65000,transDay:15000,foodDay:48000,
+    flight:1460000,night:65000,transDay:15000,foodDay:48000,
     weather:{items:[['🌡️','평균 28~32°C'],['🌦️','오후 소나기'],['💧','습함'],['🌤️','오전 맑음'],['🕶️','자외선 높음']],note:'오후 소나기가 잦아요. 오전 조지타운 벽화 산책 + 오후 실내 미식·케이블카로 계획하세요.'},
     hotelName:'조지타운/바투페링기 리조트',hotelDesc:'패밀리룸 · 해변·풀',
     transName:'그랩·버스',transDesc:'그랩·래피드페낭 버스',
@@ -769,7 +790,7 @@ const FLIGHTS={
   chiangmai:{c:'티웨이항공',ap:'치앙마이(CNX)',dep:'20:40',arr:'01:00+1',dur:'6시간 20분',st:'직항'},
   kl:{c:'에어아시아 X',ap:'쿠알라룸푸르(KUL)',dep:'15:30',arr:'21:20',dur:'6시간 50분',st:'직항'},
   kk:{c:'에어서울',ap:'코타키나발루(BKI)',dep:'07:00',arr:'11:40',dur:'5시간 40분',st:'직항'},
-  penang:{c:'에어아시아(KUL 경유)',ap:'페낭(PEN)',dep:'08:00',arr:'15:30',dur:'약 7시간 30분',st:'경유 1회'},
+  penang:{c:'홍콩 익스프레스 (홍콩 경유)',ap:'페낭(PEN)',dep:'06:40',arr:'15:40',dur:'10시간 (홍콩 경유)',st:'경유 1회'},
   danang:{c:'비엣젯',ap:'다낭(DAD)',dep:'09:10',arr:'11:50',dur:'4시간 40분',st:'직항'},
   phuquoc:{c:'비엣젯',ap:'푸꾸옥(PQC)',dep:'20:00',arr:'23:40',dur:'5시간 40분',st:'직항'},
   hanoi:{c:'티웨이항공',ap:'하노이(HAN)',dep:'08:30',arr:'10:50',dur:'4시간 20분',st:'직항'},
@@ -1003,6 +1024,21 @@ function roundsHtml(da,db,cmp){
   </section>`;
   return r1+r2+r3;
 }
+// 항공사 브랜드 배지(로고형) — 브랜드 컬러 자체 제작
+const AIRLINES={
+  '제주항공':{l:'JEJUair',bg:'#f5540a'},'진에어':{l:'JINair',bg:'#00a19a'},
+  '티웨이항공':{l:"t'way",bg:'#e51937'},'에어부산':{l:'AIR BUSAN',bg:'#0086d1'},
+  '에어서울':{l:'AIR SEOUL',bg:'#16b3ac'},'대한항공':{l:'KOREAN AIR',bg:'#0b357f'},
+  '비엣젯':{l:'VietJet',bg:'#e30613'},'에어아시아 X':{l:'AirAsia',bg:'#e11931'},
+  '에어아시아':{l:'AirAsia',bg:'#e11931'},'젯스타':{l:'Jetstar',bg:'#ff5100'},
+  '타이거에어 타이완':{l:'tigerair',bg:'#f47216'},'에어마카오':{l:'AIR MACAU',bg:'#00693c'},
+  '홍콩 익스프레스':{l:'HK Express',bg:'#6c2d91'},'캐세이패시픽':{l:'Cathay',bg:'#006564'},'스쿠트':{l:'Scoot',bg:'#fced00',fg:'#111'}
+};
+function airlineChip(carrier){
+  const first=carrier.split(/[\/(]/)[0].trim();
+  const a=AIRLINES[first]||{l:first,bg:'#3f6288'};
+  return `<span class="alogo" style="background:${a.bg};color:${a.fg||'#fff'}">${a.l}</span>`;
+}
 function destHtml(d){
   const tl=d.itinerary.map(day=>`
     <div class="day">
@@ -1028,6 +1064,15 @@ function destHtml(d){
         <div class="ws-item"><span class="ws-k">🏨 숙소</span><span class="ws-v">${KRW(d.city.night)}<small>/박</small></span><span class="ws-s">${d.hotel.name}</span></div>
         <div class="ws-item"><span class="ws-k">🌤️ ${STATE.month}월</span><span class="ws-v">${d.weather.items[0][1].replace('평균 ','')}</span><span class="ws-s">${(d.weather.items[1]||['',''])[1]}</span></div>
       </div>
+      <div class="flightcard">
+        <div class="fc-head">${airlineChip(d.air.c)}<span class="fc-name">${d.air.c}</span><span class="fc-st ${d.air.st==='직항'?'direct':'stop'}">${d.air.st}</span></div>
+        <div class="fc-route">
+          <div class="fc-pt"><span class="fc-t">${d.air.dep}</span><span class="fc-ap">${d.air.o||'인천(ICN)'}</span></div>
+          <div class="fc-mid"><span class="fc-dur">${d.air.dur}</span><span class="fc-line"></span></div>
+          <div class="fc-pt r"><span class="fc-t">${d.air.arr}</span><span class="fc-ap">${d.air.ap}</span></div>
+        </div>
+        <div class="fc-foot">왕복 ${d.b.people}인 <b>${KRW(d.b.flight)}</b><span class="fc-src"> · 최저가 대표편 · 날짜별 상이</span></div>
+      </div>
       <details class="acc" open><summary>📍 추천 일정 · ${STATE.nights}박 ${STATE.days}일</summary>
         <div class="itin-card"><div class="timeline ${d.cls}">${tl}</div></div></details>
       <details class="acc"><summary>🍽️ 맛집 · 🎯 체험</summary>
@@ -1035,10 +1080,7 @@ function destHtml(d){
           <div class="ic"><div class="h"><span class="e">🍜</span><b>맛집 (1인)</b></div>${foodRows}</div>
           <div class="ic"><div class="h"><span class="e">🎡</span><b>체험 (${d.b.people}인)</b></div>${expRows}</div>
         </div></details>
-      <details class="acc"><summary>✈️ 항공 · 🏨 숙소 · 🚕 교통</summary>
-        <div class="ic acc-air"><div class="h"><span class="e">🛫</span><b>${d.air.c} · ${d.air.st}</b></div>
-          <div class="row"><span class="l">${d.air.o||'인천(ICN)'} → ${d.air.ap}</span><span class="v">${d.air.dep} → ${d.air.arr}</span></div>
-          <div class="row"><span class="l">비행 · 왕복(${d.b.people}인)</span><span class="v">${d.air.dur} · ${KRW(d.b.flight)}</span></div></div>
+      <details class="acc"><summary>🏨 숙소 · 🚕 교통</summary>
         <div class="cards">
           <div class="ic"><div class="h"><span class="e">${d.hotel.emo}</span><b>${d.hotel.name}</b></div>${hRows}</div>
           <div class="ic"><div class="h"><span class="e">${d.transport.emo}</span><b>${d.transport.name}</b></div>${trRows}</div>
