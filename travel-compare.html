@@ -490,6 +490,24 @@
   .rvside .pros li::before{content:"＋";position:absolute;left:0;color:var(--ink);font-weight:900}
   .rvside .cons li::before{content:"－";position:absolute;left:0;color:var(--sub);font-weight:900}
   @media(max-width:560px){.rvduo{grid-template-columns:1fr}.rvside + .rvside{border-left:none;border-top:1px solid var(--line)}}
+
+  /* 승자 상세 — 요약 스탯 + 아코디언 (스크롤 축소) */
+  .detailgrid .dbody{border:1px solid var(--line)!important;border-radius:16px;padding:14px 16px 4px}
+  .wsum{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:4px}
+  .ws-item{background:#f2f6fb;border:1px solid var(--line);border-radius:12px;padding:10px 11px;display:flex;flex-direction:column;gap:1px;min-width:0}
+  .ws-k{font-size:10px;font-weight:800;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ws-v{font-size:15px;font-weight:900;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ws-v small{font-size:10px;font-weight:700;color:var(--sub)}
+  .ws-s{font-size:10px;color:var(--sub);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  @media(max-width:560px){.wsum{grid-template-columns:1fr 1fr}}
+  .acc{border-top:1px solid var(--line)}
+  .acc > summary{list-style:none;cursor:pointer;padding:13px 2px;font-size:13.5px;font-weight:900;letter-spacing:-.01em;color:var(--ink);display:flex;align-items:center;justify-content:space-between}
+  .acc > summary::-webkit-details-marker{display:none}
+  .acc > summary::after{content:"▾";color:var(--sub);font-size:11px;transition:transform .2s;margin-left:8px}
+  .acc[open] > summary,.acc[open] > summary::after{color:#3f6288}
+  .acc[open] > summary::after{transform:rotate(180deg)}
+  .acc > :not(summary){margin:2px 0 14px}
+  .acc-air{margin-bottom:10px!important}
 </style>
 </head>
 <body>
@@ -1002,48 +1020,33 @@ function destHtml(d){
   const leg=d.budget.map(b=>`<div class="bl"><span class="dot" style="background:${b[2]}"></span>
     <span class="name">${b[0]}</span><span class="pct">${(b[1]/d.total*100).toFixed(0)}%</span>
     <span class="amt">${KRW(b[1])}</span></div>`).join('');
-  return `<div class="dsec">
-    <div class="dhead ${d.cls}"><span class="fl">${d.flag}</span>
-      <div><h2>${d.name} <span style="opacity:.6;font-size:14px">${d.en}</span></h2>
-      <div class="sub">${d.tag}</div></div></div>
-    <div class="dbody">
-      <div class="blk-title"><span class="e">🌤️</span>${STATE.month}월 날씨</div>${wx}
-      <div class="blk-title"><span class="e">📍</span>추천 일정 (${STATE.nights}박 ${STATE.days}일)</div>
-      <div class="itin-card"><div class="timeline ${d.cls}">${tl}</div></div>
-      <div class="blk-title"><span class="e">✈️</span>항공편 (${d.air.o||'인천'} 출발 · ${d.air.st})</div>
-      <div class="ic">
-        <div class="h"><span class="e">🛫</span><b>${d.air.c} · ${d.air.st}</b></div>
-        <div class="row"><span class="l">출발 · ${d.air.o||'인천(ICN)'}</span><span class="v">${d.air.dep}</span></div>
-        <div class="row"><span class="l">도착 · ${d.air.ap}</span><span class="v">${d.air.arr}</span></div>
-        <div class="row"><span class="l">비행시간</span><span class="v">${d.air.dur}</span></div>
-        <div class="row"><span class="l">왕복 항공료 (${d.b.people}인)</span><span class="v">${KRW(d.b.flight)}</span></div>
+  const costList=d.budget.map(b=>`<div class="costrow"><span class="cr-l">${b[0]}</span><span class="cr-track"><span style="width:${(b[1]/d.total*100).toFixed(1)}%"></span></span><span class="cr-v">${KRW(b[1])}</span><span class="cr-p">${(b[1]/d.total*100).toFixed(0)}%</span></div>`).join('');
+  return `<div class="dsec"><div class="dbody">
+      <div class="wsum">
+        <div class="ws-item"><span class="ws-k">💰 총비용·${d.b.people}인</span><span class="ws-v">${KRW(d.total)}</span><span class="ws-s">1인당 ${KRW(d.total/d.b.people)}</span></div>
+        <div class="ws-item"><span class="ws-k">✈️ 비행</span><span class="ws-v">${d.air.dur}</span><span class="ws-s">${d.air.st} · ${KRW(d.b.flight)}</span></div>
+        <div class="ws-item"><span class="ws-k">🏨 숙소</span><span class="ws-v">${KRW(d.city.night)}<small>/박</small></span><span class="ws-s">${d.hotel.name}</span></div>
+        <div class="ws-item"><span class="ws-k">🌤️ ${STATE.month}월</span><span class="ws-v">${d.weather.items[0][1].replace('평균 ','')}</span><span class="ws-s">${(d.weather.items[1]||['',''])[1]}</span></div>
       </div>
-      <div class="blk-title"><span class="e">🏨</span>숙소 & 교통</div>
-      <div class="cards">
-        <div class="ic"><div class="h"><span class="e">${d.hotel.emo}</span><b>${d.hotel.name}</b></div>${hRows}</div>
-        <div class="ic"><div class="h"><span class="e">${d.transport.emo}</span><b>${d.transport.name}</b></div>${trRows}</div>
-      </div>
-      <div class="blk-title"><span class="e">🍽️</span>추천 식당 &nbsp;·&nbsp; 🎯 체험</div>
-      <div class="cards">
-        <div class="ic"><div class="h"><span class="e">🍜</span><b>맛집 (1인 기준)</b></div>${foodRows}</div>
-        <div class="ic"><div class="h"><span class="e">🎡</span><b>체험·액티비티 (${d.b.people}인)</b></div>${expRows}</div>
-      </div>
-      <div class="blk-title"><span class="e">💰</span>비용</div>
-      <div class="costwrap">
-        <div class="costtotal">
-          <span class="ct-k">TOTAL · ${d.b.people}인</span>
-          <span class="ct-v">${KRW(d.total)}</span>
-          <span class="ct-sub">1인당 ${KRW(d.total/d.b.people)} · 1일 평균 ${KRW(d.total/STATE.days)} · ${STATE.nights}박 ${STATE.days}일</span>
-        </div>
-        <div class="costlist">
-          ${d.budget.map(b=>`<div class="costrow">
-            <span class="cr-l">${b[0]}</span>
-            <span class="cr-track"><span style="width:${(b[1]/d.total*100).toFixed(1)}%"></span></span>
-            <span class="cr-v">${KRW(b[1])}</span>
-            <span class="cr-p">${(b[1]/d.total*100).toFixed(0)}%</span>
-          </div>`).join('')}
-        </div>
-      </div>
+      <details class="acc" open><summary>📍 추천 일정 · ${STATE.nights}박 ${STATE.days}일</summary>
+        <div class="itin-card"><div class="timeline ${d.cls}">${tl}</div></div></details>
+      <details class="acc"><summary>🍽️ 맛집 · 🎯 체험</summary>
+        <div class="cards">
+          <div class="ic"><div class="h"><span class="e">🍜</span><b>맛집 (1인)</b></div>${foodRows}</div>
+          <div class="ic"><div class="h"><span class="e">🎡</span><b>체험 (${d.b.people}인)</b></div>${expRows}</div>
+        </div></details>
+      <details class="acc"><summary>✈️ 항공 · 🏨 숙소 · 🚕 교통</summary>
+        <div class="ic acc-air"><div class="h"><span class="e">🛫</span><b>${d.air.c} · ${d.air.st}</b></div>
+          <div class="row"><span class="l">${d.air.o||'인천(ICN)'} → ${d.air.ap}</span><span class="v">${d.air.dep} → ${d.air.arr}</span></div>
+          <div class="row"><span class="l">비행 · 왕복(${d.b.people}인)</span><span class="v">${d.air.dur} · ${KRW(d.b.flight)}</span></div></div>
+        <div class="cards">
+          <div class="ic"><div class="h"><span class="e">${d.hotel.emo}</span><b>${d.hotel.name}</b></div>${hRows}</div>
+          <div class="ic"><div class="h"><span class="e">${d.transport.emo}</span><b>${d.transport.name}</b></div>${trRows}</div>
+        </div></details>
+      <details class="acc"><summary>💰 비용 상세</summary>
+        <div class="costwrap"><div class="costtotal"><span class="ct-k">TOTAL · ${d.b.people}인</span><span class="ct-v">${KRW(d.total)}</span><span class="ct-sub">1인당 ${KRW(d.total/d.b.people)} · 1일 평균 ${KRW(d.total/STATE.days)}</span></div>
+          <div class="costlist">${costList}</div></div></details>
+      <details class="acc"><summary>🌤️ ${STATE.month}월 날씨</summary>${wx}</details>
     </div></div>`;
 }
 function extrasHtml(da,db){
