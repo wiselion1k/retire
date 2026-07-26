@@ -434,6 +434,49 @@
   .round h3,.rvwrap h3,.allwrap h3,.detailhead,.blk-title{font-weight:900;letter-spacing:-.025em}
   .ftotal,.ct-v{letter-spacing:-.05em}
   .badge,.rtag,.ct-k,.champ-badge{font-feature-settings:'case' 1}
+
+  /* 히어로 잔물결 애니메이션 (청량감) */
+  header.hero{position:relative;overflow:hidden}
+  .hero .ripple{position:absolute;left:-8%;right:-8%;bottom:44px;height:66px;pointer-events:none;z-index:0;opacity:.7;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='66'%3E%3Cpath d='M0 38 Q140 20 280 38 T560 38' fill='none' stroke='%23ffffff' stroke-width='9' stroke-linecap='round' opacity='0.6'/%3E%3C/svg%3E") repeat-x;
+    background-size:560px 66px;animation:rippleA 9s linear infinite}
+  .hero .ripple::after{content:'';position:absolute;inset:0;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='440' height='66'%3E%3Cpath d='M0 44 Q110 30 220 44 T440 44' fill='none' stroke='%23ffffff' stroke-width='7' stroke-linecap='round' opacity='0.45'/%3E%3C/svg%3E") repeat-x;
+    background-size:440px 66px;animation:rippleB 6.5s linear infinite}
+  .hero .wrap{position:relative;z-index:1}
+  @keyframes rippleA{to{background-position-x:560px}}
+  @keyframes rippleB{to{background-position-x:-440px}}
+  @media(prefers-reduced-motion:reduce){.hero .ripple,.hero .ripple::after{animation:none}}
+
+  /* 도시 커버 이미지 (자체 SVG 배경) */
+  .citybanner{position:relative;border-radius:16px;overflow:hidden;min-height:128px;display:flex;align-items:flex-end;background-size:cover;background-position:center 60%}
+  .citybanner::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(24,46,68,.02),rgba(24,46,68,.5))}
+  .cb-in{position:relative;display:flex;align-items:center;gap:12px;padding:16px 18px;width:100%;color:#fff}
+  .cb-flag{font-size:30px}
+  .cb-n{font-size:20px;font-weight:900;letter-spacing:-.02em}
+  .cb-e{font-size:10px;letter-spacing:.2em;opacity:.85;font-weight:700;margin-top:1px}
+  .cb-tag{margin-left:auto;font-size:11px;font-weight:700;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.4);padding:5px 10px;border-radius:999px}
+  .scene-beach{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='200' viewBox='0 0 800 200'%3E%3Crect width='800' height='200' fill='%23dfeef7'/%3E%3Ccircle cx='650' cy='52' r='58' fill='%23fdf1cf' opacity='0.7'/%3E%3Cpath d='M0 120 C200 105 400 105 600 118 S780 128 800 120 L800 160 L0 160Z' fill='%238fd2d7'/%3E%3Cpath d='M0 150 C220 140 520 158 800 150 L800 200 L0 200Z' fill='%23efe6cf'/%3E%3C/svg%3E")}
+  .scene-city{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='200' viewBox='0 0 800 200'%3E%3Crect width='800' height='200' fill='%23e3ecf5'/%3E%3Cg fill='%23a9bcd2'%3E%3Crect x='80' y='90' width='60' height='110'/%3E%3Crect x='160' y='60' width='50' height='140'/%3E%3Crect x='230' y='112' width='72' height='88'/%3E%3Crect x='332' y='42' width='46' height='158'/%3E%3Crect x='402' y='96' width='60' height='104'/%3E%3Crect x='482' y='70' width='54' height='130'/%3E%3Crect x='560' y='116' width='82' height='84'/%3E%3Crect x='662' y='56' width='48' height='144'/%3E%3C/g%3E%3Cg fill='%23c7d5e6'%3E%3Crect x='28' y='130' width='40' height='70'/%3E%3Crect x='724' y='120' width='58' height='80'/%3E%3C/g%3E%3C/svg%3E")}
+  .scene-mountain{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='200' viewBox='0 0 800 200'%3E%3Crect width='800' height='200' fill='%23e6eef4'/%3E%3Ccircle cx='150' cy='56' r='32' fill='%23fdf1cf' opacity='0.7'/%3E%3Cpath d='M0 200 L180 92 L320 200Z' fill='%23b7c7b9'/%3E%3Cpath d='M220 200 L430 68 L640 200Z' fill='%239fb7a2'/%3E%3Cpath d='M520 200 L700 108 L800 200Z' fill='%23b7c7b9'/%3E%3C/svg%3E")}
+  .scene-snow{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='200' viewBox='0 0 800 200'%3E%3Crect width='800' height='200' fill='%23eef4fa'/%3E%3Cpath d='M0 200 C200 150 400 150 600 175 S800 190 800 200 L0 200Z' fill='%23ffffff'/%3E%3Cpath d='M0 200 C250 175 500 200 800 185 L800 200 L0 200Z' fill='%23dfeaf4'/%3E%3Cg fill='%23bcd0e2'%3E%3Cpath d='M120 178 L140 128 L160 178Z'/%3E%3Cpath d='M128 162 L140 140 L152 162Z'/%3E%3C/g%3E%3C/svg%3E")}
+
+  /* 상세 압축 (길이 축소) */
+  .detailgrid .dbody{padding:16px 18px}
+  .detailgrid .blk-title{margin:14px 0 8px;font-size:15px}
+  .itin-card{padding:2px 18px}
+  .itin-card .day{padding:11px 0}
+  .itin-card .day h4{margin-bottom:6px;font-size:14px}
+  .itin-card .pi{padding:5px 0}
+  .itin-card .pi .pt{font-size:13px}
+  .itin-card .pi .pt span{font-size:11px}
+  .detailgrid .wx{padding:12px 14px;gap:6px}
+  .detailgrid .wx .wi{padding:5px 9px;font-size:11.5px}
+  .detailgrid .wx .note{font-size:11.5px;line-height:1.45}
+  .detailgrid .ic{padding:12px 14px}
+  .detailgrid .cards{gap:10px}
+  .detailgrid .costlist{gap:10px}
+  .detailgrid .costtotal{padding:0 0 12px;margin-bottom:12px}
 </style>
 </head>
 <body>
@@ -441,6 +484,7 @@
 <header class="hero">
   <span class="float f1">🥊</span><span class="float f2">✈️</span>
   <span class="float f3">🏝️</span><span class="float f4">⚔️</span>
+  <div class="ripple" aria-hidden="true"></div>
   <div class="wrap">
     <span class="badge">TRAVEL DUEL</span>
     <h1>두 도시,<br><span class="grad">하나의 정답.</span></h1>
@@ -1063,10 +1107,15 @@ function render(){
   document.getElementById('rounds').innerHTML=roundsHtml(da,db,cmp);
   const winSide = cmp.winner==='t' ? (da.total<=db.total?'a':'b') : cmp.winner;
   const winD = winSide==='a'?da:db;
+  const beachIds=['okinawa','phuquoc','danang','kk','penang','phuket','goldcoast','jeju'];
+  const scene = winD.id==='sapporo'?'snow':(winD.id==='chiangmai'?'mountain':(beachIds.includes(winD.id)?'beach':'city'));
   document.getElementById('details').innerHTML=
     `<div class="detailhead">🏆 ${winD.flag} ${winD.name} · 승자의 여정</div>
-     <div class="detailsub">이긴 도시의 일정 · 항공 · 숙소 · 비용만 정리했어요 (${STATE.nights}박 ${STATE.days}일 · ${STATE.month}월)</div>
-     <div class="detailgrid">${destHtml(winD)}</div>`;
+     <div class="detailsub">이긴 도시의 일정 · 항공 · 숙소 · 비용 (${STATE.nights}박 ${STATE.days}일 · ${STATE.month}월)</div>
+     <div class="detailgrid">
+       <div class="citybanner scene-${scene}"><div class="cb-in"><span class="cb-flag">${winD.flag}</span><div class="cb-t"><div class="cb-n">${winD.name}</div><div class="cb-e">${winD.en}</div></div><span class="cb-tag">${winD.tag}</span></div></div>
+       ${destHtml(winD)}
+     </div>`;
   document.getElementById('extras').innerHTML=extrasHtml(da,db);
   requestAnimationFrame(()=>{animateBars();rollAll();});
 }
