@@ -178,6 +178,19 @@
   .rv .pros li::before{content:"＋";position:absolute;left:0;color:#0a9e73;font-weight:900}
   .rv .cons li::before{content:"－";position:absolute;left:0;color:#e0455e;font-weight:900}
   .rv-note{margin-top:12px;font-size:11.5px;color:var(--sub);text-align:center;font-weight:600}
+  .allwrap{margin-top:28px;padding-top:22px;border-top:1px dashed var(--line)}
+  .allwrap h3{font-size:17px;font-weight:900;text-align:center;letter-spacing:-.3px}
+  .allsub{text-align:center;font-size:12px;color:var(--sub);font-weight:700;margin:4px 0 16px}
+  .allbars{display:grid;gap:7px}
+  .ab{display:grid;grid-template-columns:104px 1fr 92px;align-items:center;gap:10px}
+  .ab .abn{font-size:12.5px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ab .abbar{height:16px;background:#eef2fb;border-radius:8px;overflow:hidden}
+  .ab .abbar span{display:block;height:100%;border-radius:8px;transition:width .8s cubic-bezier(.4,0,.2,1)}
+  .ab .abv{font-size:12px;font-weight:900;text-align:right}
+  .ab.selA .abn,.ab.selA .abv{color:#0d9bb0}
+  .ab.selB .abn,.ab.selB .abv{color:#3f74ff}
+  .ab.selA,.ab.selB{background:#f4f9ff;border-radius:8px;padding:3px 4px;margin:0 -4px}
+  @media(max-width:560px){.ab{grid-template-columns:82px 1fr 82px;gap:7px}.ab .abn{font-size:11.5px}.ab .abv{font-size:11px}}
   footer{text-align:center;padding:24px;color:var(--sub);font-size:12px;border-top:1px solid var(--line);margin-top:30px}
 </style>
 </head>
@@ -240,7 +253,8 @@ const COUNTRIES={
   vn:{name:'베트남',emoji:'🇻🇳',fx:'1,000동 ≈ 55원'},
   au:{name:'호주',emoji:'🇦🇺',fx:'1호주달러 ≈ 1,019원'},
   tw:{name:'대만',emoji:'🇹🇼',fx:'1 TWD ≈ 45.1원'},
-  mo:{name:'마카오',emoji:'🇲🇴',fx:'1 파타카 ≈ 181원'}
+  mo:{name:'마카오',emoji:'🇲🇴',fx:'1 파타카 ≈ 181원'},
+  kr:{name:'대한민국',emoji:'🇰🇷',fx:'국내 여행(원화)'}
 };
 
 // 모든 금액: 3인 가족 · 원화(KRW). night=1박 숙소, transDay=1일 교통(3인), foodDay=1일 식비(3인)
@@ -405,10 +419,18 @@ const CITIES={
     transName:'무료 셔틀·버스·택시',transDesc:'리조트 무료 셔틀 + 시내버스',
     foods:[['안드루 에그타르트',3000],['육포(저지방)',8000],['딤섬',15000],['아프리칸 치킨·포르투갈 요리',30000],['세라두라·밀크티',6000]],
     exps:[['마카오 타워 전망·스카이워크 (3인)',75000],['베네시안 곤돌라 라이드',60000],['판다 파빌리온',15000],['마카오 사이언스 센터',30000],['세나도 광장·성바울 유적',0]],
-    spots:['세나도 광장','성 바울 성당 유적','베네시안 마카오','마카오 타워','콜로안 마을','피셔맨스워프']}
+    spots:['세나도 광장','성 바울 성당 유적','베네시안 마카오','마카오 타워','콜로안 마을','피셔맨스워프']},
+  jeju:{country:'kr',flag:'🍊',name:'제주도',en:'JEJU',tag:'화산섬 자연 · 해변 · 렌터카 여행',
+    flight:150000,night:100000,transDay:55000,foodDay:90000,
+    hotelName:'제주 가성비 리조트·펜션',hotelDesc:'패밀리룸 · 오션뷰/한라산뷰',
+    transName:'렌터카',transDesc:'소형 렌터카·주유 (제주는 렌터카 권장)',
+    foods:[['흑돼지 오겹살',22000],['고기국수',9000],['갈치조림·해산물',35000],['한라봉 카페·디저트',7000],['성게미역국',15000]],
+    exps:[['성산일출봉·우도 (3인)',30000],['한라산 트레킹',0],['카멜리아힐·에코랜드',45000],['아쿠아플라넷 제주',90000],['해녀 물질·감귤 체험',60000]],
+    spots:['성산일출봉','협재·금능해변','우도','카멜리아힐','오설록 티뮤지엄','함덕해변']}
 };
 
 const CITY_ORDER={
+  kr:['jeju'],
   jp:['tokyo','osaka','okinawa'],
   th:['bangkok','phuket','chiangmai'],
   my:['kl','kk','penang'],
@@ -439,7 +461,8 @@ const FLIGHTS={
   taipei:{c:'제주항공',ap:'타이베이 타오위안(TPE)',dep:'09:00',arr:'10:40',dur:'2시간 40분',st:'직항'},
   kaohsiung:{c:'티웨이항공',ap:'가오슝(KHH)',dep:'08:30',arr:'10:40',dur:'3시간 10분',st:'직항'},
   taichung:{c:'타이거에어 타이완',ap:'타이중(RMQ)',dep:'09:30',arr:'11:20',dur:'2시간 50분',st:'직항'},
-  macau:{c:'에어마카오',ap:'마카오(MFM)',dep:'08:10',arr:'11:00',dur:'3시간 50분',st:'직항'}
+  macau:{c:'에어마카오',ap:'마카오(MFM)',dep:'08:10',arr:'11:00',dur:'3시간 50분',st:'직항'},
+  jeju:{c:'제주항공/진에어',ap:'제주(CJU)',dep:'08:00',arr:'09:10',dur:'1시간 10분',st:'직항',o:'김포(GMP)'}
 };
 
 // 여행자 실제 후기 기반 장단점 (트립어드바이저·구글 리뷰·여행 블로그 최근 후기 요약)
@@ -463,7 +486,8 @@ const REVIEWS={
   taipei:{pros:['야시장·미식 저렴','대중교통 편리·동선 짧음','온천·지우펀 등 근교 다양'],cons:['여름 무덥고 습함','태풍 시즌(7~9월)','흐린 날 잦음']},
   kaohsiung:{pros:['여유롭고 저렴','항구·예술특구 감성','따뜻한 날씨'],cons:['볼거리 상대적으로 적음','한여름 무더위','대중교통 커버 한계']},
   taichung:{pros:['감성 카페·무지개촌 등 마을','저렴·쾌적','야시장 규모 큼'],cons:['대중교통 불편','명소가 분산','여름 더위']},
-  macau:{pros:['포르투갈+중화 이색 정취','무료 셔틀·볼거리 밀집(도보 관광)','에그타르트 등 미식'],cons:['숙소·식비 다소 비쌈','여름 무덥고 태풍','카지노 위주 분위기']}
+  macau:{pros:['포르투갈+중화 이색 정취','무료 셔틀·볼거리 밀집(도보 관광)','에그타르트 등 미식'],cons:['숙소·식비 다소 비쌈','여름 무덥고 태풍','카지노 위주 분위기']},
+  jeju:{pros:['국내라 언어·입국 부담 없음','화산·해변 자연 절경','흑돼지·해산물 미식'],cons:['성수기 렌터카·숙소 비쌈','여름 태풍·강풍 변수','관광지 물가 상승']}
 };
 
 // ===== 상태 =====
@@ -490,7 +514,8 @@ const CLIMATE={
   taipei:{h:'N',sHi:34,sLo:26,wHi:19,wLo:14,wet:[5,6],ty:[7,8,9],beach:false},
   kaohsiung:{h:'N',sHi:33,sLo:26,wHi:24,wLo:16,wet:[6,7,8,9],ty:[7,8,9],beach:true},
   taichung:{h:'N',sHi:33,sLo:25,wHi:22,wLo:14,wet:[6,7,8],ty:[7,8,9],beach:false},
-  macau:{h:'N',sHi:31,sLo:26,wHi:18,wLo:13,wet:[5,6,7,8],ty:[7,8,9],beach:false}
+  macau:{h:'N',sHi:31,sLo:26,wHi:18,wLo:13,wet:[5,6,7,8],ty:[7,8,9],beach:false},
+  jeju:{h:'N',sHi:30,sLo:24,wHi:8,wLo:3,wet:[6,7],ty:[7,8,9],beach:true}
 };
 function getWeather(id,month){
   const cl=CLIMATE[id];
@@ -609,10 +634,10 @@ function destHtml(d){
       <div class="blk-title"><span class="e">🌤️</span>${STATE.month}월 날씨</div>${wx}
       <div class="blk-title"><span class="e">📍</span>추천 일정 (${STATE.nights}박 ${STATE.days}일)</div>
       <div class="timeline ${d.cls}">${tl}</div>
-      <div class="blk-title"><span class="e">✈️</span>항공편 (인천 출발 · ${d.air.st})</div>
+      <div class="blk-title"><span class="e">✈️</span>항공편 (${d.air.o||'인천'} 출발 · ${d.air.st})</div>
       <div class="ic">
         <div class="h"><span class="e">🛫</span><b>${d.air.c} · ${d.air.st}</b></div>
-        <div class="row"><span class="l">출발 · 인천(ICN)</span><span class="v">${d.air.dep}</span></div>
+        <div class="row"><span class="l">출발 · ${d.air.o||'인천(ICN)'}</span><span class="v">${d.air.dep}</span></div>
         <div class="row"><span class="l">도착 · ${d.air.ap}</span><span class="v">${d.air.arr}</span></div>
         <div class="row"><span class="l">비행시간</span><span class="v">${d.air.dur}</span></div>
         <div class="row"><span class="l">왕복 항공료 (${d.b.people}인)</span><span class="v">${KRW(d.b.flight)}</span></div>
@@ -657,6 +682,13 @@ function verdictHtml(da,db){
       <div class="lbl p">👍 여행자 장점</div><ul class="pros">${r.pros.map(x=>`<li>${x}</li>`).join('')}</ul>
       <div class="lbl c">👎 여행자 단점</div><ul class="cons">${r.cons.map(x=>`<li>${x}</li>`).join('')}</ul>
     </div>`;};
+  const all=Object.keys(CITIES).map(id=>({id,c:CITIES[id],t:calc(CITIES[id]).total})).sort((x,y)=>x.t-y.t);
+  const maxT=all[all.length-1].t;
+  const abars=all.map(x=>{
+    const sel=x.id===da.id?'selA':(x.id===db.id?'selB':'');
+    const col=sel==='selA'?'linear-gradient(90deg,#0fb5cb,#22d3aa)':sel==='selB'?'linear-gradient(90deg,#3f74ff,#74a6ff)':'linear-gradient(90deg,#aebfe0,#cdd8f0)';
+    return `<div class="ab ${sel}"><span class="abn">${x.c.flag} ${x.c.name}</span><span class="abbar"><span style="width:${(x.t/maxT*100).toFixed(1)}%;background:${col}"></span></span><span class="abv">${KRW(x.t)}</span></div>`;
+  }).join('');
   return `<h2>🏁 최종 비교 & 추천</h2>
     <div style="overflow-x:auto"><table class="cmp">
       <thead><tr><th>항목</th><th>${da.flag} ${da.name}</th><th>${db.flag} ${db.name}</th></tr></thead>
@@ -674,6 +706,10 @@ function verdictHtml(da,db){
     <div class="rvwrap"><h3>💬 여행자 실제 후기 기반 장단점</h3>
       <div class="reco">${rvCard(da)}${rvCard(db)}</div>
       <div class="rv-note">최근 여행자 후기(트립어드바이저·구글 리뷰·여행 블로그) 요약 · 시즌·개인차 있음</div>
+    </div>
+    <div class="allwrap"><h3>📊 전체 도시 총비용 순위</h3>
+      <div class="allsub">성인 ${STATE.adults}·아동 ${STATE.kids} · ${STATE.nights}박${STATE.days}일 · ${STATE.month}월 · ${STATE.dayType} 기준 · 저렴한 순 (${STATE.adults+STATE.kids}인 합산)</div>
+      <div class="allbars">${abars}</div>
     </div>`;
 }
 
