@@ -192,33 +192,122 @@
   .ab.selA,.ab.selB{background:#f4f9ff;border-radius:8px;padding:3px 4px;margin:0 -4px}
   @media(max-width:560px){.ab{grid-template-columns:82px 1fr 82px;gap:7px}.ab .abn{font-size:11.5px}.ab .abv{font-size:11px}}
   footer{text-align:center;padding:24px;color:var(--sub);font-size:12px;border-top:1px solid var(--line);margin-top:30px}
+
+  /* ===== DUEL ARENA REFRESH ===== */
+  :root{--neon:#c6f24e;--neon2:#22e39a;--neonink:#173a00;--dark:#141b32}
+  .hero{padding:44px 0 16px}
+  .hero .badge{color:#0d9bb0}
+  .hero h1{font-size:clamp(27px,6vw,46px)}
+  .hero .grad{background:linear-gradient(100deg,#12b3c9,#3f74ff 45%,#22e39a);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p b{color:var(--brand)}
+
+  /* sticky score bar */
+  .sticky{position:sticky;top:8px;z-index:60;margin-top:16px}
+  .stickyin{background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border:1px solid var(--line);
+    border-radius:16px;box-shadow:var(--shadow-sm);padding:9px 16px;display:flex;align-items:center;
+    justify-content:center;gap:12px;flex-wrap:wrap}
+  .stickyin .sname{font-weight:900;font-size:13.5px;white-space:nowrap}
+  .stickyin .sname.a{color:#0d9bb0}.stickyin .sname.b{color:#3f74ff}
+  .stickyin .score{font-weight:900;font-size:16px;color:var(--sub);display:flex;gap:6px;align-items:center}
+  .stickyin .score b{padding:2px 9px;border-radius:8px;background:#eef2fb}
+  .stickyin .score b.lead{background:var(--neon);color:var(--neonink)}
+  .stickyin .swin{flex-basis:100%;text-align:center;font-size:12px;font-weight:800;color:var(--ink);margin-top:1px}
+  .stickyin .swin b{color:#0a9e73}
+
+  /* arena / fighters */
+  .arena{display:grid;grid-template-columns:1fr 60px 1fr;gap:12px;align-items:stretch;margin-top:20px}
+  .fighter{position:relative;border-radius:22px;padding:22px 16px 18px;text-align:center;color:#fff;
+    box-shadow:var(--shadow);overflow:hidden;animation:popIn .5s ease both}
+  .fighter.fa{background:linear-gradient(160deg,#0fb5cb,#22d3aa)}
+  .fighter.fb{background:linear-gradient(160deg,#3f74ff,#74a6ff)}
+  .fighter::before{content:"";position:absolute;inset:0;background:radial-gradient(220px 130px at 50% -10%,rgba(255,255,255,.3),transparent 60%)}
+  .fighter.champ{box-shadow:0 0 0 3px var(--neon),0 22px 46px -18px rgba(198,242,78,.75)}
+  .champ-badge{position:absolute;top:10px;right:10px;background:var(--neon);color:var(--neonink);
+    font-weight:900;font-size:10.5px;padding:4px 9px;border-radius:999px;box-shadow:0 4px 12px rgba(198,242,78,.6);z-index:2}
+  .avatar{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.55);
+    display:grid;place-items:center;font-size:36px;margin:0 auto 10px;position:relative}
+  .fname{position:relative;font-size:22px;font-weight:900;letter-spacing:-.5px;line-height:1.1}
+  .fname small{display:block;font-size:10.5px;opacity:.8;font-weight:700;letter-spacing:1.5px;margin-top:2px}
+  .ftag{position:relative;font-size:12px;opacity:.95;font-weight:700;margin-top:6px;min-height:2.6em;line-height:1.35}
+  .ftotal{position:relative;font-size:clamp(24px,5vw,31px);font-weight:900;letter-spacing:-1px;margin-top:10px}
+  .fper{position:relative;font-size:11.5px;opacity:.9;font-weight:600;margin-top:1px}
+  .fwins{position:relative;display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:12px;min-height:24px}
+  .wtag{background:var(--neon);color:var(--neonink);font-size:10.5px;font-weight:900;padding:4px 8px;border-radius:999px}
+  .vsorb{align-self:center;justify-self:center;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;
+    font-weight:900;font-size:17px;color:#fff;background:linear-gradient(135deg,#1c2540,#4a5578);
+    box-shadow:0 10px 24px -8px rgba(28,37,64,.6);border:3px solid #fff}
+  @keyframes popIn{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+  @media(max-width:640px){.arena{grid-template-columns:1fr;gap:8px}.vsorb{width:44px;height:44px;font-size:15px}}
+
+  /* rounds */
+  .round{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);margin-top:16px;animation:popIn .5s ease both}
+  .rtag{display:inline-block;background:var(--dark);color:#fff;font-size:11px;font-weight:900;letter-spacing:1.5px;padding:4px 12px;border-radius:999px}
+  .round h3{font-size:20px;font-weight:900;letter-spacing:-.5px;margin:10px 0 16px}
+  .gauges{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .gauge{border:1px solid var(--line);border-radius:16px;padding:14px 16px;position:relative}
+  .gauge.win{border-color:var(--neon2);box-shadow:0 0 0 2px rgba(34,227,154,.28)}
+  .glabel{font-size:13px;font-weight:900;margin-bottom:9px;display:flex;justify-content:space-between;align-items:center;gap:6px}
+  .gbar{height:20px;background:#eef2fb;border-radius:10px;overflow:hidden}
+  .gbar span{display:block;height:100%;border-radius:10px;width:0;transition:width .9s cubic-bezier(.4,0,.2,1)}
+  .gauge.ga .gbar span{background:linear-gradient(90deg,#0fb5cb,#22d3aa)}
+  .gauge.gb .gbar span{background:linear-gradient(90deg,#3f74ff,#74a6ff)}
+  .gval{font-size:22px;font-weight:900;letter-spacing:-.5px;margin-top:9px}
+  .gauge.win .gval{color:#0a9e73}
+  .rnote{margin-top:14px;text-align:center;font-size:13.5px;font-weight:700;color:var(--sub)}
+  .rnote b{color:var(--ink)}
+  @media(max-width:560px){.gauges{grid-template-columns:1fr}}
+
+  .duel2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .d2col{display:grid;gap:10px;align-content:start}
+  .d2head{font-size:13px;font-weight:900;text-align:center;margin-bottom:2px}
+  .d2col.a .d2head{color:#0d9bb0}.d2col.b .d2head{color:#3f74ff}
+  .d2card{display:flex;gap:11px;align-items:center;background:#fbfdff;border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+  .d2card.win{border-color:var(--neon2);box-shadow:0 0 0 2px rgba(34,227,154,.2)}
+  .d2ic{font-size:22px;flex:none}
+  .d2card .d2t{flex:1;min-width:0}
+  .d2card b{font-size:13.5px;font-weight:900;display:block}
+  .d2card small{font-size:11px;color:var(--sub);font-weight:600;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .d2card .w2{font-size:14px}
+  @media(max-width:560px){.duel2{grid-template-columns:1fr}}
+
+  .themerow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .theme{border-radius:18px;padding:18px;color:#fff;position:relative;overflow:hidden;box-shadow:var(--shadow-sm)}
+  .theme.a{background:linear-gradient(150deg,#0fb5cb,#22d3aa)}
+  .theme.b{background:linear-gradient(150deg,#3f74ff,#74a6ff)}
+  .theme::before{content:"";position:absolute;inset:0;background:radial-gradient(180px 100px at 90% 0,rgba(255,255,255,.25),transparent 60%)}
+  .theme .th-h{position:relative;font-size:15px;font-weight:900}
+  .hashes{position:relative;display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+  .hash{background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.4);font-size:11.5px;font-weight:800;padding:5px 10px;border-radius:999px}
+  .th-hi{position:relative;font-size:12.5px;font-weight:800;background:var(--neon);color:var(--neonink);display:inline-block;padding:6px 11px;border-radius:10px}
+  @media(max-width:560px){.themerow{grid-template-columns:1fr}}
+
+  .detailhead{font-size:19px;font-weight:900;text-align:center;margin:32px 0 6px;letter-spacing:-.3px}
+  .detailsub{text-align:center;font-size:12px;color:var(--sub);font-weight:700;margin-bottom:14px}
+  .detailgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+  .detailgrid .dsec{margin-top:0}
+  @media(max-width:860px){.detailgrid{grid-template-columns:1fr}}
+  .bbar span{transition:width .8s cubic-bezier(.4,0,.2,1)}
 </style>
 </head>
 <body>
 
 <header class="hero">
-  <span class="float f1">🌴</span><span class="float f2">✈️</span>
-  <span class="float f3">🐚</span><span class="float f4">⛵</span>
+  <span class="float f1">🥊</span><span class="float f2">✈️</span>
+  <span class="float f3">🏝️</span><span class="float f4">⚔️</span>
   <div class="wrap">
-    <span class="badge">✦ 여행지 밸런스게임</span>
-    <h1>어디가 더 <span class="grad">개이득</span>?<br>고르면 3초컷 각 나옴 ⚡</h1>
-    <p>일본·태국·말레이시아·베트남·호주·대만·마카오 20개 도시 · 예산까지 순삭 비교 🧾</p>
+    <span class="badge">✦ 여행지 듀얼 아레나</span>
+    <h1>두 도시, <span class="grad">진짜 승부</span> 붙여봄 ⚔️</h1>
+    <p>도시 둘만 고르면 예산·항공·날씨로 <b>5판 다득점</b> 자동 판정 · 22개 도시</p>
   </div>
 </header>
 
 <main class="wrap">
   <div class="selbar">
     <div class="selcard">
-      <div class="selgrp a">
-        <label>🅰 여행지 A</label>
-        <select id="selA"></select>
-      </div>
+      <div class="selgrp a"><label>🅰 도전자 A</label><select id="selA"></select></div>
       <div class="selvs">VS</div>
-      <div class="selgrp b">
-        <label>🅱 여행지 B</label>
-        <select id="selB"></select>
-      </div>
-      <div class="selnote">도시·인원·기간·시기만 툭툭 바꿔봐 → 일정·예산·날씨 자동 갱신 ✨</div>
+      <div class="selgrp b"><label>🅱 도전자 B</label><select id="selB"></select></div>
+      <div class="selnote">도시·인원·기간·시기를 바꾸면 승부가 실시간으로 다시 붙어요 ⚡</div>
     </div>
     <div class="selcard opts">
       <div class="og"><label>👨 성인</label><select id="selAd"></select></div>
@@ -227,7 +316,6 @@
       <div class="og"><label>📅 출발 시기</label><select id="selMon"></select></div>
       <div class="og"><label>💼 요일</label><select id="selDay"></select></div>
     </div>
-    <div class="vsline" id="vsline"></div>
     <div class="assume">
       <span>💛 체험파 가족</span>
       <span>✈️ 직항·경유1회 최저가 기준</span>
@@ -236,9 +324,11 @@
     </div>
   </div>
 
-  <div class="quick" id="quick"></div>
-  <div id="dests"></div>
-  <div class="verdict" id="verdict"></div>
+  <div class="sticky"><div class="stickyin" id="sticky"></div></div>
+  <div class="arena" id="fighters"></div>
+  <div id="rounds"></div>
+  <div id="details"></div>
+  <div id="extras"></div>
 </main>
 
 <footer>ⓘ 항공=인천 출발 직항·경유1회 대표편(구글 플라이트·스카이스캐너·카약 최저가 수준) · 항공사/시간은 대표 스케줄 예시로 날짜별 상이, 호텔=Trip.com·아고다 가성비 기준 · 2026-07-25 환율로 원화 환산 · 실제 요금·시간표는 예약 시점에 따라 달라집니다 · Voyage</footer>
@@ -611,13 +701,85 @@ function prep(id,cls){
     ],total:b.total};
 }
 
-// ===== 렌더 =====
-function qcardHtml(d){
-  return `<div class="qcard ${d.cls}"><div class="rel">
-    <div class="flag">${d.flag}</div><h3>${d.name}</h3><div class="tag">${d.tag}</div>
-    <div class="price">${KRW(d.total)} <small>/ ${d.b.people}인 총액</small></div>
-    <div class="per">1인당 약 ${KRW(d.total/d.b.people)} · ${STATE.nights}박${STATE.days}일</div>
-  </div></div>`;
+// ===== 렌더 (Visual Duel Arena) =====
+function flightMin(air){const h=(''+air.dur).match(/(\d+)\s*시간/),m=(''+air.dur).match(/(\d+)\s*분/);return (h?+h[1]:0)*60+(m?+m[1]:0);}
+function metrics(da,db){
+  const rows=[
+    {emo:'💰',label:'가성비',a:da.total,b:db.total,low:true,av:KRW(da.total),bv:KRW(db.total)},
+    {emo:'✈️',label:'접근성',a:flightMin(da.air)+(da.air.st==='직항'?0:150),b:flightMin(db.air)+(db.air.st==='직항'?0:150),low:true,av:da.air.dur+' '+da.air.st,bv:db.air.dur+' '+db.air.st},
+    {emo:'🏨',label:'숙소값',a:da.city.night,b:db.city.night,low:true,av:KRW(da.city.night)+'/박',bv:KRW(db.city.night)+'/박'},
+    {emo:'🍽️',label:'물가',a:da.city.foodDay,b:db.city.foodDay,low:true,av:KRW(da.city.foodDay)+'/일',bv:KRW(db.city.foodDay)+'/일'},
+    {emo:'🎯',label:'즐길거리',a:da.exp.list.length,b:db.exp.list.length,low:false,av:da.exp.list.length+'종',bv:db.exp.list.length+'종'}
+  ];
+  let aw=0,bw=0;
+  rows.forEach(r=>{r.win=r.a===r.b?'t':((r.low?r.a<r.b:r.a>r.b)?'a':'b');if(r.win==='a')aw++;else if(r.win==='b')bw++;});
+  return {rows,aw,bw,winner:aw>bw?'a':(bw>aw?'b':'t')};
+}
+function hashtags(d){
+  const base=d.tag.split(/[·]/).map(s=>s.trim().replace(/\s+/g,'')).filter(Boolean).slice(0,2);
+  const wc=(d.weather.items[1]||['',''])[1].replace(/\s+/g,'').replace(/[·].*$/,'');
+  const top=d.exp.list[0][0].replace(/ \(3인\)$/,'').replace(/[·\s(].*$/,'');
+  const who=STATE.kids>0?'아이랑':'우리끼리';
+  return [...new Set([...base,STATE.month+'월여행',who,wc,top].filter(Boolean))].slice(0,5);
+}
+function arenaHtml(da,db,cmp){
+  const fighter=(d,side)=>{
+    const champ=cmp.winner===side;
+    const wins=cmp.rows.filter(r=>r.win===side).map(r=>`<span class="wtag">${r.emo} ${r.label}</span>`).join('');
+    return `<div class="fighter f${side==='a'?'a':'b'} ${champ?'champ':''}">
+      ${champ?'<span class="champ-badge">👑 종합 우세</span>':''}
+      <div class="avatar">${d.flag}</div>
+      <div class="fname">${d.name}<small>${d.en}</small></div>
+      <div class="ftag">${d.tag}</div>
+      <div class="ftotal"><span data-count="${d.total}" data-key="tot_${side}">₩0</span></div>
+      <div class="fper">1인당 ${KRW(d.total/d.b.people)} · ${STATE.nights}박${STATE.days}일 · ${d.b.people}인</div>
+      <div class="fwins">${wins||'<span style="opacity:.6;font-size:11px">이 항목은 열세</span>'}</div>
+    </div>`;
+  };
+  return `${fighter(da,'a')}<div class="vsorb">VS</div>${fighter(db,'b')}`;
+}
+function stickyHtml(da,db,cmp){
+  const win=cmp.winner==='a'?`<b>${da.name}</b> 우세`:cmp.winner==='b'?`<b>${db.name}</b> 우세`:'막상막하 🔥';
+  const cheaper=da.total<db.total?da.name:db.name;
+  return `<span class="sname a">${da.flag} ${da.name}</span>
+    <span class="score"><b class="${cmp.winner==='a'?'lead':''}">${cmp.aw}</b>:<b class="${cmp.winner==='b'?'lead':''}">${cmp.bw}</b></span>
+    <span class="sname b">${db.flag} ${db.name}</span>
+    <span class="swin">🏆 ${win} · 💰 가성비는 <b>${cheaper}</b></span>`;
+}
+function roundsHtml(da,db,cmp){
+  const max=Math.max(da.total,db.total);
+  const bw=cmp.rows[0].win, fw=cmp.rows[1].win, sw=cmp.rows[2].win;
+  const cheaper=da.total<db.total?da.name:db.name, diff=Math.abs(da.total-db.total);
+  // Round 1
+  const gauge=(d,side,w)=>`<div class="gauge g${side==='a'?'a':'b'} ${bw===side?'win':''}">
+      <div class="glabel"><span>${d.flag} ${d.name}</span>${bw===side?'<span style="color:#0a9e73">👑 승</span>':''}</div>
+      <div class="gbar"><span style="width:${w.toFixed(1)}%"></span></div>
+      <div class="gval"><span data-count="${d.total}" data-key="g1_${side}">₩0</span></div>
+    </div>`;
+  const r1=`<section class="round"><span class="rtag">ROUND 1</span><h3>💰 지갑 방어전</h3>
+    <div class="gauges">${gauge(da,'a',da.total/max*100)}${gauge(db,'b',db.total/max*100)}</div>
+    <div class="rnote">👛 <b>${cheaper}</b>가 <b>${KRW(diff)}</b> 더 저렴 · 1인당 ${KRW(da.total/da.b.people)} vs ${KRW(db.total/db.b.people)}</div>
+  </section>`;
+  // Round 2
+  const col=(d,side)=>`<div class="d2col ${side==='a'?'a':'b'}">
+      <div class="d2head">${d.flag} ${d.name}</div>
+      <div class="d2card ${fw===side?'win':''}"><span class="d2ic">✈️</span><div class="d2t"><b>비행 ${d.air.dur}</b><small>${d.air.st} · ${d.air.c}</small></div>${fw===side?'<span class="w2">🏅</span>':''}</div>
+      <div class="d2card ${sw===side?'win':''}"><span class="d2ic">🏨</span><div class="d2t"><b>1박 ${KRW(d.city.night)}</b><small>${d.hotel.name}</small></div>${sw===side?'<span class="w2">🏅</span>':''}</div>
+    </div>`;
+  const r2=`<section class="round"><span class="rtag">ROUND 2</span><h3>✈️ 이동과 쉼</h3>
+    <div class="duel2">${col(da,'a')}${col(db,'b')}</div>
+    <div class="rnote">${fw==='t'?'비행 접근성 비슷':'✈️ 더 편한 비행: <b>'+(fw==='a'?da.name:db.name)+'</b>'} · ${sw==='t'?'숙소값 비슷':'🏨 숙소 가성비: <b>'+(sw==='a'?da.name:db.name)+'</b>'}</div>
+  </section>`;
+  // Round 3
+  const theme=(d,side)=>`<div class="theme ${side==='a'?'a':'b'}">
+      <div class="th-h">${d.flag} ${d.name} 테마</div>
+      <div class="hashes">${hashtags(d).map(h=>`<span class="hash">#${h}</span>`).join('')}</div>
+      <div class="th-hi">✨ 하이라이트 · ${d.exp.list[0][0].replace(/ \(3인\)$/,'')}</div>
+    </div>`;
+  const r3=`<section class="round"><span class="rtag">ROUND 3</span><h3>🤖 AI 테마 매칭 <span style="font-size:12px;font-weight:700;color:var(--sub)">· 성인 ${STATE.adults}·아동 ${STATE.kids} · ${STATE.month}월</span></h3>
+    <div class="themerow">${theme(da,'a')}${theme(db,'b')}</div>
+  </section>`;
+  return r1+r2+r3;
 }
 function destHtml(d){
   const tl=d.itinerary.map(day=>`
@@ -672,22 +834,7 @@ function destHtml(d){
       </div>
     </div></div>`;
 }
-function verdictHtml(da,db){
-  const labels=['✈️ 항공권','🏨 숙소(4박)','🚕 현지 교통','🍽️ 식비','🎯 체험·액티비티','🛍️ 쇼핑·기타'];
-  const trHtml=labels.map((lab,i)=>{
-    const av=da.budget[i][1], bv=db.budget[i][1];
-    return `<tr><td>${lab}</td>
-      <td><b>${KRW(av)}</b>${av<bv?'<span class="win o">저렴</span>':''}</td>
-      <td><b>${KRW(bv)}</b>${bv<av?'<span class="win n">저렴</span>':''}</td></tr>`;
-  }).join('');
-  const cheaper = da.total<db.total?da.name:db.name;
-  const diff=Math.abs(da.total-db.total);
-  const rc=(d)=>`<div class="rc ${d.cls}"><h4>${d.flag} ${d.name} · 이런 가족에게</h4><ul>
-      <li>${d.tag}</li>
-      <li>🎯 ${d.city.exps[0][0].replace(/ \(3인\)$/,'')}</li>
-      <li>🎯 ${d.city.exps[1][0].replace(/ \(3인\)$/,'')}</li>
-      <li>${d.weather.items[0][0]} ${STATE.month}월 ${d.weather.items[0][1]}</li>
-    </ul></div>`;
+function extrasHtml(da,db){
   const rvCard=(d)=>{const r=REVIEWS[d.id];return `<div class="rv ${d.cls}"><h4>${d.flag} ${d.name}</h4>
       <div class="lbl p">👍 여행자 장점</div><ul class="pros">${r.pros.map(x=>`<li>${x}</li>`).join('')}</ul>
       <div class="lbl c">👎 여행자 단점</div><ul class="cons">${r.cons.map(x=>`<li>${x}</li>`).join('')}</ul>
@@ -699,28 +846,13 @@ function verdictHtml(da,db){
     const col=sel==='selA'?'linear-gradient(90deg,#0fb5cb,#22d3aa)':sel==='selB'?'linear-gradient(90deg,#3f74ff,#74a6ff)':'linear-gradient(90deg,#aebfe0,#cdd8f0)';
     return `<div class="ab ${sel}"><span class="abn">${x.c.flag} ${x.c.name}</span><span class="abbar"><span style="width:${(x.t/maxT*100).toFixed(1)}%;background:${col}"></span></span><span class="abv">${KRW(x.t)}</span></div>`;
   }).join('');
-  return `<h2>🏁 최종 비교 & 추천</h2>
-    <div style="overflow-x:auto"><table class="cmp">
-      <thead><tr><th>항목</th><th>${da.flag} ${da.name}</th><th>${db.flag} ${db.name}</th></tr></thead>
-      <tbody>${trHtml}
-        <tr style="background:#f6f9ff"><td><b>총 예산 (${da.b.people}인)</b></td>
-          <td><b>${KRW(da.total)}</b>${da.total<db.total?'<span class="win o">저렴</span>':''}</td>
-          <td><b>${KRW(db.total)}</b>${db.total<da.total?'<span class="win n">저렴</span>':''}</td></tr>
-        <tr><td>1인당</td><td><b>${KRW(da.total/da.b.people)}</b></td><td><b>${KRW(db.total/db.b.people)}</b></td></tr>
-      </tbody>
-    </table></div>
-    <div class="reco">${rc(da)}${rc(db)}</div>
-    <div class="pick">💡 <b>${cheaper}</b>가 약 <b>${KRW(diff)}</b> 더 저렴합니다.
-      <b>${da.name}</b>은(는) ${da.tag}, <b>${db.name}</b>은(는) ${db.tag}.<br>
-      성인 ${STATE.adults}·아동 ${STATE.kids}명 · ${STATE.nights}박${STATE.days}일 · ${STATE.month}월 기준으로 대표 액티비티와 날씨·예산을 비교해 골라보세요.</div>
-    <div class="rvwrap"><h3>💬 여행자 실제 후기 기반 장단점</h3>
+  return `<div class="verdict rvwrap"><h3>💬 여행자 실제 후기 기반 장단점</h3>
       <div class="reco">${rvCard(da)}${rvCard(db)}</div>
       <div class="rv-note">최근 여행자 후기(트립어드바이저·구글 리뷰·여행 블로그) 요약 · 시즌·개인차 있음</div>
-    </div>
     <div class="allwrap"><h3>📊 전체 도시 총비용 순위</h3>
       <div class="allsub">성인 ${STATE.adults}·아동 ${STATE.kids} · ${STATE.nights}박${STATE.days}일 · ${STATE.month}월 · ${STATE.dayType} 기준 · 저렴한 순 (${STATE.adults+STATE.kids}인 합산)</div>
       <div class="allbars">${abars}</div>
-    </div>`;
+    </div></div>`;
 }
 
 // ===== 셀렉트 구성 & 초기화 =====
@@ -747,17 +879,39 @@ function sync(){
   STATE.nights=+selDur.value; STATE.days=STATE.nights+1;
   STATE.month=+selMon.value; STATE.dayType=selDay.value;
 }
+// 롤링 숫자 카운터 (이전값 → 새값)
+const prevVals={};
+function rollAll(){
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    const target=+el.dataset.count, key=el.dataset.key||('k'+target);
+    const from=prevVals[key]!=null?prevVals[key]:target*0.4, t0=performance.now(), dur=850;
+    (function step(now){const p=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-p,3);
+      el.textContent='₩'+Math.round(from+(target-from)*e).toLocaleString('ko-KR');
+      if(p<1)requestAnimationFrame(step);else prevVals[key]=target;})(t0);
+  });
+}
+function animateBars(){
+  document.querySelectorAll('.gbar span,.bbar span,.abbar span').forEach(s=>{
+    const w=s.style.width;s.style.width='0';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{s.style.width=w;}));
+  });
+}
 function render(){
   sync();
   const a=CITIES[selA.value], b=CITIES[selB.value];
   const da=prep(selA.value,'oki'), db=prep(selB.value,'nag');
-  document.getElementById('vsline').innerHTML=`${a.flag} ${a.name} <span class="vs">VS</span> ${b.flag} ${b.name}`;
+  const cmp=metrics(da,db);
   const fxs=[...new Set([a.country,b.country])].map(cc=>COUNTRIES[cc].fx).join(' · ');
   document.getElementById('fxchip').textContent='💱 '+fxs;
-  document.getElementById('quick').innerHTML=qcardHtml(da)+qcardHtml(db);
-  document.getElementById('dests').innerHTML=destHtml(da)+destHtml(db);
-  document.getElementById('verdict').innerHTML=verdictHtml(da,db);
-  document.querySelectorAll('.bbar').forEach(bb=>[...bb.children].forEach(s=>{const w=s.style.width;s.style.width='0';requestAnimationFrame(()=>requestAnimationFrame(()=>{s.style.transition='width .7s cubic-bezier(.4,0,.2,1)';s.style.width=w}))}));
+  document.getElementById('sticky').innerHTML=stickyHtml(da,db,cmp);
+  document.getElementById('fighters').innerHTML=arenaHtml(da,db,cmp);
+  document.getElementById('rounds').innerHTML=roundsHtml(da,db,cmp);
+  document.getElementById('details').innerHTML=
+    `<div class="detailhead">🔎 도시별 상세</div>
+     <div class="detailsub">일정 · 항공편 · 숙소 · 식당 · 체험 · 날씨 · 예산 (${STATE.nights}박 ${STATE.days}일 · ${STATE.month}월)</div>
+     <div class="detailgrid">${destHtml(da)}${destHtml(db)}</div>`;
+  document.getElementById('extras').innerHTML=extrasHtml(da,db);
+  requestAnimationFrame(()=>{animateBars();rollAll();});
 }
 [selA,selB,selAd,selKid,selDur,selMon,selDay].forEach(s=>s.addEventListener('change',render));
 render();
