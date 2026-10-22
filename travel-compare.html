@@ -9,7 +9,7 @@
 <title>여행지 비교 컨설팅 — 도시를 고르면 자동 비교</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css"/>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Noto+Sans+KR:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#FFFFFF; --paper:#FFFFFF; --card:#FFFFFF; --panel:#F6F5F3; --ink:#111111; --muted:#6F6F6B; --sub:#6F6F6B; --faint:#A3A29E;
@@ -272,6 +272,120 @@ footer{max-width:1320px;margin:0 auto;padding:40px 40px 60px;font-family:var(--l
 
   .scene-snow{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='200' viewBox='0 0 800 200'%3E%3Crect width='800' height='200' fill='%23eef4fa'/%3E%3Cpath d='M0 200 C200 150 400 150 600 175 S800 190 800 200 L0 200Z' fill='%23ffffff'/%3E%3Cpath d='M0 200 C250 175 500 200 800 185 L800 200 L0 200Z' fill='%23dfeaf4'/%3E%3Cg fill='%23bcd0e2'%3E%3Cpath d='M120 178 L140 128 L160 178Z'/%3E%3Cpath d='M128 162 L140 140 L152 162Z'/%3E%3C/g%3E%3C/svg%3E")}
 
+
+/* ========================= KINFOLK-LIKE EDITORIAL ========================= */
+:root{
+  --bg:#F4F1EA; --paper:#F4F1EA; --card:#F4F1EA; --panel:#EBE6DC; --soft:#E7E2D7;
+  --ink:#1B1A17; --muted:#77726A; --sub:#77726A; --faint:#A39D90;
+  --line:#DAD4C7; --line-strong:#BDB6A6;
+  --disp:'Cormorant Garamond','Noto Serif KR',Georgia,serif;
+  --kr:'Noto Serif KR','Cormorant Garamond',serif;
+  --blue:#1B1A17; --blue-deep:#1B1A17; --blue-soft:#EBE6DC; --blue-line:#D3CCBC; --blue-mid:#A59D8B; --blue-pale:#D8D1C2;
+  --orange:#1B1A17; --orange-soft:#E7E2D7; --orange-line:#1B1A17;
+}
+html,body{background:#F4F1EA!important;color:var(--ink)}
+body{font-weight:300}
+::selection{background:#1B1A17;color:#F4F1EA}
+/* 상단: 중앙 워드마크 + 하단 중앙 내비 (고정 아님) */
+.topnav{position:relative!important;background:transparent!important;backdrop-filter:none!important;border-bottom:1px solid var(--line)!important}
+.topnav-in{height:auto!important;flex-direction:column;justify-content:center;gap:16px;padding:30px 40px 20px!important}
+.topnav-in::before{order:-1;font-family:var(--latin);font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted)}
+.brand{position:static!important;transform:none!important;font-family:var(--latin)!important;font-size:26px!important;font-weight:400!important;letter-spacing:.62em!important;padding-left:.62em}
+.navlinks{gap:38px!important}
+.navlinks a{font-family:var(--latin);font-size:11px!important;letter-spacing:.26em!important;text-transform:uppercase;color:var(--ink)}
+/* 타이포: 가는 세리프 */
+h1.title,.hero h1{font-family:var(--disp)!important;font-weight:300!important;letter-spacing:-.025em!important;line-height:1.04!important;color:var(--ink)!important}
+h1.title b,.hero h1 em{font-family:var(--disp)!important;font-style:italic!important;font-weight:300!important;color:var(--ink)!important;-webkit-text-fill-color:var(--ink)!important}
+.sec-title,.rhead h3,.detailhead,.verdict h3,.allwrap h3,.th-h,.fname,.cb-n,.rvside h4,.acc > summary,.col-name,.rate-name,.scn .sh,.visa-tier{font-family:var(--disp)!important;font-weight:400!important;letter-spacing:-.015em!important}
+.sec-title,.rhead h3{font-size:clamp(34px,4.2vw,56px)!important;line-height:1.1}
+.sec-desc,.detailsub,.rhead p,.ftag,.sub,.hero p,.allsub,.rv-note,.card-meta,.fper,.rate-sub,.eduname{font-family:var(--kr);font-weight:300!important}
+.sub,.hero p{font-size:15px!important;line-height:1.95;color:var(--muted)!important;max-width:430px!important}
+.hero p b{color:var(--ink)!important;font-weight:400}
+.spend-val,.card-ben .b1,.col-total,.rate-val,.scn .snet .val,.chip .cv,.ftotal,.gval,.fc-t,.fc-foot b,.ws-v,.ct-v,.pc,.cr-v,.ab .abv,.sim-hero .val,.card-rank,.edu-table td,.infl-val,.field input[type=number],.day h4,.d2card b,.ab .abn{font-family:var(--disp)!important;font-weight:400!important;font-variant-numeric:lining-nums tabular-nums;letter-spacing:-.01em}
+.spend-val{font-size:56px!important}.ftotal{font-size:clamp(40px,4.4vw,58px)!important;font-weight:300!important}.gval{font-size:42px!important;font-weight:300!important}
+.card-ben .b1{font-size:28px!important}.chip .cv{font-size:30px!important}.col-total,.rate-val{font-size:28px!important}
+.sim-hero .val{font-size:58px!important;font-weight:300!important}.ct-v{font-size:58px!important;font-weight:300!important}.fc-t{font-size:34px!important;font-weight:300!important}
+.field input[type=number]{font-size:28px!important}
+.edu-table td{font-size:15px}
+/* 라벨(소문자 대문자) */
+.sec-num,.part b,.rhead .rtag,.chap-k{font-family:var(--latin)!important;font-size:11px!important;font-weight:400!important;letter-spacing:.34em!important;text-transform:uppercase;color:var(--muted)!important}
+.sec-num::before{content:"No. "}
+.sec-head{flex-direction:column!important;align-items:flex-start!important;gap:14px!important}
+.rhead .rtag::before{content:"— "}
+.part{justify-content:center!important;gap:22px!important;margin-bottom:6px!important}
+.part::before{content:"";flex:0 1 120px;height:1px;background:var(--line-strong)}
+.part::after{flex:0 1 120px!important;max-width:120px;background:var(--line-strong)!important}
+.part span{letter-spacing:.34em!important;color:var(--ink)!important}
+.sec{padding:110px 0 14px!important}
+.sec-desc{font-size:14.5px!important;line-height:1.95;max-width:520px!important;color:var(--muted)!important}
+/* 버튼/링크 */
+.rebtn{background:transparent!important;color:var(--ink)!important;border:1px solid var(--ink)!important;border-radius:0;font-family:var(--latin);font-size:11px!important;letter-spacing:.26em!important;text-transform:uppercase;padding:15px 30px!important}
+.rebtn:hover{background:var(--ink)!important;color:#F4F1EA!important}
+.mysch-btn{background:transparent!important;font-family:var(--latin);font-size:11px!important;letter-spacing:.2em;text-transform:uppercase}
+.mysch-btn.on{background:var(--ink)!important;color:#F4F1EA!important}
+details.more > summary,.acc > summary{font-family:var(--disp)!important;color:var(--ink)!important}
+details.more > summary{font-size:20px!important;font-weight:400}
+details.more > summary::after,.acc > summary::after{font-family:var(--disp);font-weight:300}
+.acc > summary{font-size:26px!important}
+/* 구성요소 색 */
+.sim-hero{background:transparent!important;color:var(--ink)!important;border:0!important;border-top:1px solid var(--ink)!important;border-bottom:1px solid var(--ink)!important;padding:40px 0!important}
+.sim-hero .lab{color:var(--muted)!important;font-family:var(--kr)}
+.sim-hero .val{color:var(--ink)!important}
+.card-item.top{background:var(--panel)!important}
+.bench,.visa-note,.visa-item.star,.scn.my{background:var(--panel)!important}
+.scn{border-color:var(--line-strong)!important}.band .scn{background:transparent!important}
+.bar.elem{background:#D8D1C2!important}.bar.mid{background:#A59D8B!important}.bar.high{background:#3A372F!important}
+.col-seg.living{background:#D8D1C2!important}.col-seg.housing{background:#A59D8B!important}.col-seg.edu{background:#3A372F!important}
+.lvtag.elem{background:#E7E2D7!important}.lvtag.mid{background:#D8D1C2!important}.lvtag.high{background:#3A372F!important;color:#F4F1EA!important}
+.col-track{background:var(--soft)!important}
+.band{background:var(--panel)!important}
+.cbtn:hover .cn{color:var(--ink)!important}
+footer{font-family:var(--kr)!important;text-align:center!important;color:var(--muted)!important;letter-spacing:0!important;font-size:12px!important;max-width:760px!important}
+
+
+/* 히어로: 좌측 텍스트 + 우측 세로 정물 사진 */
+header.hero{--hw:min(38vw,500px);--hx:max(40px,calc((100% - 1320px)/2 + 40px));min-height:calc(70px + var(--hw)*1.25 + 110px);display:block!important;color:var(--ink);padding:0!important;border:0}
+header.hero::before{content:"";position:absolute;left:auto;bottom:auto;right:var(--hx);top:70px;width:var(--hw);height:auto;aspect-ratio:4/5;z-index:1;
+  background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Cdefs%3E%3ClinearGradient id=%22s%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23F4EEE2%22/%3E%3Cstop offset=%221%22 stop-color=%22%23C46C3C%22/%3E%3C/linearGradient%3E%3CradialGradient id=%22o%22 cx=%22.35%22 cy=%22.3%22 r=%22.8%22%3E%3Cstop offset=%220%22 stop-color=%22%23E9DFCF%22/%3E%3Cstop offset=%22.6%22 stop-color=%22%23C4B49A%22/%3E%3Cstop offset=%221%22 stop-color=%22%239A8A70%22/%3E%3C/radialGradient%3E%3ClinearGradient id=%22f%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23CDBFA9%22/%3E%3Cstop offset=%221%22 stop-color=%22%23B8A98F%22/%3E%3C/linearGradient%3E%3Cfilter id=%22b%22%3E%3CfeGaussianBlur stdDeviation=%227%22/%3E%3C/filter%3E%3C/defs%3E%3Crect width=%22400%22 height=%22500%22 fill=%22%23DDD3C2%22/%3E%3Crect y=%22330%22 width=%22400%22 height=%22170%22 fill=%22url(%23f)%22/%3E%3Cpolygon points=%220,0 300,0 400,150 400,330 0,330%22 fill=%22%23E7DECE%22 opacity=%22.75%22/%3E%3Cpolygon points=%2260,330 190,330 330,500 120,500%22 fill=%22%23EFE7D8%22 opacity=%22.9%22/%3E%3Cpolygon points=%22190,330 235,330 400,500 345,500%22 fill=%22%236A5A44%22 opacity=%22.18%22/%3E%3Ccircle cx=%22304%22 cy=%22120%22 r=%2246%22 fill=%22url(%23s)%22 opacity=%22.85%22/%3E%3Cellipse cx=%22170%22 cy=%22418%22 rx=%2278%22 ry=%2212%22 fill=%22%234A3B2A%22 opacity=%22.4%22 filter=%22url(%23b)%22/%3E%3Ccircle cx=%22150%22 cy=%22352%22 r=%2262%22 fill=%22url(%23o)%22/%3E%3Crect x=%22224%22 y=%22388%22 width=%2274%22 height=%2230%22 fill=%22%23A99878%22/%3E%3Crect x=%22224%22 y=%22388%22 width=%2274%22 height=%227%22 fill=%22%23C4B496%22/%3E%3Cellipse cx=%22262%22 cy=%22422%22 rx=%2244%22 ry=%227%22 fill=%22%234A3B2A%22 opacity=%22.32%22 filter=%22url(%23b)%22/%3E%3C/svg%3E") center/cover no-repeat;filter:none}
+header.hero::after{content:"Fig. 01 — 두 도시, 하나의 오후";position:absolute;inset:auto;left:auto;right:var(--hx);top:calc(70px + var(--hw)*1.25 + 14px);width:var(--hw);height:auto;z-index:2;background:none;
+  font-family:var(--disp);font-style:italic;font-size:14px;color:var(--muted);letter-spacing:.01em}
+header.hero .hero-grain{position:absolute;inset:auto;right:var(--hx);top:70px;width:var(--hw);height:auto;aspect-ratio:4/5;opacity:.38;mix-blend-mode:multiply;z-index:3;pointer-events:none}
+.eyebrow{color:var(--muted)!important;font-size:11px!important;letter-spacing:.34em!important;margin-bottom:34px!important}
+h1.title,.hero h1{font-size:clamp(52px,7.4vw,112px)!important}
+
+.hero .wrap{padding-top:130px!important;padding-bottom:70px!important}
+.hero .wrap > .eyebrow,.hero h1,.hero p{max-width:52%!important}
+.hero .selbar{margin-top:max(40px,calc(var(--hw)*1.25 - 330px))!important;position:relative;z-index:5}
+.selbar{background:transparent!important;border:1px solid var(--ink)!important;box-shadow:none!important}
+.selgrp:hover{background:var(--panel)!important}
+.selgrp select{font-family:var(--disp)!important;font-size:30px!important;font-weight:400!important}
+.og select{font-family:var(--disp)!important;font-size:19px!important;font-weight:400!important}
+.sticky{top:0!important;margin-top:60px!important}
+.stickyin{background:var(--bg)!important;border-top:1px solid var(--ink)!important}
+.stickyin .score{font-family:var(--disp)!important;font-size:26px!important}
+.fscene{filter:sepia(.3) saturate(.5) contrast(.98)!important}
+.citybanner{filter:sepia(.3) saturate(.5)!important}
+.fname{font-size:38px!important}.fname small{font-family:var(--latin)!important}
+.fighter.champ{outline-color:var(--ink)!important}
+.champ-badge{background:var(--ink)!important;color:#F4F1EA!important}
+.wtag{font-family:var(--kr)!important}
+.dcol-l{top:24px!important}
+.arena{margin-top:80px!important}
+@media (max-width:1000px){
+  header.hero{--hw:78vw;--hx:24px;min-height:0;padding-top:calc(24px + var(--hw)*1.25 + 20px)!important}
+  header.hero::before{top:24px;right:auto;left:24px}header.hero::after{display:none}
+  header.hero .hero-grain{top:24px;right:auto;left:24px}
+  .hero .wrap{padding-top:20px!important;padding-bottom:50px!important}
+  .hero .wrap > .eyebrow,.hero h1,.hero p{max-width:100%!important}
+  .hero .selbar{margin-top:40px!important}
+  .topnav-in{padding:22px 24px 14px!important}.navlinks{display:none}
+}
+
+
+body,select,input,button,.og select,.selgrp select{font-variant-numeric:lining-nums tabular-nums}
+
+.rhead h3{font-size:clamp(28px,3vw,42px)!important;word-break:keep-all}
+.sec-title,.detailhead,.verdict h3,.allwrap h3{word-break:keep-all}
 </style>
 </head>
 <body>
@@ -829,9 +943,9 @@ function arenaHtml(da,db,cmp){
 function stickyHtml(da,db,cmp){
   const win=cmp.winner==='a'?`<b>${da.name}</b> 우세`:cmp.winner==='b'?`<b>${db.name}</b> 우세`:'막상막하';
   const cheaper=da.total<db.total?da.name:db.name;
-  return `<span class="sname a">${da.flag} ${da.name}</span>
+  return `<span class="sname a">${da.name}</span>
     <span class="score"><b class="${cmp.winner==='a'?'lead':''}">${cmp.aw}</b>:<b class="${cmp.winner==='b'?'lead':''}">${cmp.bw}</b></span>
-    <span class="sname b">${db.flag} ${db.name}</span>
+    <span class="sname b">${db.name}</span>
     <span class="swin">${win} · 가성비 <b>${cheaper}</b></span>`;
 }
 function roundsHtml(da,db,cmp){
@@ -840,7 +954,7 @@ function roundsHtml(da,db,cmp){
   const cheaper=da.total<db.total?da.name:db.name, diff=Math.abs(da.total-db.total);
   // Round 1
   const gauge=(d,side,w)=>`<div class="gauge g${side==='a'?'a':'b'} ${bw===side?'win':''}">
-      <div class="glabel"><span>${d.flag} ${d.name}</span>${bw===side?'<span class="w">승</span>':''}</div>
+      <div class="glabel"><span>${d.name}</span>${bw===side?'<span class="w">승</span>':''}</div>
       <div class="gbar"><span style="width:${w.toFixed(1)}%"></span></div>
       <div class="gval"><span data-count="${d.total}" data-key="g1_${side}">₩0</span></div>
     </div>`;
@@ -850,7 +964,7 @@ function roundsHtml(da,db,cmp){
   </section>`;
   // Round 2
   const col=(d,side)=>`<div class="d2col ${side==='a'?'a':'b'}">
-      <div class="d2head">${d.flag} ${d.name}</div>
+      <div class="d2head">${d.name}</div>
       <div class="d2card ${fw===side?'win':''}"><span class="d2ic"><svg viewBox="0 0 24 24"><path d="M21 4L3 11l6 2.5L11.5 20 21 4zM9 13.5l5-4"/></svg></span><div class="d2t"><b>비행 ${d.air.dur}</b><small>${d.air.st} · ${d.air.c}</small></div>${fw===side?'<span class="w2">승</span>':''}</div>
       <div class="d2card ${sw===side?'win':''}"><span class="d2ic"><svg viewBox="0 0 24 24"><path d="M3 18V7M3 14h18v4M21 14v-2a3 3 0 0 0-3-3h-7v5M7.5 11.5h.01"/></svg></span><div class="d2t"><b>1박 ${KRW(d.city.night)}</b><small>${d.hotel.name}</small></div>${sw===side?'<span class="w2">승</span>':''}</div>
     </div>`;
@@ -860,7 +974,7 @@ function roundsHtml(da,db,cmp){
   </section>`;
   // Round 3
   const theme=(d,side)=>`<div class="theme ${side==='a'?'a':'b'}">
-      <div class="th-h">${d.flag} ${d.name} 테마</div>
+      <div class="th-h">${d.name} 테마</div>
       <div class="hashes">${hashtags(d).map(h=>`<span class="hash">#${h}</span>`).join('')}</div>
       <div class="th-hi">하이라이트 · ${d.exp.list[0][0].replace(/ \(3인\)$/,'')}</div>
     </div>`;
@@ -944,7 +1058,7 @@ function destHtml(d,banner){
 }
 function extrasHtml(da,db){
   const rvBody=(d)=>{const r=REVIEWS[d.id];return `<div class="rvside">
-      <h4>${d.flag} ${d.name}</h4>
+      <h4>${d.name}</h4>
       <div class="lbl p">장점</div><ul class="pros">${r.pros.map(x=>`<li>${x}</li>`).join('')}</ul>
       <div class="lbl c">단점</div><ul class="cons">${r.cons.map(x=>`<li>${x}</li>`).join('')}</ul>
     </div>`;};
@@ -953,7 +1067,7 @@ function extrasHtml(da,db){
   const abars=all.map(x=>{
     const sel=x.id===da.id?'selA':(x.id===db.id?'selB':'');
     const col=sel==='selA'?'#86A67F':(sel==='selB'?'#E6B766':'#54453B');
-    return `<div class="ab ${sel}"><span class="abn">${x.c.flag} ${x.c.name}</span><span class="abbar"><span style="width:${(x.t/maxT*100).toFixed(1)}%;background:${col}"></span></span><span class="abv">${KRW(x.t)}</span></div>`;
+    return `<div class="ab ${sel}"><span class="abn">${x.c.name}</span><span class="abbar"><span style="width:${(x.t/maxT*100).toFixed(1)}%;background:${col}"></span></span><span class="abv">${KRW(x.t)}</span></div>`;
   }).join('');
   const rv=`<div class="verdict rvwrap"><div class="chap-k">Travelers' notes</div><h3>여행자 후기로 본 장단점</h3>
       <div class="rvduo">${rvBody(da)}${rvBody(db)}</div>
@@ -1022,7 +1136,7 @@ function render(){
   const banner=`<div class="citybanner scene-${scene}"><div class="cb-in"><span class="cb-flag">${winD.flag}</span><div class="cb-t"><div class="cb-n">${winD.name}</div><div class="cb-e">${winD.en}</div></div></div></div>`;
   document.getElementById('details').innerHTML=
     `<div class="chap-head"><div class="chap-k">The winner's journey</div>
-       <h2 class="detailhead">${winD.flag} ${winD.name}<em>승자의 여정</em></h2>
+       <h2 class="detailhead">${winD.name}<em>승자의 여정</em></h2>
        <p class="detailsub">이긴 도시의 일정 · 항공 · 숙소 · 비용 (${STATE.nights}박 ${STATE.days}일 · ${STATE.month}월)</p></div>
      <div class="detailgrid">${destHtml(winD,banner)}</div>`;
   const ex=extrasHtml(da,db);

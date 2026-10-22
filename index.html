@@ -6,7 +6,7 @@
 <title>CardFit · 은퇴이민 4개국 비교 — 카드 · 학비 · 생활비 · 비자</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Noto+Sans+KR:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;500&family=Noto+Sans+KR:wght@200;300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <style>
 :root{
@@ -224,6 +224,117 @@ footer{max-width:1320px;margin:0 auto;padding:36px 40px 56px;font-family:var(--l
   .visa-item{flex-direction:column;gap:6px}.visa-tier{width:auto}.bar-amt{display:none}
   .sim-hero .val{font-size:30px}.countries{width:100%}
 }
+
+/* ========================= KINFOLK-LIKE EDITORIAL ========================= */
+:root{
+  --bg:#F4F1EA; --paper:#F4F1EA; --card:#F4F1EA; --panel:#EBE6DC; --soft:#E7E2D7;
+  --ink:#1B1A17; --muted:#77726A; --sub:#77726A; --faint:#A39D90;
+  --line:#DAD4C7; --line-strong:#BDB6A6;
+  --disp:'Cormorant Garamond','Noto Serif KR',Georgia,serif;
+  --kr:'Noto Serif KR','Cormorant Garamond',serif;
+  --blue:#1B1A17; --blue-deep:#1B1A17; --blue-soft:#EBE6DC; --blue-line:#D3CCBC; --blue-mid:#A59D8B; --blue-pale:#D8D1C2;
+  --orange:#1B1A17; --orange-soft:#E7E2D7; --orange-line:#1B1A17;
+}
+html,body{background:#F4F1EA!important;color:var(--ink)}
+body{font-weight:300}
+::selection{background:#1B1A17;color:#F4F1EA}
+/* 상단: 중앙 워드마크 + 하단 중앙 내비 (고정 아님) */
+.topnav{position:relative!important;background:transparent!important;backdrop-filter:none!important;border-bottom:1px solid var(--line)!important}
+.topnav-in{height:auto!important;flex-direction:column;justify-content:center;gap:16px;padding:30px 40px 20px!important}
+.topnav-in::before{order:-1;font-family:var(--latin);font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted)}
+.brand{position:static!important;transform:none!important;font-family:var(--latin)!important;font-size:26px!important;font-weight:400!important;letter-spacing:.62em!important;padding-left:.62em}
+.navlinks{gap:38px!important}
+.navlinks a{font-family:var(--latin);font-size:11px!important;letter-spacing:.26em!important;text-transform:uppercase;color:var(--ink)}
+/* 타이포: 가는 세리프 */
+h1.title,.hero h1{font-family:var(--disp)!important;font-weight:300!important;letter-spacing:-.025em!important;line-height:1.04!important;color:var(--ink)!important}
+h1.title b,.hero h1 em{font-family:var(--disp)!important;font-style:italic!important;font-weight:300!important;color:var(--ink)!important;-webkit-text-fill-color:var(--ink)!important}
+.sec-title,.rhead h3,.detailhead,.verdict h3,.allwrap h3,.th-h,.fname,.cb-n,.rvside h4,.acc > summary,.col-name,.rate-name,.scn .sh,.visa-tier{font-family:var(--disp)!important;font-weight:400!important;letter-spacing:-.015em!important}
+.sec-title,.rhead h3{font-size:clamp(34px,4.2vw,56px)!important;line-height:1.1}
+.sec-desc,.detailsub,.rhead p,.ftag,.sub,.hero p,.allsub,.rv-note,.card-meta,.fper,.rate-sub,.eduname{font-family:var(--kr);font-weight:300!important}
+.sub,.hero p{font-size:15px!important;line-height:1.95;color:var(--muted)!important;max-width:430px!important}
+.hero p b{color:var(--ink)!important;font-weight:400}
+.spend-val,.card-ben .b1,.col-total,.rate-val,.scn .snet .val,.chip .cv,.ftotal,.gval,.fc-t,.fc-foot b,.ws-v,.ct-v,.pc,.cr-v,.ab .abv,.sim-hero .val,.card-rank,.edu-table td,.infl-val,.field input[type=number],.day h4,.d2card b,.ab .abn{font-family:var(--disp)!important;font-weight:400!important;font-variant-numeric:lining-nums tabular-nums;letter-spacing:-.01em}
+.spend-val{font-size:56px!important}.ftotal{font-size:clamp(40px,4.4vw,58px)!important;font-weight:300!important}.gval{font-size:42px!important;font-weight:300!important}
+.card-ben .b1{font-size:28px!important}.chip .cv{font-size:30px!important}.col-total,.rate-val{font-size:28px!important}
+.sim-hero .val{font-size:58px!important;font-weight:300!important}.ct-v{font-size:58px!important;font-weight:300!important}.fc-t{font-size:34px!important;font-weight:300!important}
+.field input[type=number]{font-size:28px!important}
+.edu-table td{font-size:15px}
+/* 라벨(소문자 대문자) */
+.sec-num,.part b,.rhead .rtag,.chap-k{font-family:var(--latin)!important;font-size:11px!important;font-weight:400!important;letter-spacing:.34em!important;text-transform:uppercase;color:var(--muted)!important}
+.sec-num::before{content:"No. "}
+.sec-head{flex-direction:column!important;align-items:flex-start!important;gap:14px!important}
+.rhead .rtag::before{content:"— "}
+.part{justify-content:center!important;gap:22px!important;margin-bottom:6px!important}
+.part::before{content:"";flex:0 1 120px;height:1px;background:var(--line-strong)}
+.part::after{flex:0 1 120px!important;max-width:120px;background:var(--line-strong)!important}
+.part span{letter-spacing:.34em!important;color:var(--ink)!important}
+.sec{padding:110px 0 14px!important}
+.sec-desc{font-size:14.5px!important;line-height:1.95;max-width:520px!important;color:var(--muted)!important}
+/* 버튼/링크 */
+.rebtn{background:transparent!important;color:var(--ink)!important;border:1px solid var(--ink)!important;border-radius:0;font-family:var(--latin);font-size:11px!important;letter-spacing:.26em!important;text-transform:uppercase;padding:15px 30px!important}
+.rebtn:hover{background:var(--ink)!important;color:#F4F1EA!important}
+.mysch-btn{background:transparent!important;font-family:var(--latin);font-size:11px!important;letter-spacing:.2em;text-transform:uppercase}
+.mysch-btn.on{background:var(--ink)!important;color:#F4F1EA!important}
+details.more > summary,.acc > summary{font-family:var(--disp)!important;color:var(--ink)!important}
+details.more > summary{font-size:20px!important;font-weight:400}
+details.more > summary::after,.acc > summary::after{font-family:var(--disp);font-weight:300}
+.acc > summary{font-size:26px!important}
+/* 구성요소 색 */
+.sim-hero{background:transparent!important;color:var(--ink)!important;border:0!important;border-top:1px solid var(--ink)!important;border-bottom:1px solid var(--ink)!important;padding:40px 0!important}
+.sim-hero .lab{color:var(--muted)!important;font-family:var(--kr)}
+.sim-hero .val{color:var(--ink)!important}
+.card-item.top{background:var(--panel)!important}
+.bench,.visa-note,.visa-item.star,.scn.my{background:var(--panel)!important}
+.scn{border-color:var(--line-strong)!important}.band .scn{background:transparent!important}
+.bar.elem{background:#D8D1C2!important}.bar.mid{background:#A59D8B!important}.bar.high{background:#3A372F!important}
+.col-seg.living{background:#D8D1C2!important}.col-seg.housing{background:#A59D8B!important}.col-seg.edu{background:#3A372F!important}
+.lvtag.elem{background:#E7E2D7!important}.lvtag.mid{background:#D8D1C2!important}.lvtag.high{background:#3A372F!important;color:#F4F1EA!important}
+.col-track{background:var(--soft)!important}
+.band{background:var(--panel)!important}
+.cbtn:hover .cn{color:var(--ink)!important}
+footer{font-family:var(--kr)!important;text-align:center!important;color:var(--muted)!important;letter-spacing:0!important;font-size:12px!important;max-width:760px!important}
+
+
+/* 히어로: 좌측 텍스트 + 우측 세로 정물 사진 */
+header.hero{--hw:min(38vw,500px);--hx:max(40px,calc((100% - 1320px)/2 + 40px));min-height:calc(70px + var(--hw)*1.25 + 110px);display:block!important;color:var(--ink);padding:0!important;border:0}
+header.hero::before{content:"";position:absolute;left:auto;bottom:auto;right:var(--hx);top:70px;width:var(--hw);height:auto;aspect-ratio:4/5;z-index:1;
+  background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 500%22 preserveAspectRatio=%22xMidYMid slice%22%3E%3Cdefs%3E%3ClinearGradient id=%22w%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23E2D8C8%22/%3E%3Cstop offset=%221%22 stop-color=%22%23CDBFAA%22/%3E%3C/linearGradient%3E%3ClinearGradient id=%22v%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%220%22%3E%3Cstop offset=%220%22 stop-color=%22%23C9B99F%22/%3E%3Cstop offset=%22.55%22 stop-color=%22%23A89679%22/%3E%3Cstop offset=%221%22 stop-color=%22%2385735A%22/%3E%3C/linearGradient%3E%3ClinearGradient id=%22l%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23F1E9DB%22 stop-opacity=%22.95%22/%3E%3Cstop offset=%221%22 stop-color=%22%23E5DACA%22 stop-opacity=%22.2%22/%3E%3C/linearGradient%3E%3Cfilter id=%22b%22%3E%3CfeGaussianBlur stdDeviation=%226%22/%3E%3C/filter%3E%3C/defs%3E%3Crect width=%22400%22 height=%22500%22 fill=%22url(%23w)%22/%3E%3Cpolygon points=%2240,0 250,0 400,215 400,420 210,430 0,170%22 fill=%22url(%23l)%22/%3E%3Cpath d=%22M92 500V250a108 108 0 0 1 216 0V500Z%22 fill=%22%23C7B9A3%22/%3E%3Cpath d=%22M112 500V256a88 88 0 0 1 176 0V500Z%22 fill=%22%23BBAB93%22/%3E%3Cpolygon points=%22300,0 400,0 400,330%22 fill=%22%235A4A36%22 opacity=%22.13%22/%3E%3Cellipse cx=%22206%22 cy=%22478%22 rx=%2274%22 ry=%2211%22 fill=%22%234A3B2A%22 opacity=%22.38%22 filter=%22url(%23b)%22/%3E%3Cpath d=%22M170 478C150 452 156 410 176 388C186 376 190 362 190 350L222 350C222 362 226 376 236 388C256 410 262 452 242 478Z%22 fill=%22url(%23v)%22/%3E%3Cg stroke=%22%236B6A4C%22 stroke-width=%222.2%22 fill=%22none%22 stroke-linecap=%22round%22%3E%3Cpath d=%22M206 352C204 300 190 262 168 224%22/%3E%3Cpath d=%22M206 352C210 296 228 252 252 214%22/%3E%3Cpath d=%22M206 352C206 296 206 240 210 190%22/%3E%3C/g%3E%3Cg fill=%22%237C7A5C%22%3E%3Cellipse cx=%22176%22 cy=%22238%22 rx=%227%22 ry=%2214%22 transform=%22rotate(-28 176 238)%22/%3E%3Cellipse cx=%22190%22 cy=%22270%22 rx=%226%22 ry=%2212%22 transform=%22rotate(-18 190 270)%22/%3E%3Cellipse cx=%22244%22 cy=%22230%22 rx=%227%22 ry=%2214%22 transform=%22rotate(26 244 230)%22/%3E%3Cellipse cx=%22226%22 cy=%22268%22 rx=%226%22 ry=%2212%22 transform=%22rotate(18 226 268)%22/%3E%3Cellipse cx=%22210%22 cy=%22206%22 rx=%227%22 ry=%2215%22/%3E%3Cellipse cx=%22204%22 cy=%22246%22 rx=%226%22 ry=%2212%22 transform=%22rotate(-6 204 246)%22/%3E%3C/g%3E%3C/svg%3E") center/cover no-repeat;filter:none}
+header.hero::after{content:"Fig. 01 — 오후 네 시의 빛";position:absolute;inset:auto;left:auto;right:var(--hx);top:calc(70px + var(--hw)*1.25 + 14px);width:var(--hw);height:auto;z-index:2;background:none;
+  font-family:var(--disp);font-style:italic;font-size:14px;color:var(--muted);letter-spacing:.01em}
+header.hero .hero-grain{position:absolute;inset:auto;right:var(--hx);top:70px;width:var(--hw);height:auto;aspect-ratio:4/5;opacity:.38;mix-blend-mode:multiply;z-index:3;pointer-events:none}
+.eyebrow{color:var(--muted)!important;font-size:11px!important;letter-spacing:.34em!important;margin-bottom:34px!important}
+h1.title,.hero h1{font-size:clamp(52px,7.4vw,112px)!important}
+
+.hero-in{max-width:1320px!important;width:100%;margin:0 auto;padding:130px 40px 60px!important;position:relative;z-index:4}
+.hero-in > *{max-width:52%}
+h1.title{max-width:52%!important}
+.switchbar{border-top:1px solid var(--line)!important;border-bottom:1px solid var(--line)!important}
+.switchbar-in{justify-content:center!important;gap:0!important}.switch-label{display:none!important}
+.cbtn{padding:26px 38px 22px!important;border-bottom:1px solid transparent!important}
+.cbtn .flag{filter:grayscale(1) contrast(.9);opacity:.75;font-size:16px!important}
+.cbtn .cn{font-family:var(--disp)!important;font-size:22px!important;font-weight:400!important;color:var(--muted)!important}
+.cbtn .cc{letter-spacing:.2em!important;text-transform:uppercase}
+.cbtn.active{border-bottom:1px solid var(--ink)!important}.cbtn.active .cn{color:var(--ink)!important;font-weight:500!important}
+.cbtn.active .flag{opacity:1;filter:grayscale(.3)}
+.shell{padding-top:90px!important}
+.panel{top:28px!important;max-height:calc(100vh - 56px)!important;border-top:1px solid var(--ink)!important}
+.panel .sec-title{font-size:26px!important}
+.band .shell1{padding-top:40px!important}
+@media (max-width:1000px){
+  header.hero{--hw:78vw;--hx:24px;min-height:0;padding-top:calc(24px + var(--hw)*1.25 + 20px)!important}
+  header.hero::before{top:24px;right:auto;left:24px}header.hero::after{display:none}
+  header.hero .hero-grain{top:24px;right:auto;left:24px}
+  .hero-in{padding:20px 24px 40px!important}.hero-in > *,h1.title{max-width:100%!important}
+  .topnav-in{padding:22px 24px 14px!important}.navlinks{display:none}
+  .cbtn{padding:18px 20px 14px!important}
+}
+
+
+body,select,input,button,.og select,.selgrp select{font-variant-numeric:lining-nums tabular-nums}
+
+.rhead h3{font-size:clamp(28px,3vw,42px)!important;word-break:keep-all}
+.sec-title,.detailhead,.verdict h3,.allwrap h3{word-break:keep-all}
+@media (max-width:1000px){.shell{padding-top:40px!important}.sec{padding-top:70px!important}}
 </style>
 </head>
 <body>
@@ -233,7 +344,7 @@ footer{max-width:1320px;margin:0 auto;padding:36px 40px 56px;font-family:var(--l
 </div></nav>
 <header class="hero" id="top"><div class="hero-grain photo-grain"></div><div class="hero-in">
   <div class="eyebrow">Expat Card · Retirement Relocation</div>
-  <h1 class="title">은퇴 후,<br>어디서 <b>어떻게</b> 살까.</h1>
+  <h1 class="title">은퇴 후,<br>어디서 <b>어떻게</b><br>살까.</h1>
   <p class="sub">3인 가족 기준 한국·말레이시아·싱가포르·호주 비교. 나라를 고르면 카드 혜택, 학비, 생활비, 비자, 자산 시뮬레이션이 현지 통화로 한 번에 바뀝니다.</p>
 </div></header>
 <div class="switchbar"><div class="switchbar-in"><span class="switch-label">Country</span><div class="countries" id="countries"></div></div></div>
