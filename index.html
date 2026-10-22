@@ -6,118 +6,110 @@
 <title>CardFit · 은퇴이민 4개국 비교 — 카드 · 학비 · 생활비 · 비자</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <style>
 :root{
-  --bg:#F4F7FC; --paper:#FFFFFF; --ink:#102742; --muted:#5C729A; --faint:#9AACC6;
-  --blue:#1F5FE0; --blue-deep:#16429E; --blue-soft:#EAF1FD; --blue-line:#D4E1F6; --blue-mid:#5B8AE8; --blue-pale:#B9CFF2;
-  --orange:#F97316; --orange-soft:#FFF0E4; --orange-line:#FBD3B0;
-  --line:#E5EDF8;
+  --bg:#F7F7F7; --paper:#FFFFFF; --ink:#000000; --muted:#64666A; --faint:#7B7E83;
+  --blue:#008254; --blue-deep:#00482F; --blue-soft:#EFFCF8; --blue-line:#B7ECDA; --blue-mid:#008254; --blue-pale:#B7ECDA;
+  --orange:#00482F; --orange-soft:#E8FDAC; --orange-line:#9AE600;
+  --neg:#DE2828; --neg-soft:#FDECEC;
+  --line:#EBEBEC; --line-strong:#D8D9DA; --lime:#9AE600; --ribbon:#A8EA4C;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'Pretendard',system-ui,sans-serif;background:var(--bg);color:var(--ink);
   line-height:1.55;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
-.mono{font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums}
-.disp{font-family:'Space Grotesk',sans-serif}
+.mono{font-family:'Montserrat','Pretendard',sans-serif;font-variant-numeric:tabular-nums}
+.disp{font-family:'Montserrat','Pretendard',sans-serif}
 .wrap{max-width:900px;margin:0 auto;padding:0 20px 120px}
 
-/* ── 리조트 히어로 헤더 (밝은 트로피컬) ─────────────── */
-header{position:relative;overflow:hidden;isolation:isolate;
-  padding:66px 20px 56px;margin-bottom:30px;
-  background:linear-gradient(163deg,#67D6F2 0%,#2FC1DE 34%,#16B5B0 66%,#39D9AE 100%)}
-.resort-bg{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;display:block}
-.head-scrim{position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:linear-gradient(104deg,rgba(6,40,66,.52) 0%,rgba(6,40,66,.28) 40%,rgba(6,40,66,.05) 62%,rgba(6,40,66,0) 78%)}
-.resort-fade{position:absolute;left:0;right:0;bottom:0;height:110px;z-index:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(57,217,174,0) 0%,rgba(244,247,252,.14) 72%,rgba(244,247,252,.5) 100%)}
-.head-inner{position:relative;z-index:2;max-width:900px;margin:0 auto}
-.eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;color:#FFF3D6;
-  text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:15px;
-  text-shadow:0 1px 10px rgba(5,32,54,.55)}
-.eyebrow::before{content:"";width:24px;height:2px;background:#FFC978}
-h1.title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:32px;line-height:1.16;
-  letter-spacing:-.02em;color:#FFFFFF;text-shadow:0 2px 22px rgba(5,32,54,.6),0 1px 3px rgba(5,32,54,.5)}
-h1.title b{color:#FFDD8E}
-.sub{color:#EAFBFF;font-size:14px;margin-top:11px;max-width:610px;text-shadow:0 1px 12px rgba(5,32,54,.55)}
-.head-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:19px}
-.head-tags span{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.4px;
-  color:#FFFFFF;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.34);
-  border-radius:20px;padding:5px 12px;backdrop-filter:blur(7px);box-shadow:0 2px 10px rgba(5,32,54,.14)}
+/* ── 히어로 밴드 (NerdWallet: green band → near-white body) ─────────────── */
+header{position:relative;padding:56px 20px 48px;margin-bottom:30px;
+  background:linear-gradient(135deg,#008254 0%,#006642 100%);border-bottom:4px solid var(--ribbon)}
+.head-inner{position:relative;max-width:900px;margin:0 auto}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:1.5px;color:#E8FDAC;
+  text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.eyebrow::before{content:"";width:24px;height:2px;background:var(--lime)}
+h1.title{font-weight:700;font-size:34px;line-height:1.2;letter-spacing:-.02em;color:#FFFFFF}
+h1.title b{color:var(--lime)}
+.sub{color:#E3FAF2;font-size:14px;margin-top:12px;max-width:610px;font-weight:400}
+.head-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.head-tags span{font-size:12px;font-weight:600;color:#FFFFFF;background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.3);border-radius:4px;padding:5px 12px}
 
-.sec{margin-bottom:22px;background:var(--paper);border:1px solid var(--line);border-radius:16px;
-  box-shadow:0 1px 2px rgba(16,39,66,.03),0 6px 20px rgba(16,39,66,.04);overflow:hidden}
+.sec{margin-bottom:22px;background:var(--paper);border:1px solid var(--line-strong);border-radius:8px;
+  overflow:hidden}
 .sec-head{display:flex;align-items:center;gap:11px;padding:18px 22px 0}
-.sec-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:#fff;background:var(--blue);
-  width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:600;flex:none}
-.sec-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16.5px}
+.sec-num{font-family:'Montserrat','Pretendard',sans-serif;font-size:11px;color:#fff;background:var(--blue);
+  width:22px;height:22px;border-radius:2px;display:flex;align-items:center;justify-content:center;font-weight:600;flex:none}
+.sec-title{font-family:'Montserrat','Pretendard',sans-serif;font-weight:600;font-size:16.5px}
 .sec-desc{color:var(--muted);font-size:12.5px;padding:5px 22px 0 55px}
 .sec-body{padding:16px 22px 22px}
 
 .countries{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.cbtn{cursor:pointer;border:1.5px solid var(--line);background:#FBFDFF;border-radius:13px;padding:14px 8px;
+.cbtn{cursor:pointer;border:1.5px solid var(--line);background:#F7F7F7;border-radius:8px;padding:14px 8px;
   text-align:center;transition:.15s;font-family:inherit}
 .cbtn .flag{font-size:24px;display:block;margin-bottom:5px;line-height:1}
 .cbtn .cn{font-size:13.5px;font-weight:700;color:var(--ink)}
-.cbtn .cc{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--faint);margin-top:2px}
+.cbtn .cc{font-family:'Montserrat','Pretendard',sans-serif;font-size:10px;color:var(--faint);margin-top:2px}
 .cbtn:hover{border-color:var(--blue-pale);transform:translateY(-1px)}
 .cbtn.active{border-color:var(--blue);background:var(--blue-soft)}
 .cbtn.active .cc{color:var(--blue)}
 
 .spend-top{margin-bottom:12px}
 .spend-label{font-size:12.5px;color:var(--muted)}
-.spend-val{font-family:'JetBrains Mono',monospace;font-size:25px;font-weight:600;color:var(--blue)}
-.spend-krw{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--faint);margin-top:1px}
+.spend-val{font-family:'Montserrat','Pretendard',sans-serif;font-size:25px;font-weight:600;color:var(--blue)}
+.spend-krw{font-family:'Montserrat','Pretendard',sans-serif;font-size:11.5px;color:var(--faint);margin-top:1px}
 input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:5px;border-radius:6px;
   background:var(--blue-line);outline:none;margin:6px 0}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:19px;height:19px;border-radius:50%;
-  background:var(--orange);cursor:pointer;border:3px solid #fff;box-shadow:0 1px 4px rgba(249,115,22,.5)}
+  background:var(--orange);cursor:pointer;border:3px solid #fff;}
 input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;background:var(--orange);cursor:pointer;border:3px solid #fff}
-.range-ends{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--faint);margin-top:1px}
+.range-ends{display:flex;justify-content:space-between;font-family:'Montserrat','Pretendard',sans-serif;font-size:10.5px;color:var(--faint);margin-top:1px}
 
 .alloc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 22px}
 .alloc-row .ar-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
 .alloc-row .ar-name{font-size:12.5px;color:var(--ink);display:flex;align-items:center;gap:6px}
-.alloc-row .ar-val{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+.alloc-row .ar-val{font-family:'Montserrat','Pretendard',sans-serif;font-size:11px;color:var(--muted)}
 
 .cards-list{display:flex;flex-direction:column;gap:9px}
-.card-item{display:flex;align-items:center;gap:13px;padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:#FBFDFF}
+.card-item{display:flex;align-items:center;gap:13px;padding:13px 15px;border:1px solid var(--line);border-radius:8px;background:#F7F7F7}
 .card-item.top{border-color:var(--orange);background:var(--orange-soft)}
-.card-rank{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:700;color:var(--faint);width:24px;text-align:center;flex:none}
+.card-rank{font-family:'Montserrat','Pretendard',sans-serif;font-size:17px;font-weight:700;color:var(--faint);width:24px;text-align:center;flex:none}
 .card-item.top .card-rank{color:var(--orange)}
 .card-main{flex:1;min-width:0}
 .card-name{font-size:13.5px;font-weight:600}
 .card-meta{font-size:11px;color:var(--muted);margin-top:2px}
 .card-ben{text-align:right;white-space:nowrap}
-.card-ben .b1{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;color:var(--blue)}
+.card-ben .b1{font-family:'Montserrat','Pretendard',sans-serif;font-size:15px;font-weight:600;color:var(--blue)}
 .card-item.top .card-ben .b1{color:var(--orange)}
-.card-ben .b2{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--faint)}
-.warn{font-size:10.5px;color:var(--orange);margin-top:3px}
+.card-ben .b2{font-family:'Montserrat','Pretendard',sans-serif;font-size:10.5px;color:var(--faint)}
+.warn{font-size:10.5px;color:var(--neg);margin-top:3px}
 
 .edu-inputs{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;margin-bottom:16px}
-.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px;font-family:'JetBrains Mono',monospace;letter-spacing:.4px}
-.field input[type=number]{width:100%;background:#FBFDFF;border:1.5px solid var(--line);border-radius:9px;color:var(--ink);
-  font-family:'JetBrains Mono',monospace;font-size:15px;padding:10px 12px;outline:none}
+.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px;font-family:'Montserrat','Pretendard',sans-serif;letter-spacing:.4px}
+.field input[type=number]{width:100%;background:#F7F7F7;border:1.5px solid var(--line);border-radius:4px;color:var(--ink);
+  font-family:'Montserrat','Pretendard',sans-serif;font-size:15px;padding:10px 12px;outline:none}
 .field input[type=number]:focus{border-color:var(--blue)}
 .infl-row{display:flex;align-items:center;gap:11px}
 .infl-row input[type=range]{flex:1}
-.infl-val{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--orange);width:42px;text-align:right;font-weight:600}
-.eduname{font-size:11px;color:var(--blue);font-family:'JetBrains Mono',monospace;margin-top:4px}
+.infl-val{font-family:'Montserrat','Pretendard',sans-serif;font-size:13px;color:var(--orange);width:42px;text-align:right;font-weight:600}
+.eduname{font-size:11px;color:var(--blue);font-family:'Montserrat','Pretendard',sans-serif;margin-top:4px}
 
 .myschool{display:flex;gap:6px;margin-bottom:9px}
-.mysch-btn{flex:1;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:8px 4px;border-radius:8px;
-  border:1.5px solid var(--line);background:#FBFDFF;color:var(--muted);transition:.15s}
+.mysch-btn{flex:1;cursor:pointer;font-family:'Montserrat','Pretendard',sans-serif;font-size:10.5px;padding:8px 4px;border-radius:8px;
+  border:1.5px solid var(--line);background:#F7F7F7;color:var(--muted);transition:.15s}
 .mysch-btn:hover{border-color:var(--blue-pale)}
 .mysch-btn.on{border-color:var(--blue);background:var(--blue-soft);color:var(--blue);font-weight:600}
-.rebtn{width:100%;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:12px;padding:11px;border-radius:9px;
+.rebtn{width:100%;cursor:pointer;font-family:'Montserrat','Pretendard',sans-serif;font-size:12px;padding:11px;border-radius:4px;
   border:1.5px solid var(--blue-line);background:var(--blue-soft);color:var(--blue);font-weight:600;transition:.15s}
 .rebtn:hover{border-color:var(--blue);transform:translateY(-1px)}
 
 .chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
-.chip{background:#FBFDFF;border:1px solid var(--line);border-radius:10px;padding:9px 13px;flex:1;min-width:110px}
-.chip .ck{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--faint);letter-spacing:.4px;text-transform:uppercase}
-.chip .cv{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:600;color:var(--ink);margin-top:2px}
+.chip{background:#F7F7F7;border:1px solid var(--line);border-radius:6px;padding:9px 13px;flex:1;min-width:110px}
+.chip .ck{font-family:'Montserrat','Pretendard',sans-serif;font-size:9.5px;color:var(--faint);letter-spacing:.4px;text-transform:uppercase}
+.chip .cv{font-family:'Montserrat','Pretendard',sans-serif;font-size:17px;font-weight:600;color:var(--ink);margin-top:2px}
 .chip.hero{background:var(--orange-soft);border-color:var(--orange-line)}
 .chip.hero .cv{color:var(--orange);font-size:20px}
 
@@ -128,22 +120,22 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
 .bar.elem{background:var(--blue-pale)}
 .bar.mid{background:var(--blue-mid)}
 .bar.high{background:var(--blue-deep)}
-.bar-amt{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);white-space:nowrap}
-.bar-yr{font-family:'JetBrains Mono',monospace;font-size:8.5px;color:var(--faint);margin-top:4px}
-.bar-grade{font-family:'JetBrains Mono',monospace;font-size:7.5px;color:var(--orange);font-weight:600}
+.bar-amt{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-family:'Montserrat','Pretendard',sans-serif;font-size:8px;color:var(--muted);white-space:nowrap}
+.bar-yr{font-family:'Montserrat','Pretendard',sans-serif;font-size:8.5px;color:var(--faint);margin-top:4px}
+.bar-grade{font-family:'Montserrat','Pretendard',sans-serif;font-size:7.5px;color:var(--orange);font-weight:600}
 .legend{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap}
 .legend span{display:flex;align-items:center;gap:5px;font-size:10.5px;color:var(--muted)}
 .legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
 
 .edu-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:12px}
-.edu-table th{text-align:right;font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--faint);font-weight:500;
+.edu-table th{text-align:right;font-family:'Montserrat','Pretendard',sans-serif;font-size:9.5px;color:var(--faint);font-weight:500;
   letter-spacing:.4px;padding:6px 9px;border-bottom:1.5px solid var(--blue-line);text-transform:uppercase}
 .edu-table th:first-child,.edu-table td:first-child{text-align:left}
-.edu-table td{padding:7px 9px;border-bottom:1px solid var(--line);font-family:'JetBrains Mono',monospace}
-.lvtag{font-size:8.5px;padding:1px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-weight:600}
+.edu-table td{padding:7px 9px;border-bottom:1px solid var(--line);font-family:'Montserrat','Pretendard',sans-serif}
+.lvtag{font-size:8.5px;padding:1px 6px;border-radius:4px;font-family:'Montserrat','Pretendard',sans-serif;font-weight:600}
 .lvtag.elem{background:var(--blue-soft);color:var(--blue-mid)}
 .lvtag.mid{background:var(--blue-soft);color:var(--blue)}
-.lvtag.high{background:#E5EDFB;color:var(--blue-deep)}
+.lvtag.high{background:#E3FAF2;color:var(--blue-deep)}
 .edu-table tfoot td{border-top:2px solid var(--blue-line);border-bottom:none;font-weight:600;font-size:12.5px;padding-top:10px}
 .edu-table tfoot .tot{color:var(--orange)}
 
@@ -152,10 +144,10 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
 .col-name{font-size:13px;font-weight:600;display:flex;align-items:center;gap:7px}
 .col-name .fl{font-size:15px}
 .col-row.sel .col-name{color:var(--blue)}
-.col-total{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--ink)}
+.col-total{font-family:'Montserrat','Pretendard',sans-serif;font-size:13px;font-weight:600;color:var(--ink)}
 .col-row.sel .col-total{color:var(--orange)}
-.col-track{display:flex;height:22px;border-radius:6px;overflow:hidden;background:#F0F4FA;border:1px solid var(--line)}
-.col-seg{height:100%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;
+.col-track{display:flex;height:22px;border-radius:6px;overflow:hidden;background:#EBEBEC;border:1px solid var(--line)}
+.col-seg{height:100%;display:flex;align-items:center;justify-content:center;font-family:'Montserrat','Pretendard',sans-serif;
   font-size:9px;color:#fff;white-space:nowrap;overflow:hidden}
 .col-seg.living{background:var(--blue-pale)}
 .col-seg.housing{background:var(--blue-mid)}
@@ -163,21 +155,21 @@ input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;bac
 .col-legend{display:flex;gap:16px;margin-top:14px;flex-wrap:wrap}
 .col-legend span{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
 .col-legend i{width:11px;height:11px;border-radius:3px}
-.bench{margin-top:14px;font-size:11.5px;color:var(--muted);line-height:1.7;background:#FBFDFF;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.bench{margin-top:14px;font-size:11.5px;color:var(--muted);line-height:1.7;background:#F7F7F7;border:1px solid var(--line);border-radius:6px;padding:12px 14px}
 .bench b{color:var(--ink)}
-.bench .bh{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px}
+.bench .bh{font-family:'Montserrat','Pretendard',sans-serif;font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px}
 
 .visa-list{display:flex;flex-direction:column;gap:9px}
-.visa-item{display:flex;gap:13px;padding:12px 14px;border:1px solid var(--line);border-radius:11px;background:#FBFDFF}
+.visa-item{display:flex;gap:13px;padding:12px 14px;border:1px solid var(--line);border-radius:6px;background:#F7F7F7}
 .visa-item.star{border-color:var(--orange);background:var(--orange-soft)}
-.visa-tier{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;width:120px;flex:none;color:var(--blue)}
+.visa-tier{font-family:'Montserrat','Pretendard',sans-serif;font-weight:600;font-size:13px;width:120px;flex:none;color:var(--blue)}
 .visa-item.star .visa-tier{color:var(--orange)}
 .visa-detail{font-size:12px;color:var(--ink);line-height:1.5}
 .visa-note{margin-top:12px;font-size:11.5px;color:var(--muted);background:var(--blue-soft);border-left:3px solid var(--blue);
   border-radius:0 8px 8px 0;padding:10px 13px;line-height:1.6}
 
-.disclaim{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--faint);border:1px solid var(--line);
-  border-radius:12px;padding:14px 16px;margin-top:22px;line-height:1.7;background:#FBFDFF}
+.disclaim{font-family:'Montserrat','Pretendard',sans-serif;font-size:10px;color:var(--faint);border:1px solid var(--line);
+  border-radius:8px;padding:14px 16px;margin-top:22px;line-height:1.7;background:#F7F7F7}
 .disclaim b{color:var(--muted)}
 footer{text-align:center;color:var(--faint);font-size:11px;margin-top:30px}
 
@@ -185,28 +177,28 @@ footer{text-align:center;color:var(--faint);font-size:11px;margin-top:30px}
 .rate-rh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
 .rate-name{font-size:13px;font-weight:600;display:flex;gap:7px;align-items:center}
 .rate-name .fl{font-size:15px}
-.rate-val{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;color:var(--blue)}
+.rate-val{font-family:'Montserrat','Pretendard',sans-serif;font-size:14px;font-weight:600;color:var(--blue)}
 .rate-row.sel .rate-val{color:var(--orange)}
-.rate-track{height:8px;border-radius:5px;background:#EEF3FB;overflow:hidden}
+.rate-track{height:8px;border-radius:5px;background:#EBEBEC;overflow:hidden}
 .rate-fill{height:100%;background:var(--blue-mid);border-radius:5px;transition:.3s}
 .rate-row.sel .rate-fill{background:var(--orange)}
-.rate-sub{font-size:10.5px;color:var(--faint);font-family:'JetBrains Mono',monospace;margin-top:3px}
+.rate-sub{font-size:10.5px;color:var(--faint);font-family:'Montserrat','Pretendard',sans-serif;margin-top:3px}
 
 .sim-inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 18px;margin-bottom:18px}
-.sim-inputs .infl-row .simval{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--orange);font-weight:600;min-width:58px;text-align:right}
+.sim-inputs .infl-row .simval{font-family:'Montserrat','Pretendard',sans-serif;font-size:13px;color:var(--orange);font-weight:600;min-width:58px;text-align:right}
 .scn-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:4px 0}
-.scn{border:1.5px solid var(--line);border-radius:13px;padding:14px 15px;background:#FBFDFF}
+.scn{border:1.5px solid var(--line);border-radius:8px;padding:14px 15px;background:#F7F7F7}
 .scn.my{border-color:var(--orange);background:var(--orange-soft)}
-.scn .sh{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;display:flex;align-items:center;gap:6px;margin-bottom:9px}
+.scn .sh{font-family:'Montserrat','Pretendard',sans-serif;font-weight:600;font-size:13px;display:flex;align-items:center;gap:6px;margin-bottom:9px}
 .scn .srow{display:flex;justify-content:space-between;font-size:11.5px;padding:3px 0;color:var(--muted)}
-.scn .srow b{font-family:'JetBrains Mono',monospace;color:var(--ink);font-weight:500}
+.scn .srow b{font-family:'Montserrat','Pretendard',sans-serif;color:var(--ink);font-weight:500}
 .scn .snet{margin-top:9px;padding-top:9px;border-top:1px dashed var(--blue-line);display:flex;justify-content:space-between;align-items:baseline}
 .scn .snet .lab{font-size:11px;color:var(--muted)}
-.scn .snet .val{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;color:var(--blue)}
+.scn .snet .val{font-family:'Montserrat','Pretendard',sans-serif;font-size:15px;font-weight:600;color:var(--blue)}
 .scn.my .snet .val{color:var(--orange)}
-.sim-hero{background:var(--orange-soft);border:1px solid var(--orange-line);border-radius:12px;padding:13px 16px;margin:14px 0 4px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.sim-hero{background:var(--orange-soft);border:1px solid var(--orange-line);border-radius:8px;padding:13px 16px;margin:14px 0 4px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
 .sim-hero .lab{font-size:12px;color:var(--ink)}
-.sim-hero .val{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:var(--orange)}
+.sim-hero .val{font-family:'Montserrat','Pretendard',sans-serif;font-size:22px;font-weight:700;color:var(--orange)}
 
 @media (max-width:640px){
   .countries{grid-template-columns:repeat(2,1fr)}
@@ -221,121 +213,6 @@ footer{text-align:center;color:var(--faint);font-size:11px;margin-top:30px}
 </head>
 <body>
 <header>
-  <svg class="resort-bg" viewBox="0 0 900 300" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <defs>
-      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#7FE0F5"/>
-        <stop offset="0.4" stop-color="#3EC6E4"/>
-        <stop offset="0.72" stop-color="#1CB6BE"/>
-        <stop offset="1" stop-color="#37D3AE"/>
-      </linearGradient>
-      <radialGradient id="sunGlow" cx="0.5" cy="0.5" r="0.5">
-        <stop offset="0" stop-color="#FFFAEC"/>
-        <stop offset="0.28" stop-color="#FFEBB0" stop-opacity="0.95"/>
-        <stop offset="0.6" stop-color="#FFD27A" stop-opacity="0.45"/>
-        <stop offset="1" stop-color="#FFC26B" stop-opacity="0"/>
-      </radialGradient>
-      <linearGradient id="ocean" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#12A9C9"/>
-        <stop offset="0.5" stop-color="#12BEBE"/>
-        <stop offset="1" stop-color="#46D8C0"/>
-      </linearGradient>
-      <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#FCEFC9"/>
-        <stop offset="1" stop-color="#F6E0AE"/>
-      </linearGradient>
-    </defs>
-    <!-- 하늘 -->
-    <rect width="900" height="300" fill="url(#sky)"/>
-    <!-- 밝은 태양 -->
-    <circle cx="690" cy="118" r="150" fill="url(#sunGlow)"/>
-    <circle cx="690" cy="118" r="44" fill="#FFF6DC" opacity="0.96"/>
-    <circle cx="690" cy="118" r="44" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.5"/>
-    <!-- 부드러운 구름 -->
-    <g fill="#FFFFFF" opacity="0.85">
-      <ellipse cx="250" cy="58" rx="46" ry="15"/>
-      <ellipse cx="292" cy="52" rx="34" ry="13"/>
-      <ellipse cx="214" cy="52" rx="30" ry="11"/>
-    </g>
-    <g fill="#FFFFFF" opacity="0.7">
-      <ellipse cx="540" cy="40" rx="34" ry="11"/>
-      <ellipse cx="568" cy="36" rx="24" ry="9"/>
-    </g>
-    <!-- 바다 -->
-    <path d="M0,196 Q225,184 450,193 T900,190 L900,258 L0,258 Z" fill="url(#ocean)"/>
-    <path d="M0,196 Q225,184 450,193 T900,190" fill="none" stroke="#EBFFFA" stroke-width="1.4" opacity="0.55"/>
-    <!-- 태양 반사 + 잔물결 -->
-    <g opacity="0.5" fill="#FFF3D0">
-      <rect x="656" y="204" width="68" height="4" rx="2"/>
-      <rect x="644" y="216" width="92" height="4" rx="2"/>
-      <rect x="632" y="228" width="116" height="3" rx="1.5"/>
-    </g>
-    <g stroke="#EBFFF8" stroke-width="1.4" opacity="0.4" fill="none">
-      <path d="M120,224 q22,-6 44,0 t44,0"/>
-      <path d="M330,236 q22,-6 44,0 t44,0"/>
-      <path d="M40,244 q22,-6 44,0 t44,0"/>
-    </g>
-    <!-- 백사장 -->
-    <path d="M0,248 Q220,234 460,244 T900,242 L900,300 L0,300 Z" fill="url(#sand)"/>
-    <path d="M0,248 Q220,234 460,244 T900,242" fill="none" stroke="#FFFFFF" stroke-width="1.2" opacity="0.5"/>
-    <!-- 작은 돛단배 (멀리) -->
-    <g opacity="0.9">
-      <path d="M300,206 l2,8 l13,0 l2,-8 Z" fill="#FFFFFF"/>
-      <path d="M309,206 l0,-16 l11,16 Z" fill="#FFFFFF"/>
-      <path d="M309,206 l0,-16 l-9,16 Z" fill="#EAFBFF"/>
-    </g>
-    <!-- 오른쪽 야자수 (스크립트로 잎 생성) -->
-    <path d="M840,300 C832,240 832,178 826,120 C825,112 841,111 842,120 C848,178 850,240 856,300 Z" fill="#8A5A34"/>
-    <path d="M840,300 C832,240 832,178 828,122 L836,122 C842,178 846,240 850,300 Z" fill="#A06E43" opacity="0.7"/>
-    <g id="palmR" stroke-linejoin="round"></g>
-    <g fill="#7A4A28"><circle cx="827" cy="122" r="6"/><circle cx="841" cy="123" r="6"/><circle cx="834" cy="130" r="6"/></g>
-    <!-- 왼쪽 상단 코너 프레이밍 잎 (반투명) -->
-    <g id="palmL" opacity="0.96" stroke-linejoin="round"></g>
-    <!-- 새 두 마리 -->
-    <g stroke="#F2FBFF" stroke-width="1.8" fill="none" opacity="0.7" stroke-linecap="round">
-      <path d="M418,70 q8,-7 16,0 q8,-7 16,0"/>
-      <path d="M470,88 q6,-5 12,0 q6,-5 12,0"/>
-    </g>
-  </svg>
-  <div class="head-scrim"></div>
-  <div class="resort-fade"></div>
-  <script>
-  (function(){
-    function bez(a,c,b,t){var u=1-t;return [u*u*a[0]+2*u*t*c[0]+t*t*b[0],u*u*a[1]+2*u*t*c[1]+t*t*b[1]];}
-    function tanv(a,c,b,t){var u=1-t;return [2*u*(c[0]-a[0])+2*t*(b[0]-c[0]),2*u*(c[1]-a[1])+2*t*(b[1]-c[1])];}
-    function frond(cx,cy,ang,len,droop,col){
-      var a=ang*Math.PI/180,dir=[Math.cos(a),Math.sin(a)];
-      var P0=[cx,cy],P1=[cx+dir[0]*len,cy+dir[1]*len];
-      var C=[(P0[0]+P1[0])/2,(P0[1]+P1[1])/2+droop];
-      var rib='M'+P0[0].toFixed(1)+','+P0[1].toFixed(1)+' Q'+C[0].toFixed(1)+','+C[1].toFixed(1)+' '+P1[0].toFixed(1)+','+P1[1].toFixed(1);
-      var s='',N=13;
-      for(var i=1;i<=N;i++){
-        var t=i/(N+1),p=bez(P0,C,P1,t),tg=tanv(P0,C,P1,t);
-        var tl=Math.hypot(tg[0],tg[1])||1;tg=[tg[0]/tl,tg[1]/tl];
-        var nrm=[-tg[1],tg[0]],ll=len*0.22*(1-0.62*t)+3;
-        for(var k=0;k<2;k++){var sgn=k?1:-1;
-          var dx=nrm[0]*sgn*0.9-tg[0]*0.45,dy=nrm[1]*sgn*0.9-tg[1]*0.45;
-          var dl=Math.hypot(dx,dy)||1,d=[dx/dl,dy/dl];
-          var tip=[p[0]+d[0]*ll,p[1]+d[1]*ll];
-          var c1=[p[0]+d[0]*ll*0.5+tg[0]*ll*0.18,p[1]+d[1]*ll*0.5+tg[1]*ll*0.18];
-          s+='<path d="M'+p[0].toFixed(1)+','+p[1].toFixed(1)+' Q'+c1[0].toFixed(1)+','+c1[1].toFixed(1)+' '+tip[0].toFixed(1)+','+tip[1].toFixed(1)+'" fill="none" stroke="'+col+'" stroke-width="'+(ll*0.5).toFixed(1)+'" stroke-linecap="round"/>';
-        }
-      }
-      return '<path d="'+rib+'" fill="none" stroke="'+col+'" stroke-width="3.2" stroke-linecap="round"/>'+s;
-    }
-    var G1='#0F8A5F',G2='#17B07C',G3='#2FCB92';
-    function build(id,cx,cy,fronds){var el=document.getElementById(id);if(!el)return;var o='';fronds.forEach(function(f){o+=frond(cx,cy,f[0],f[1],f[2],f[3]);});el.innerHTML=o;}
-    // 오른쪽 야자수 (풍성한 왕관 — 코너 프레이밍)
-    build('palmR',834,118,[
-      [208,116,42,G1],[230,138,52,G2],[252,150,58,G3],[274,132,58,G2],
-      [298,140,58,G1],[322,150,54,G3],[348,150,46,G2],[14,138,40,G1]
-    ]);
-    // 왼쪽 상단 코너 프레이밍 잎 (반투명)
-    build('palmL',-24,-20,[
-      [18,205,66,G1],[40,200,74,G2],[62,190,74,G3],[84,175,70,G2],[104,150,62,G1]
-    ]);
-  })();
-  </script>
   <div class="head-inner">
     <div class="eyebrow">EXPAT CARD · RETIREMENT RELOCATION</div>
     <h1 class="title">은퇴이민 <b>4개국 비교</b> · 카드 · 학비 · 생활비 · 비자</h1>
@@ -491,7 +368,7 @@ footer{text-align:center;color:var(--faint);font-size:11px;margin-top:30px}
       <div class="col-bars" id="wealthBars"></div>
       <div class="col-legend">
         <span><i style="background:var(--blue-deep)"></i>85세 잔존 총자산</span>
-        <span><i style="background:var(--orange)"></i>자산 고갈</span>
+        <span><i style="background:var(--neg)"></i>자산 고갈</span>
       </div>
       <div class="bench" id="wealthNote"></div>
     </div>
@@ -510,18 +387,18 @@ footer{text-align:center;color:var(--faint);font-size:11px;margin-top:30px}
           <span class="simval" id="divYearsV"></span></div></div>
       </div>
       <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:6px">
-        <div style="flex:1;min-width:170px"><label style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.4px">배당 처리</label><div class="myschool" id="dripTog"></div></div>
-        <div style="flex:1;min-width:170px"><label style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.4px">거주지 (세금)</label><div class="myschool" id="resTog"></div></div>
+        <div style="flex:1;min-width:170px"><label style="font-size:11px;color:var(--muted);font-family:'Montserrat','Pretendard',sans-serif;letter-spacing:.4px">배당 처리</label><div class="myschool" id="dripTog"></div></div>
+        <div style="flex:1;min-width:170px"><label style="font-size:11px;color:var(--muted);font-family:'Montserrat','Pretendard',sans-serif;letter-spacing:.4px">거주지 (세금)</label><div class="myschool" id="resTog"></div></div>
       </div>
       <div class="sim-hero" id="divHero"></div>
 
-      <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;margin:20px 0 6px">🇰🇷 한국 월배당 ETF TOP 10 <span style="font-size:11px;color:var(--faint);font-family:'JetBrains Mono',monospace">· 1년 배당률순 · 2026 스냅샷</span></div>
+      <div style="font-family:'Montserrat','Pretendard',sans-serif;font-weight:600;font-size:14px;margin:20px 0 6px">🇰🇷 한국 월배당 ETF TOP 10 <span style="font-size:11px;color:var(--faint);font-family:'Montserrat','Pretendard',sans-serif">· 1년 배당률순 · 2026 스냅샷</span></div>
       <table class="edu-table" id="divKRTable"></table>
 
-      <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;margin:22px 0 6px">🇺🇸 미국 월배당 ETF TOP 10 <span style="font-size:11px;color:var(--faint);font-family:'JetBrains Mono',monospace">· 1년 배당률순 · 2026 스냅샷</span></div>
+      <div style="font-family:'Montserrat','Pretendard',sans-serif;font-weight:600;font-size:14px;margin:22px 0 6px">🇺🇸 미국 월배당 ETF TOP 10 <span style="font-size:11px;color:var(--faint);font-family:'Montserrat','Pretendard',sans-serif">· 1년 배당률순 · 2026 스냅샷</span></div>
       <table class="edu-table" id="divUSTable"></table>
 
-      <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;margin:22px 0 6px">🇺🇸 미국 단기국채 (T-Bill) <span style="font-size:11px;color:var(--faint);font-family:'JetBrains Mono',monospace">· 세후 실수령</span></div>
+      <div style="font-family:'Montserrat','Pretendard',sans-serif;font-weight:600;font-size:14px;margin:22px 0 6px">🇺🇸 미국 단기국채 (T-Bill) <span style="font-size:11px;color:var(--faint);font-family:'Montserrat','Pretendard',sans-serif">· 세후 실수령</span></div>
       <div class="myschool" id="bondTog" style="max-width:330px"></div>
       <div class="chips" id="bondChips"></div>
 
@@ -550,7 +427,7 @@ footer{text-align:center;color:var(--faint);font-size:11px;margin-top:30px}
         <span><i style="background:var(--orange)"></i>한 시나리오(폭락 포함)</span>
         <span><i style="background:var(--faint)"></i>순수 복리 가정</span>
       </div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;margin:20px 0 6px">📉 지난 100년 주요 폭락 이벤트</div>
+      <div style="font-family:'Montserrat','Pretendard',sans-serif;font-weight:600;font-size:14px;margin:20px 0 6px">📉 지난 100년 주요 폭락 이벤트</div>
       <table class="edu-table" id="crisisTable"></table>
       <div class="bench" id="crisisNote"></div>
     </div>
@@ -1112,9 +989,9 @@ function renderWealth(){
     const vsKr=r.final-kr.final;
     const div=document.createElement('div');div.className='col-row'+(sel?' sel':'');
     div.innerHTML=`<div class="col-rh"><span class="col-name"><span class="fl">${r.c.flag}</span>${r.c.name} · ${r.c.city}</span>
-        <span class="col-total" style="${neg?'color:var(--orange)':''}">₩${eok(r.final)}</span></div>
-      <div class="col-track" style="width:${w.toFixed(1)}%;background:${neg?'var(--orange-soft)':'#F0F4FA'}">
-        <div class="col-seg" style="flex:1;background:${neg?'var(--orange)':'var(--blue-deep)'}">${neg?'고갈 '+(r.depletedYear||''):''}</div></div>
+        <span class="col-total" style="${neg?'color:var(--neg)':''}">₩${eok(r.final)}</span></div>
+      <div class="col-track" style="width:${w.toFixed(1)}%;background:${neg?'var(--neg-soft)':'#EBEBEC'}">
+        <div class="col-seg" style="flex:1;background:${neg?'var(--neg)':'var(--blue-deep)'}">${neg?'고갈 '+(r.depletedYear||''):''}</div></div>
       <div class="rate-sub">투자세율 ${(W_TAX[r.code]*100).toFixed(0)}% · 세후실효 ${(r.netRate*100).toFixed(2)}%${r.code!=='KR'?' · 한국 대비 '+(vsKr>=0?'+':'')+'₩'+eok(vsKr):''}</div>`;
     el.appendChild(div);
   });
@@ -1139,7 +1016,7 @@ function divTableHTML(list,market){
   const rows=list.map((d,i)=>{
     const r=divCalc(p,d[1],d[2],n,t,drip);
     return `<tr><td>${i+1}. ${d[0]}</td><td>${(d[1]*100).toFixed(1)}%</td>
-      <td style="color:${d[2]<0?'var(--orange)':'var(--muted)'}">${d[2]>=0?'+':''}${(d[2]*100).toFixed(1)}%</td>
+      <td style="color:${d[2]<0?'var(--neg)':'var(--muted)'}">${d[2]>=0?'+':''}${(d[2]*100).toFixed(1)}%</td>
       <td>₩${eok(r.gross)}</td><td class="tot">₩${eok(r.net)}</td></tr>`;
   }).join('');
   return `<thead><tr><th>상품 (배당률순)</th><th>연배당률</th><th>NAV가정</th><th>세전 ${colLabel}</th><th>세후 ${colLabel}</th></tr></thead><tbody>${rows}</tbody>`;
@@ -1223,7 +1100,7 @@ function buildCrisisSVG(d){
   const band=`${up} ${dn} Z`;
   let xl='';for(let t=0;t<=Y;t+=10)xl+=`<text x="${X(t).toFixed(1)}" y="${H-6}" font-size="10" fill="#9AACC6" text-anchor="middle" font-family="JetBrains Mono">${d.age0+t}세</text>`;
   let yl='';[0.25,0.5,0.75].forEach(f=>{const val=Math.exp(loMin+(loMax-loMin)*f);const yy=Yc(val);yl+=`<line x1="${padL}" y1="${yy.toFixed(1)}" x2="${W-padR}" y2="${yy.toFixed(1)}" stroke="#E5EDF8"/><text x="${padL+2}" y="${(yy-3).toFixed(1)}" font-size="9" fill="#9AACC6" font-family="JetBrains Mono">₩${(val/1e8).toFixed(0)}억</text>`;});
-  return `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;border:1px solid var(--line);border-radius:12px;background:#FBFDFF">
+  return `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:#F7F7F7">
     ${yl}
     <path d="${band}" fill="var(--blue-pale)" opacity="0.35"/>
     <path d="${line(d.naive)}" fill="none" stroke="var(--faint)" stroke-width="1.5" stroke-dasharray="5 4"/>
@@ -1242,7 +1119,7 @@ function renderCrisis(){
   document.getElementById('crisisChips').innerHTML=`
     <div class="chip hero"><div class="ck">성공 확률 (90세까지 안 마름)</div><div class="cv">${d.successRate.toFixed(0)}%</div></div>
     <div class="chip"><div class="ck">실질 최종자산 중앙값</div><div class="cv">${f(d.endP50)}</div></div>
-    <div class="chip"><div class="ck">P10 (나쁜 경우)</div><div class="cv" style="color:var(--orange)">${f(d.endP10)}</div></div>
+    <div class="chip"><div class="ck">P10 (나쁜 경우)</div><div class="cv" style="color:var(--neg)">${f(d.endP10)}</div></div>
     <div class="chip"><div class="ck">P90 (좋은 경우)</div><div class="cv">${f(d.endP90)}</div></div>
     <div class="chip"><div class="ck">고갈 발생 나이</div><div class="cv">${ruinTxt}</div></div>
     <div class="chip"><div class="ck">이 시나리오 폭락/최대낙폭</div><div class="cv">${d.sCrashes}회 / ${(d.sWorst*100).toFixed(0)}%${d.sRuinAge?' · '+d.sRuinAge+'세 고갈':''}</div></div>`;

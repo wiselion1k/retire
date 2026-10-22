@@ -529,6 +529,84 @@
   .fc-foot{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;font-weight:700;color:var(--sub)}
   .fc-foot b{font-size:15.5px;font-weight:900;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.02em;margin-left:4px}
   .fc-src{font-size:10px;color:var(--sub);font-weight:600}
+  /* ============================================================
+     AIRBNB DESIGN LANGUAGE — 화이트 캔버스 · Rausch 단일 포인트 · 소프트 라운드 · 모디스트 웨이트
+     ============================================================ */
+  :root{--ink:#222222;--sub:#6a6a6a;--line:#ebebeb;--line-strong:#dddddd;--panel:#f7f7f7;
+    --rausch:#ff385c;--rausch-d:#e00b41;--rausch-soft:#fff0f3;--hover:rgba(0,0,0,.02) 0 0 0 1px,rgba(0,0,0,.04) 0 2px 6px 0,rgba(0,0,0,.1) 0 4px 8px 0}
+  body{color:var(--ink);letter-spacing:-.005em}
+
+  /* 타이포: 모디스트 웨이트 (500–700) */
+  h1,h2,h3,h4,.fname,.ftotal,.ct-v,.gval,.cr-v,.fc-t,.ws-v,.blk-title,.glabel,.d2card b,.abv,.stickyin .score b,
+  .stickyin .sname,.day-card h4,.ic .h b,.ic .row .v,.total .big,.round h3,.detailhead,.rvwrap h3,.allwrap h3,
+  .rvside h4,.rv h4,.rc h4,.acc > summary,.fc-foot b,.cb-n{font-weight:700!important}
+  .hero h1{font-weight:700!important;letter-spacing:-.035em;line-height:1.08}
+  .fname,.ftotal,.ct-v{letter-spacing:-.03em}
+  .selgrp label,.og label,.ct-k,.d2head,.rtag,.champ-badge,.hero .badge{font-weight:600!important;letter-spacing:.04em}
+
+  /* 히어로: 화이트 캔버스 + Rausch 배지 (해변 일러스트·물결 제거) */
+  header.hero{background:#fff!important;padding:56px 0 28px;border-bottom:1px solid var(--line)}
+  .hero .ripple{display:none}
+  .hero .badge{background:var(--rausch);color:#fff;border-radius:999px;padding:7px 14px;text-transform:none;font-size:12px}
+  .hero h1 .grad{color:var(--rausch);-webkit-text-fill-color:var(--rausch)}
+  .hero p{font-weight:500;color:var(--sub)}.hero p b{color:var(--ink);font-weight:700}
+
+  /* 셀렉터: 알약형 검색 서피스 */
+  .selcard{border-radius:16px;border:1px solid var(--line-strong);box-shadow:rgba(0,0,0,.08) 0 4px 12px}
+  .selgrp.a select,.selgrp.b select,.og select{border:1px solid var(--line-strong)!important;border-radius:8px;background:#fff;font-weight:600}
+  .selgrp select:focus,.og select:focus{border-color:var(--ink)!important;box-shadow:0 0 0 1px var(--ink)}
+  .assume span{border-color:var(--line-strong);color:var(--ink);font-weight:500}
+
+  /* 스티키 스코어바 */
+  .stickyin{border-radius:999px;border-color:var(--line-strong);box-shadow:rgba(0,0,0,.08) 0 2px 8px}
+  .stickyin .score b{background:var(--panel);border-radius:999px;padding:2px 11px}
+  .stickyin .score b.lead{background:var(--rausch);color:#fff}
+  .stickyin .swin b{color:var(--rausch)}
+
+  /* 아레나: 승자 = Rausch 카드 (한 화면에 한 번만 쓰는 포인트) */
+  .fighter{border-radius:14px;border:1px solid var(--line-strong)}
+  .fighter.champ{background:var(--rausch)!important;border-color:var(--rausch);box-shadow:var(--hover)}
+  .champ-badge{background:#fff;color:var(--rausch);border-radius:999px;text-transform:none;letter-spacing:0;padding:5px 11px;font-size:11px}
+  .fighter.champ .wtag{background:rgba(255,255,255,.22);color:#fff}
+  .wtag{background:var(--panel);color:var(--ink);text-transform:none;letter-spacing:0;font-weight:600;font-size:11px}
+  .vsorb{border-color:var(--line-strong);font-weight:700;letter-spacing:.06em}
+  .fighter:hover,.round:hover,.verdict:hover{box-shadow:var(--hover)}
+
+  /* 라운드 */
+  .round{border-radius:14px;border-color:var(--line-strong)}
+  .rtag{background:var(--ink);border-radius:999px;text-transform:none;padding:4px 12px;font-size:11px}
+  .gauge{border-radius:12px}
+  .gauge.win{border:2px solid var(--ink);background:#fff;padding:13px 15px}
+  .gauge.win .gbar span{background:var(--rausch)!important}
+  .gauge.win .gval{color:var(--ink)}
+  .gauge.ga .gbar span,.gauge.gb .gbar span{background:#c1c1c1!important}
+  .d2card{border-radius:12px;border-color:var(--line-strong)}
+  .d2card.win{background:#fff;color:var(--ink);border:2px solid var(--ink);padding:11px 13px}
+  .d2card.win small{color:var(--sub)}
+  .theme{background:var(--panel)!important;border-radius:14px}
+  .th-hi{background:var(--rausch);color:#fff}
+  .hash{border-color:var(--line-strong);font-weight:600}
+
+  /* 상세 */
+  .dhead.oki,.dhead.nag{background:var(--ink)!important}
+  .timeline.oki .day::before,.timeline.nag .day::before{border-color:var(--rausch)!important}
+  .wx.oki,.wx.nag,.total.oki,.total.nag,.rv.oki,.rv.nag,.rvduo,.ws-item{background:var(--panel)!important}
+  .wx{border-radius:12px}
+  .cr-track{background:var(--line)}.cr-track span{background:var(--rausch)}
+  .acc[open] > summary,.acc[open] > summary::after{color:var(--rausch)}
+  .fc-dur,.fc-line::after{color:var(--ink)}
+  .itin-card,.flightcard,.detailgrid .dbody,.verdict{border-radius:14px;border-color:var(--line-strong)!important}
+  .ws-item,.ic{border-radius:12px}
+  .fc-st.direct{background:#fff0f3;color:var(--rausch-d)}
+
+  /* 랭킹/표 */
+  .ab .abbar span{background:#c1c1c1}
+  .ab.selA,.ab.selB{background:var(--rausch-soft)}
+  .ab.selA .abn,.ab.selA .abv,.ab.selB .abn,.ab.selB .abv{color:var(--rausch-d)}
+  table.cmp thead th:nth-child(2),table.cmp thead th:nth-child(3){color:var(--ink)}
+  .win.o,.win.n{background:var(--rausch-soft);color:var(--rausch-d)}
+  .pick{background:var(--panel);border:1px solid var(--line)}
+  footer{color:var(--sub)}
 </style>
 </head>
 <body>
@@ -1091,7 +1169,7 @@ function roundsHtml(da,db,cmp){
   const cheaper=da.total<db.total?da.name:db.name, diff=Math.abs(da.total-db.total);
   // Round 1
   const gauge=(d,side,w)=>`<div class="gauge g${side==='a'?'a':'b'} ${bw===side?'win':''}">
-      <div class="glabel"><span>${d.flag} ${d.name}</span>${bw===side?'<span style="color:#0a9e73">👑 승</span>':''}</div>
+      <div class="glabel"><span>${d.flag} ${d.name}</span>${bw===side?'<span style="color:#ff385c">👑 승</span>':''}</div>
       <div class="gbar"><span style="width:${w.toFixed(1)}%"></span></div>
       <div class="gval"><span data-count="${d.total}" data-key="g1_${side}">₩0</span></div>
     </div>`;
