@@ -401,6 +401,10 @@ html{scroll-padding-top:calc(var(--nav-h) + 12px)}
 
 .rimg::after{content:"";position:absolute;inset:0;opacity:.22;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 @media (max-width:640px){.sim-hero .val{font-size:34px!important}.spend-val{font-size:44px!important}.part span{font-size:13px!important}}
+
+/* 실제 이미지 위 글자 가독성: 상단 스크림 강화 */
+header.hero::before{background:linear-gradient(180deg,rgba(0,0,0,.46) 0%,rgba(0,0,0,.22) 38%,rgba(0,0,0,.12) 100%)!important}
+.hero-in .sub,.hero .wrap > p,.eyebrow,h1.title,.hero h1{text-shadow:0 1px 18px rgba(0,0,0,.35)}
 </style>
 </head>
 <body>
